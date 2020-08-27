@@ -10,7 +10,8 @@ module.exports = {
   ],
   plugins: [
     'styled-components',
-    '@babel/plugin-proposal-class-properties',
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-syntax-dynamic-import',
   ],
   env: {
