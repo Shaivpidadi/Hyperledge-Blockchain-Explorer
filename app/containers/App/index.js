@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { AppProvider } from '@shopify/polaris';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -19,11 +20,13 @@ import GlobalStyle from '../../global-styles';
 export default function App() {
   return (
     <div>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <AppProvider>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </AppProvider>
       <GlobalStyle />
     </div>
   );

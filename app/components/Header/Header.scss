@@ -1,7 +1,4 @@
-@import '../LayoutContainer/variables';
-
-.PageHeader {
-  @include layout-padding;
+.Header {
   height: sg-layout-height(page-header);
 
   @media only screen and (max-width: sg-breakpoint() - 1px) {
@@ -13,32 +10,10 @@
   }
 }
 
-.LogoFull {
-  width: sg-layout-width(logo-header);
-  height: sg-layout-height(logo-header);
-  color: sg-color(ink, darker);
-  transition: opacity, color;
-  transition-duration: sg-duration();
-  transition-timing-function: sg-easing();
-
-  &:focus {
-    opacity: 0.8;
-  }
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &:active {
-    opacity: 1;
-  }
-
-  @media only screen and (max-width: sg-breakpoint() - 1px) {
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media only screen and (min-width: sg-breakpoint()) {
-    margin-top: sg-spacing(loose);
+.explorerSearch {
+  input:focus {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 0.2em #5c6ac4,
+      inset 0 0 0.1 0.2em 0 rgba(99, 115, 139, 0.2);
   }
 }
