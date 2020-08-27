@@ -1,0 +1,17 @@
+////
+/// Border
+/// @group theme/border
+////
+
+///
+/// Border data
+$styleguide-border-data: (
+  thin: 0.1rem solid currentColor,
+  base: 0.2rem solid currentColor
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('border', $styleguide-border-data);
+
+

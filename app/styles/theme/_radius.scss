@@ -1,0 +1,13 @@
+////
+/// Radius
+/// @group theme/radius
+////
+
+///
+/// Radius data
+$styleguide-radius-data: (tight: 0.1rem, base: 0.3rem, loose: 0.6rem);
+
+///
+/// Merge into Threads
+@include threads-update-property('radius', $styleguide-radius-data);
+

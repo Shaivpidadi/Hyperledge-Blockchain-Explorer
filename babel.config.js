@@ -3,6 +3,7 @@ module.exports = {
     [
       '@babel/preset-env',
       {
+        loose: true,
         modules: false,
       },
     ],
@@ -12,6 +13,9 @@ module.exports = {
     'styled-components',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-transform-runtime',
+    ['babel-plugin-transform-react-remove-prop-types', { mode: 'unsafe-wrap' }],
     '@babel/plugin-syntax-dynamic-import',
   ],
   env: {

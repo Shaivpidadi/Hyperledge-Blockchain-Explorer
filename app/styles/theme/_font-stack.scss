@@ -1,0 +1,26 @@
+////
+/// Font stack
+/// @group theme/font-stack
+////
+
+///
+/// Font stack data
+$styleguide-font-stack-data: (
+  base: #{ 'Interface',
+  -apple-system,
+  'BlinkMacSystemFont',
+  'San Francisco',
+  'Roboto',
+  'Segoe UI',
+  'Helvetica Neue',
+  sans-serif },
+  monospace: #{ 'Andale Mono',
+  AndaleMono,
+  'Lucida Console',
+  monospace }
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('font-stack', $styleguide-font-stack-data);
+

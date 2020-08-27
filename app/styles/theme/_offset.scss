@@ -1,0 +1,30 @@
+////
+/// Offset
+/// @group theme/offset
+////
+
+///
+/// Offset-X data
+$styleguide-offset-x-data: (
+  base: 0,
+  hint-icon: sg-spacing(tight),
+  page-nav: sg-spacing(tighter),
+  page-nav-activator: sg-spacing(tighter) - $page-nav-activator-padding
+);
+
+///
+/// Offset-Y data
+$styleguide-offset-y-data: (
+  base: 0,
+  hint-icon: sg-spacing(tight),
+  side-nav: sg-layout-height(page-header, tablet),
+  page-nav: sg-spacing(tightest),
+  page-nav-activator: sg-spacing(tighter) - $page-nav-activator-padding
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('offset-x', $styleguide-offset-x-data);
+@include threads-update-property('offset-y', $styleguide-offset-y-data);
+
+

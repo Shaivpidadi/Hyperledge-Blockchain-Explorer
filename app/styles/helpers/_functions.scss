@@ -1,0 +1,47 @@
+////
+/// Helper functions
+/// @group helpers/functions
+////
+
+///
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function sg-strip-unit($number) {
+  @if type-of($number) == number {
+    @return $number / ($number * 0 + 1);
+  } @else {
+    @error 'You did not provide a valid number to sg-strip-unit';
+  }
+}
+
+///
+/// Remove the REM value of any number
+/// Assumes a base font-size of 10px
+/// @param {Number} $number - Number to convert to REM
+/// @return {Number} - Value in REMs
+@function sg-rem($number) {
+  @if type-of($number) == number {
+    @return (sg-strip-unit($number) / 10) * 1rem;
+  } @else {
+    @error 'You did not provide a valid number to sg-rem';
+  }
+}
+
+///
+/// Convert a REM value back to PX
+/// Assumes a base font-size of 10px
+/// @param {Number} $number - REM value to convert to PX
+/// @return {Number} - Value in PXs
+@function sg-rem-to-px($number) {
+  @if unit($number) == 'rem' {
+    @return (sg-strip-unit($number) * 10) * 1px;
+  } @else {
+    @error 'You did not provide a valid number to sg-rem-to-px';
+  }
+}
+
+
+
+// WEBPACK FOOTER //
+// ./app/styles/helpers/_functions.scss

@@ -1,0 +1,24 @@
+////
+/// Z-index
+/// @group theme/z-index
+////
+
+///
+/// Z-index data
+$styleguide-z-index-data: (
+  base: 100,
+  page-nav: 300,
+  page-nav-interior: 400,
+  page-nav-activator: 500,
+  side-nav: 600,
+  page-footer: 700,
+  main-card: 800,
+  backdrop: 850,
+  surface: 900
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('z-index', $styleguide-z-index-data);
+
+

@@ -1,0 +1,31 @@
+////
+/// Font size
+/// @group theme/font-size
+////
+
+///
+/// Reuseable sizes
+// $font-size-thing: 14rem;
+
+///
+/// font size data
+$styleguide-font-size-data: (
+  smaller: 1.2rem,
+  small: 1.4rem,
+  base: 1.6rem,
+  playground-table-header: 1.3rem,
+  h1: (base: 4.8rem, desktop: 4.8rem),
+  h2: (base: 4rem, desktop: 4.8rem),
+  h3: (base: 2.2rem),
+  h4: (base: small),
+  h5: (base: base),
+  standfirst: (base: 2.2rem, desktop: 2.4rem),
+  sidenav-label: (base: small, child: base),
+  footer-link: (base: small, tablet: base)
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('font-size', $styleguide-font-size-data);
+
+

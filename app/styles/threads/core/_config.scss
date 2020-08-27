@@ -1,0 +1,43 @@
+////
+/// Threads Core
+/// Configuration
+/// @group core
+/// @author Curtis Dulmage
+////
+
+/// Global map to hold all Threads properties
+/// @type {Map} Contains key value pairs
+$threads-properties: ();
+
+/// Global default property name
+/// @type {String} Allows for a default property value
+$threads-default-value: 'base';
+
+/// Merges a new Threads property into the global map.
+/// Used internally by the corresponding mixin.
+/// @access private
+/// @param {String} $property-name - Name of the key you wish to target or define.
+/// @param {Map} $custom-map - The custom map containing new and/or override keys + values.
+/// @return {Map} The new merged map, to be assigned within the consumer mixin.
+/// @throw Property `cyan` not found. Available properties: (red, green, blue)
+@function _threads-update-property($property-name, $custom-map) {
+  @if map-has-key($threads-properties, $property-name) {
+    // since this function is executed within a mixin,
+    // the updated variable must be declared as `!global`
+    $threads-properties: map-extend(
+      $threads-properties, ($property-name: $custom-map)
+    ) !global;
+
+    @return $threads-properties;
+  } @else {
+    @error 'Property `#{$property-name}` not found. Available properties: #{available-names($threads-properties)}';
+  }
+}
+
+/// The preffered method for updating all Threads property maps.
+/// Assigns the updated maps to a $threads-config "shell" variable.
+/// @param {String} $property-name - Name of the key you wish to target or define.
+/// @param {Map} $custom-map - The custom map containing new and/or override keys + values.
+@mixin threads-update-property($property-name, $custom-map) {
+  $threads-config: _threads-update-property($property-name, $custom-map);
+}

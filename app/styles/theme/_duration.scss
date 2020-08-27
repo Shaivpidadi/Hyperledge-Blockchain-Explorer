@@ -1,0 +1,21 @@
+////
+/// Duration
+/// @group theme/duration
+////
+
+///
+/// Duration data
+$styleguide-duration-data: (
+  fastest: 30ms,
+  faster: 60ms,
+  fast: 120ms,
+  base: 240ms,
+  slow: 480ms,
+  slower: 960ms,
+  slowest: 1920ms
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('duration', $styleguide-duration-data);
+

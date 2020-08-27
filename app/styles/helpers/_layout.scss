@@ -1,0 +1,24 @@
+////
+/// Layout helpers
+/// @group helpers/layout
+////
+
+@mixin layout-container($max-width: null) {
+  max-width: $max-width;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+///
+/// To be used on flex items. Resolves some common layout issues, such as
+/// text truncation not respecting padding or breaking out of container.
+/// https://css-tricks.com/flexbox-truncated-text/
+@mixin flex-item-fix {
+  min-width: 0;
+  max-width: 100%;
+}
+
+
+
+// WEBPACK FOOTER //
+// ./app/styles/helpers/_layout.scss

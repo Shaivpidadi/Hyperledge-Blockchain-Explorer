@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Duration
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$duration-label: 'duration';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $duration-label: ()
+  )
+);
+
+/// Returns the animation or transition duration for the given group and variant.
+/// @param {String} $group (optional) - The key for the duration group.
+/// @param {String} $variant (optional) - The key for the duration variant.
+/// @return {Number} The animation or transition duration.
+@function sg-duration($group: $threads-default-value, $variant: $threads-default-value) {
+  $duration-data: map-get($threads-properties, $duration-label);
+  $fetched-duration: threads-value-get($duration-data, $group, $variant);
+
+  @if type-of($fetched-duration) == number {
+    @return $fetched-duration;
+  } @else {
+    @error 'Duration `#{$group} - #{$variant}` not found. Available options: #{available-names($duration-data)}';
+  }
+}

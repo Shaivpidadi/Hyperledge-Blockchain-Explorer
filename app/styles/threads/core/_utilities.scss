@@ -1,0 +1,111 @@
+////
+/// Threads Core
+/// Utilities
+/// @group core
+/// @author Curtis Dulmage
+////
+
+/// Returns the list of available names in a given map.
+/// @param {Map} $map - The map of data to list the names from.
+/// @param {Number} $map (optional) - The level of depth to get names from.
+/// @return {String} The list of names in the map.
+@function available-names($map, $level: 1) {
+  @if type-of($map) != map {
+    @return null;
+  }
+
+  $output: '';
+  $newline: '\A ';
+
+  @if $level == 1 {
+    @each $key, $value in $map {
+      $output: $output + '#{$newline}- #{$key} #{available-names($value, $level + 1)}';
+    }
+  } @else {
+    $output: '(';
+    $i: 1;
+
+    @each $key, $value in $map {
+      $sep: if($i < length($map), ', ', '');
+      $output: $output + '#{$key}#{$sep}#{available-names($value, $level + 1)}';
+      $i: $i + 1;
+    }
+
+    $output: $output + ')';
+  }
+
+  @return $output;
+}
+
+/// Fetch nested keys from a map.
+/// @param {Map} $map - The map you want to check against.
+/// @param {Arglist} $keys - Keys to fetch
+/// @return {Map} The value held by the key you want fetched.
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+/// Merge multiple maps into one.
+/// @param {Map} $map - Initial default map.
+/// @param {ArgList} $maps - Other maps to merge.
+/// @return {Map} The final merged map.
+@function map-extend($map, $maps...) {
+  @for $i from 1 through length($maps) {
+    @each $key, $value in nth($maps, $i) {
+      @if (type-of($value) == map) and (type-of(map-get($map, $key)) == map) {
+        $value: map-extend(map-get($map, $key), $value);
+      }
+
+      $map: map-merge($map, ($key: $value));
+    }
+  }
+
+  @return $map;
+}
+
+/// Returns the map value for a given map name and group.
+/// @param {Map} $data - The data map for the given thread.
+/// @param {String} $key - The map's key.
+/// @param {String} $variant - The map's variant.
+/// @return {Value} The requested value.
+@function threads-value-get($data, $key, $variant) {
+  $value-is-map: type-of(map-get($data, $key)) == map;
+
+  $fetched-value: if(
+    $value-is-map,
+    map-deep-get($data, $key, $variant),
+    map-get($data, $key)
+  );
+
+  // need to perform this craziness because
+  // SASS seems to think `purple == #800080` is true
+  $options: map-keys($data);
+  $options-index: index($options, $fetched-value);
+  $options-item: if(
+    $options-index,
+    nth($options, $options-index),
+    null
+  );
+
+  $has-key: map-has-key($data, $fetched-value);
+  $equal-keys: '#{$options-item}' == '#{$fetched-value}';
+
+  // if the fetched value matches another key, get the value of that matching key
+  // if the value is a map, the final fetched value will be the `threads-default-value`,
+  // which is defined in config.scss
+  @if $has-key and $equal-keys {
+    $value-is-map: type-of(map-get($data, $fetched-value)) == map;
+
+    $fetched-value: if(
+      $value-is-map,
+      map-deep-get($data, $fetched-value, $threads-default-value),
+      map-get($data, $fetched-value)
+    );
+  }
+
+  @return $fetched-value;
+}

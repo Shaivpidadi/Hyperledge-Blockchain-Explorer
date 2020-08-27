@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Color
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$color-label: 'color';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $color-label: ()
+  )
+);
+
+/// Returns the color value for the given group and variant.
+/// @param {String} $group (optional) - The key for the color group. [helpful to think of this as `hue` or `action` (red / blue / primary / secondary)]
+/// @param {String} $variant (optional) - The key for the color variant. [helpful to think of this as `shade` (lightness / darkness)]
+/// @return {Color} The color value.
+@function sg-color($group: $threads-default-value, $variant: $threads-default-value) {
+  $color-data: map-get($threads-properties, $color-label);
+  $fetched-color: threads-value-get($color-data, $group, $variant);
+
+  @if type-of($fetched-color) == color {
+    @return $fetched-color;
+  } @else {
+    @error 'Color `#{$group} - #{$variant}` not found. Available options: #{available-names($color-data)}';
+  }
+}

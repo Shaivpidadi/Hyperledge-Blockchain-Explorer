@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Spacing
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$spacing-label: 'spacing';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $spacing-label: ()
+  )
+);
+
+/// Returns the spacing for the given group and variant.
+/// @param {String} $group (optional) - The key for the spacing group.
+/// @param {String} $variant (optional) - The key for the spacing variant.
+/// @return {Number} The spacing value.
+@function sg-spacing($group: $threads-default-value, $variant: $threads-default-value) {
+  $spacing-data: map-get($threads-properties, $spacing-label);
+  $fetched-spacing: threads-value-get($spacing-data, $group, $variant);
+
+  @if type-of($fetched-spacing) == number {
+    @return $fetched-spacing;
+  } @else {
+    @error 'Spacing `#{$group} - #{$variant}` not found. Available options: #{available-names($spacing-data)}';
+  }
+}

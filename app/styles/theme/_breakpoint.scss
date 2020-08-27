@@ -1,0 +1,39 @@
+////
+/// Breakpoint
+/// @group theme/breakpoint
+////
+
+// stylelint-disable scss/partial-no-import
+
+@import '../helpers/functions';
+
+///
+/// Breakpoint data
+$styleguide-breakpoint-data: (
+  'base': 960px,
+  'portrait':
+  (
+    'mobile': 320px,
+    'iphone6': 375px,
+    'tablet': 768px,
+    '720p': 720px,
+    '1080p': 1080px,
+    'imac': 1440px
+  ),
+  'landscape':
+  (
+    'mobile': 480px,
+    'iphone6': 667px,
+    'tablet': 1024px,
+    '720p': 1280px,
+    '1080p': 1920px,
+    'imac': 2560px
+  ),
+  'page-max': sg-rem-to-px(sg-layout-width(layout-with-padding))
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('breakpoint', $styleguide-breakpoint-data);
+
+

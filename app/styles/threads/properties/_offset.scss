@@ -1,0 +1,44 @@
+////
+/// Threads Properties
+/// Offset
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$offset-x-label: 'offset-x';
+$offset-y-label: 'offset-y';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $offset-x-label: (),
+    $offset-y-label: ()
+  )
+);
+
+/// Returns the border-offset for the given group and variant.
+/// @param {String} $group (optional) - The key for the border-offset group.
+/// @param {String} $variant (optional) - The key for the border-offset variant.
+/// @return {Number | List} The border-offset value.
+@function sg-offset-x($group: $threads-default-value, $variant: $threads-default-value) {
+  $offset-x-data: map-get($threads-properties, $offset-x-label);
+  $fetched-offset: threads-value-get($offset-x-data, $group, $variant);
+
+  @if type-of($fetched-offset) == number or type-of($fetched-offset) == list {
+    @return $fetched-offset;
+  } @else {
+    @error 'Offset X `#{$group} - #{$variant}` not found. Available options: #{available-names($offset-x-data)}';
+  }
+}
+
+@function sg-offset-y($group: $threads-default-value, $variant: $threads-default-value) {
+  $offset-y-data: map-get($threads-properties, $offset-y-label);
+  $fetched-offset: threads-value-get($offset-y-data, $group, $variant);
+
+  @if type-of($fetched-offset) == number or type-of($fetched-offset) == list {
+    @return $fetched-offset;
+  } @else {
+    @error 'Offset Y `#{$group} - #{$variant}` not found. Available options: #{available-names($offset-y-data)}';
+  }
+}

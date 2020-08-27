@@ -1,0 +1,36 @@
+////
+/// Threads Properties
+/// Font Size
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$font-size-label: 'font-size';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $font-size-label: ()
+  )
+);
+
+/// Returns the font-size for the given group and variant.
+/// @param {String} $group (optional) - The key for the font-size group. (helpful to think of this as the `family` (Futura / Courier))
+/// @param {String} $variant (optional) - The key for the font-size variant. (helpful to think of this as the `font variant` (thin / light / bold / heavy))
+/// @return {List} The font-size for the requested family.
+@function sg-font-size($group: $threads-default-value, $variant: $threads-default-value) {
+  $font-size-data: map-get($threads-properties, $font-size-label);
+  $font-size-value: map-get($font-size-data, $group);
+  @if type-of($font-size-value) != map {
+    @return $font-size-value;
+  } @else {
+    $fetched-font-size: threads-value-get($font-size-data, $group, $variant);
+
+      @if type-of($fetched-font-size) == number or type-of($fetched-font-size) == list {
+        @return $fetched-font-size;
+      } @else {
+        @error 'Font-size `#{$group} - #{$variant}` not found. Available options: #{available-names($font-size-data)}';
+      }
+  }
+}

@@ -1,0 +1,52 @@
+////
+/// Color
+/// @group theme/color
+////
+
+// stylelint-disable color-no-hex
+
+///
+/// Color data
+///
+/// Shopify color palette, extended specifically for the styleguide,
+/// inspired from the Marketing palette.
+///
+/// @type map
+$styleguide-color-data: (
+  base: transparent,
+  white: #ffffff,
+  black: #000000,
+  sky: (lighter: #f9fafb, light: #f4f6f8, base: #dfe4e8, dark: #c4cdd5),
+  ink:
+    (
+      lightest: #919eab,
+      lighter: #637381,
+      light: #454f5b,
+      base: #212b35,
+      dark: #1a222b,
+      darker: #161d25
+    ),
+  yellow: (lighter: #fcf1cd, light: #ffea8a, base: #eec200, dark: #9c6f19, darker: #573b00),
+  orange: (lighter: #fcebdb, light: #ffc58b, base: #f49342, dark: #c05717, darker: #4a1504),
+  red: (lighter: #fbeae5, light: #feaf9a, base: #ed6347, dark: #bf0711, darker: #330101),
+  purple: (lighter: #f6f0fd, light: #e3d0ff, base: #9c6ade, dark: #50248f, darker: #230051),
+  blue: (lighter: #ebf5fa, light: #b4e1fa, base: #007ace, dark: #084e8a, darker: #001429),
+  teal: (lighter: #e0f5f5, light: #b7ecec, base: #47c1bf, dark: #00848e, darker: #003135),
+  green:
+    (
+      lighter: #e3f1df,
+      light: #bbe5b3,
+      base: #50b83c,
+      dark: #108043,
+      darker: #173630,
+      sia: #2fa84c
+    ),
+  indigo: (lighter: #f4f5fa, light: #b3bcf5, base: #5c6ac4, dark: #202e78, darker: #000639),
+  titlebar: (light: #b3b5cb, base: #43467f, dark: #1c2260, darker: #00044c),
+  shade: (base: rgba(63, 63, 68, 0.05), dark: hsla(0, 0%, 0%, 0.2), darker: hsla(0, 0%, 0%, 0.4)),
+  action: blue
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('color', $styleguide-color-data);

@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Shadow
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$shadow-label: 'shadow';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $shadow-label: ()
+  )
+);
+
+/// Returns the box/text-shadow value for the given group and variant.
+/// @param {String} $group (optional) - The key for the shadow group.
+/// @param {String} $variant (optional) - The key for the shadow variant.
+/// @return {List} The shorthand shadow value with width, style, and color.
+@function sg-shadow($group: $threads-default-value, $variant: $threads-default-value) {
+  $shadow-data: map-get($threads-properties, $shadow-label);
+  $fetched-shadow: threads-value-get($shadow-data, $group, $variant);
+
+  @if type-of($fetched-shadow) == number or type-of($fetched-shadow) == string or type-of($fetched-shadow) == list {
+    @return $fetched-shadow;
+  } @else {
+    @error 'Shadow `#{$group} - #{$variant}` not found. Available options: #{available-names($shadow-data)}';
+  }
+}

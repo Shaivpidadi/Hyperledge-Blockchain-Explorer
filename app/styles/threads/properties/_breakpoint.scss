@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Breakpoint
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$breakpoint-label: 'breakpoint';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $breakpoint-label: ()
+  )
+);
+
+/// Returns the breakpoint width for the given group and variant.
+/// @param {String} $group (optional) - The key for the breakpoint group. [helpful to think of this as `orientation` (portrait / landscape)]
+/// @param {String} $variant (optional) - The key for the breakpoint variant. [helpful to think of this as `device` (mobile / tablet / desktop)]
+/// @return {Number} The breakpoint width for the given group and variant.
+@function sg-breakpoint($group: $threads-default-value, $variant: $threads-default-value) {
+  $breakpoint-data: map-get($threads-properties, $breakpoint-label);
+  $fetched-breakpoint: threads-value-get($breakpoint-data, $group, $variant);
+
+  @if type-of($fetched-breakpoint) == number {
+    @return $fetched-breakpoint;
+  } @else {
+    @error 'Breakpoint `#{$group} - #{$variant}` not found. Available options: #{available-names($breakpoint-data)}';
+  }
+}

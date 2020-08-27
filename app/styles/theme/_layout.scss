@@ -1,0 +1,75 @@
+////
+/// Layout
+/// @group theme/layout
+////
+
+///
+/// Reuseable widths
+$layout-container-width: 140rem;
+
+// PageNavActivator + Hamburger dimensions
+$page-nav-link-height: 4rem;
+$page-nav-activator-padding: sg-spacing(tightest);
+$hamburger-width: 2.4rem;
+$hamburger-height: 2rem;
+$hamburger-line-height: 0.2rem;
+
+// Card
+$card-max-padding-left: sg-spacing(huger);
+$card-max-padding-right: sg-spacing(fat);
+
+// TRY TO REMOVE THESE!!
+$card-max-width: $layout-container-width - 32rem - sg-spacing(loosest);
+$card-interior: $card-max-width - $card-max-padding-left - $card-max-padding-right;
+
+// Color Palette
+$color-palette-spacing: sg-spacing();
+
+///
+/// Layout width data
+$styleguide-layout-width-data: (
+  base: 0,
+  layout-container: $layout-container-width,
+  layout-with-padding: $layout-container-width + (sg-spacing(fattest) * 2),
+  card-home: 134.4rem,
+  page-nav: (base: $hamburger-width + (sg-spacing(tighter) * 2), expanded: 13.3rem),
+  side-nav: 34rem,
+  statistics-table: 80rem,
+  button-min-width: 12.6rem,
+  type-content: (base: 60rem, small: 40rem),
+  hamburger: $hamburger-width,
+  logo-header: 4rem,
+  icon-circle: 4.8rem,
+  playground-prop: (base: 18rem, max: 32rem),
+  color-palette: floor(($card-interior - ($color-palette-spacing * 2)) / 3),
+  resource-icon: (base: 4.8rem, desktop: 8rem)
+);
+
+///
+/// Layout height data
+$styleguide-layout-height-data: (
+  base: 0,
+  page-header: (base:7.2rem, tablet: 12rem),
+  page-footer: 13.2rem,
+  page-nav:
+    (
+      base: $hamburger-height + (sg-spacing(tighter) * 2),
+      expanded: $page-nav-link-height * 5 + sg-spacing(looser) + sg-spacing(tightest)
+    ),
+  page-nav-link: $page-nav-link-height,
+  page-nav-indicator: 0.6rem,
+  side-nav-activator: 7.2rem,
+  side-nav-wrapper: sg-spacing(),
+  side-nav-footer: (base: 31rem, desktop: 23rem),
+  hamburger: $hamburger-height,
+  logo-header: 4rem,
+  icon-circle: 4.8rem,
+  form-input: (compact: 3.2rem, small: 3.8rem, base: 4.8rem),
+  color-palette-shade: (base: 4.8rem, expanded: 7.8rem),
+  home-header: (base: 59.6rem, desktop: 46.8rem)
+);
+
+///
+/// Merge into Threads
+@include threads-update-property('layout-width', $styleguide-layout-width-data);
+@include threads-update-property('layout-height', $styleguide-layout-height-data);

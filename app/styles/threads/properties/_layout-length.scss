@@ -1,0 +1,31 @@
+////
+/// Threads Properties
+/// Layout Length
+/// @group properties
+/// @author Curtis Dulmage
+////
+
+/// Label used within $threads-properties
+/// @type {String} Used when merging values into $threads-properties
+$layout-length-label: 'layout-length';
+
+$threads-properties: map-merge(
+  $threads-properties, (
+    $layout-length-label: (),
+  )
+);
+
+/// Returns the layout length for the given group and variant.
+/// @param {String} $group (optional) - The key for the layout-length group.
+/// @param {String} $variant (optional) - The key for the layout-length variant.
+/// @return {Number} The layout length.
+@function sg-layout-length($group: $threads-default-value, $variant: $threads-default-value) {
+  $layout-length-data: map-get($threads-properties, $layout-length-label);
+  $fetched-layout-length: threads-value-get($layout-length-data, $group, $variant);
+
+  @if type-of($fetched-layout-length) == number {
+    @return $fetched-layout-length;
+  } @else {
+    @error 'Layout length `#{$group} - #{$variant}` not found. Available options: #{available-names($layout-length-data)}';
+  }
+}

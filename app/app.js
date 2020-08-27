@@ -15,8 +15,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
-import 'antd/dist/antd.css';
-
+import './styles.scss';
 // Import root app
 import App from 'containers/App';
 
