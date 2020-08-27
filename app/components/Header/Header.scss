@@ -1,0 +1,44 @@
+@import '../LayoutContainer/variables';
+
+.PageHeader {
+  @include layout-padding;
+  height: sg-layout-height(page-header);
+
+  @media only screen and (max-width: sg-breakpoint() - 1px) {
+    background-color: sg-color(sky, light);
+  }
+
+  @media only screen and (min-width: sg-breakpoint()) {
+    height: sg-layout-height(page-header, tablet);
+  }
+}
+
+.LogoFull {
+  width: sg-layout-width(logo-header);
+  height: sg-layout-height(logo-header);
+  color: sg-color(ink, darker);
+  transition: opacity, color;
+  transition-duration: sg-duration();
+  transition-timing-function: sg-easing();
+
+  &:focus {
+    opacity: 0.8;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  @media only screen and (max-width: sg-breakpoint() - 1px) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media only screen and (min-width: sg-breakpoint()) {
+    margin-top: sg-spacing(loose);
+  }
+}
