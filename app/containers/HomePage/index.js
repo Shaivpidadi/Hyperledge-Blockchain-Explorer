@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Card, Popover, ActionList, Button } from '@shopify/polaris';
+import { Card } from '@shopify/polaris';
 
 import messages from './messages';
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
+import BlockchainCard from '../../components/BlockchainCard/BlockchainCard';
 {
   /* <FormattedMessage {...messages.header} /> */
 }
@@ -22,6 +23,8 @@ const HomePage = () => {
           </div>
         </Card.Section>
       </Card>
+
+      <BlockchainCard />
     </div>
   );
 };

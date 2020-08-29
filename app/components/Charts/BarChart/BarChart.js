@@ -57,7 +57,6 @@ const CustomBarShape = props => {
         fill="#f3f5f8"
         rx="6"
         ry="6"
-        // style={{ transition: 'all 0.2s ease 0s', cursor: 'pointer' }}
         css={css({
           transition: 'all 0.2s ease 0s',
           cursor: 'pointer',
