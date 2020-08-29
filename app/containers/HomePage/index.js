@@ -12,8 +12,8 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 const HomePage = () => {
   return (
     <div style={{ marginTop: '40px' }}>
-      <Card title="Blockchain Explorer" sectioned>
-        <Card.Header>
+      <Card sectioned>
+        <Card.Header title="Blockchain Explorer">
           <Dropdown />
         </Card.Header>
         <Card.Section>
