@@ -19,7 +19,7 @@ import GlobalStyle from '../../global-styles';
 
 export default function App() {
   return (
-    <div>
+    <div style={{ display: 'flex', width: '1140', justifyContent: 'center' }}>
       <AppProvider>
         <Header />
         <Switch>
