@@ -57,25 +57,6 @@ const SingleBlockCard = () => (
       </div>
 
       <div style={{ display: 'inline-block' }}>
-        {/* <div>
-          <span
-            style={{
-              color: 'rgb(93, 106, 133)',
-              width: '110px',
-              display: 'inline-block',
-            }}
-          >
-            Channel Name:
-          </span>
-          <span
-            style={{
-              color: 'rgb(93, 106, 133)',
-            }}
-          >
-            Shaiv
-          </span>
-        </div> */}
-
         <LabelWithValue label="Channel Name" value="Shaiv" />
         <LabelWithValue label="Total txs" value="12312" />
       </div>
