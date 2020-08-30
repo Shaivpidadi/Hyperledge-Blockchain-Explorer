@@ -19,9 +19,7 @@ const BlockchainCardItem = ({ label, value }) => (
 const BlockchainCard = () => {
   return (
     <Card sectioned>
-      <Card.Header title="Blockchain Stats">
-        {/* <Card.Header title="Blockchain Statswww" /> */}
-      </Card.Header>
+      <Card.Header title="Blockchain Stats" />
       <div
         style={{
           display: 'flex',
