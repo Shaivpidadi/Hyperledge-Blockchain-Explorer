@@ -8,7 +8,7 @@ import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
@@ -17,7 +17,7 @@ const HomePage = () => {
         </Card.Header>
         <Card.Section>
           <div style={{ overflowX: 'auto', marginTop: '20px' }}>
-            <ExplorerBarChart width={1100} height={110} />
+            <ExplorerBarChart width={1100} height={110} history={history} />
           </div>
         </Card.Section>
       </Card>
@@ -33,7 +33,7 @@ const HomePage = () => {
                   }}
                 >
                   <HiddenScroll height="400px">
-                    <SingleBlockCard />
+                    <SingleBlockCard onClick={() => history.push('/block')} />
                     <SingleBlockCard />
                     <SingleBlockCard />
                     <SingleBlockCard />

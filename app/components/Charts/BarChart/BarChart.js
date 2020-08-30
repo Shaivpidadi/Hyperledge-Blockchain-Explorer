@@ -81,8 +81,9 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const ExplorerBarChart = ({ width, height }) => {
+const ExplorerBarChart = ({ width, height, history }) => {
   const handleBarClick = data => {
+    history.push('/block');
     console.log(data);
   };
   return (
