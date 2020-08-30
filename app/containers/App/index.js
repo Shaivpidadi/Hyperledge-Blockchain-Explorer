@@ -11,9 +11,9 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AppProvider } from '@shopify/polaris';
 
-import HomePage from 'containers/HomePage/Loadable';
-import BlockPage from 'containers/BlockPage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import HomePage from '../../containers/HomePage/Loadable';
+import BlockPage from '../../containers/BlockPage/Loadable';
+import NotFoundPage from '../../containers/NotFoundPage/Loadable';
 import Header from '../../components/Header/Header';
 
 import GlobalStyle from '../../global-styles';
