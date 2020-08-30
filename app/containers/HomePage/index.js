@@ -7,9 +7,7 @@ import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import BlockchainCard from '../../components/BlockchainCard/BlockchainCard';
 import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
-{
-  /* <FormattedMessage {...messages.header} /> */
-}
+import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 
 const HomePage = () => {
   return (
@@ -26,12 +24,24 @@ const HomePage = () => {
       </Card>
 
       <Card sectioned title="Latest Blocks">
-        <div style={{ width: '45%', padding: '0px 20px' }}>
-          <SingleBlockCard />
-          <SingleBlockCard />
-          <SingleBlockCard />
-          <SingleBlockCard />
-          <SingleBlockCard />
+        <div
+          style={{
+            width: '45%',
+            padding: '0px 20px',
+          }}
+        >
+          <HiddenScroll height="400px">
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+            <SingleBlockCard />
+          </HiddenScroll>
         </div>
       </Card>
       <BlockchainCard />
