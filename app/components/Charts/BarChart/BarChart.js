@@ -81,11 +81,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const ExplorerBarChart = ({ width, height, history }) => {
-  const handleBarClick = data => {
-    history.push('/block');
-    console.log(data);
-  };
+const ExplorerBarChart = ({ width, height, onBarClick }) => {
   return (
     <div className="bar-chart-wrapper">
       <BarChart width={width} height={height} data={data}>
@@ -101,7 +97,7 @@ const ExplorerBarChart = ({ width, height, history }) => {
         <Bar
           dataKey="uv"
           fill="#f3f5f8"
-          onClick={handleBarClick}
+          onClick={data => onBarClick(data)}
           shape={
             <CustomBarShape
               x="463.26"

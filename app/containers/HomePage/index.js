@@ -17,7 +17,14 @@ const HomePage = ({ history }) => {
         </Card.Header>
         <Card.Section>
           <div style={{ overflowX: 'auto', marginTop: '20px' }}>
-            <ExplorerBarChart width={1100} height={110} history={history} />
+            <ExplorerBarChart
+              width={1100}
+              height={110}
+              onBarClick={data => {
+                console.log({ data });
+                history.push('/block');
+              }}
+            />
           </div>
         </Card.Section>
       </Card>
