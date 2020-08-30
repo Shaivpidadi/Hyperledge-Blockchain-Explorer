@@ -6,6 +6,7 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import BlockchainCard from '../../components/BlockchainCard/BlockchainCard';
 import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
+import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
 const HomePage = () => {
   return (
@@ -21,7 +22,7 @@ const HomePage = () => {
         </Card.Section>
       </Card>
 
-      <div style={{ margin: '20px 0px' }}>
+      <div style={{ margin: '20px 0px', minHeight: '500px' }}>
         <Card>
           <Layout style={{ margin: '0px !important' }}>
             <Layout.Section oneHalf>
@@ -48,14 +49,8 @@ const HomePage = () => {
             </Layout.Section>
             <Layout.Section oneHalf>
               <Card sectioned title="Transactions by Organization">
-                <div
-                  style={{
-                    padding: '0px 20px',
-                  }}
-                >
-                  <HiddenScroll height="400px">
-                    Transactions by Organization
-                  </HiddenScroll>
+                <div style={{ minHeight: '400px' }}>
+                  <RadicalChart />
                 </div>
               </Card>
             </Layout.Section>
