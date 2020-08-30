@@ -1,6 +1,27 @@
 import React from 'react';
 import { Card, Icon, Avatar, Tag } from '@shopify/polaris';
-import blockLogo from '../../assets/images/block.svg';
+
+const LabelWithValue = ({ label, value }) => (
+  <div>
+    <span
+      style={{
+        color: 'rgb(0, 0, 0)',
+        width: '110px',
+        display: 'inline-block',
+        fontWeight: 'bolder',
+      }}
+    >
+      {`${label}:`}
+    </span>
+    <span
+      style={{
+        color: 'rgb(93, 106, 133)',
+      }}
+    >
+      {value}
+    </span>
+  </div>
+);
 
 const SingleBlockCard = () => (
   <Card>
@@ -36,7 +57,7 @@ const SingleBlockCard = () => (
       </div>
 
       <div style={{ display: 'inline-block' }}>
-        <div>
+        {/* <div>
           <span
             style={{
               color: 'rgb(93, 106, 133)',
@@ -53,26 +74,10 @@ const SingleBlockCard = () => (
           >
             Shaiv
           </span>
-        </div>
+        </div> */}
 
-        <div>
-          <span
-            style={{
-              color: 'rgb(93, 106, 133)',
-              width: '110px',
-              display: 'inline-block',
-            }}
-          >
-            Channel Name:
-          </span>
-          <span
-            style={{
-              color: 'rgb(93, 106, 133)',
-            }}
-          >
-            Shaiv
-          </span>
-        </div>
+        <LabelWithValue label="Channel Name" value="Shaiv" />
+        <LabelWithValue label="Total txs" value="12312" />
       </div>
 
       <div
