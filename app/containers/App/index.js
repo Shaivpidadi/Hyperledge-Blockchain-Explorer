@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 import { AppProvider } from '@shopify/polaris';
 
 import HomePage from 'containers/HomePage/Loadable';
+import BlockPage from 'containers/BlockPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from '../../components/Header/Header';
 
@@ -24,6 +25,7 @@ export default function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/blocks" component={BlockPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppProvider>
