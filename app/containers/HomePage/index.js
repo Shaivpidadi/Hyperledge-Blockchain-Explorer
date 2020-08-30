@@ -1,8 +1,6 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Card, Layout } from '@shopify/polaris';
 
-import messages from './messages';
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import BlockchainCard from '../../components/BlockchainCard/BlockchainCard';
