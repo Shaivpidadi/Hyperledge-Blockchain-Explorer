@@ -27,6 +27,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Interface, Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
+
+  .Polaris-Layout {
+    margin: 2rem 2rem 2rem 0rem;
+    padding-bottom: 2rem;
+  }
 `;
 
 export default GlobalStyle;

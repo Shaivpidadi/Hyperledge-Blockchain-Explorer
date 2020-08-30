@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Card } from '@shopify/polaris';
+import { Card, Layout } from '@shopify/polaris';
 
 import messages from './messages';
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -23,28 +23,51 @@ const HomePage = () => {
         </Card.Section>
       </Card>
 
-      <Card sectioned title="Latest Blocks">
-        <div
-          style={{
-            width: '45%',
-            padding: '0px 20px',
-          }}
-        >
-          <HiddenScroll height="400px">
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-            <SingleBlockCard />
-          </HiddenScroll>
-        </div>
-      </Card>
-      <BlockchainCard />
+      <div style={{ margin: '20px 0px' }}>
+        <Card>
+          <Layout style={{ margin: '0px !important' }}>
+            <Layout.Section oneHalf>
+              <Card sectioned title="Latest Blocks">
+                <div
+                  style={{
+                    padding: '0px 20px',
+                  }}
+                >
+                  <HiddenScroll height="400px">
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                    <SingleBlockCard />
+                  </HiddenScroll>
+                </div>
+              </Card>
+            </Layout.Section>
+            <Layout.Section oneHalf>
+              <Card sectioned title="Transactions by Organization">
+                <div
+                  style={{
+                    padding: '0px 20px',
+                  }}
+                >
+                  <HiddenScroll height="400px">
+                    Transactions by Organization
+                  </HiddenScroll>
+                </div>
+              </Card>
+            </Layout.Section>
+          </Layout>
+        </Card>
+      </div>
+
+      <div style={{ marginTop: '2px' }}>
+        <BlockchainCard />
+      </div>
     </div>
   );
 };
