@@ -25,7 +25,7 @@ export default function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/blocks" component={BlockPage} />
+          <Route exact path="/block" component={BlockPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppProvider>

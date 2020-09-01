@@ -11,7 +11,7 @@ const BlockPage = () => {
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
-        <Card.Header title="Block Page" />
+        <Card.Header title="All Blocks" />
       </Card>
     </div>
   );
