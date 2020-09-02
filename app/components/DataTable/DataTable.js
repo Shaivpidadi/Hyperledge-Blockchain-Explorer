@@ -5,11 +5,10 @@ import styled from 'styled-components';
 const TableStyles = styled.div`
   table {
     width: 100%;
-    border-spacing: 0;
     font-size: 14px;
     font-weight: 500;
-    line-height: normal;
-    letter-spacing: normal;
+    border-collapse: separate;
+    border-spacing: 0 1em;
 
     th,
     td {
@@ -17,7 +16,6 @@ const TableStyles = styled.div`
       height: 75px;
     }
     tbody tr {
-      box-shadow: inset 0 -1px 0 0 #e4e7ec;
       background-color: #f0f0f0;
     }
 
@@ -30,7 +28,6 @@ const TableStyles = styled.div`
     }
 
     thead th {
-      color: var(--primary);
       border-bottom-width: 2px;
       font-size: 15px;
       font-weight: 600;
