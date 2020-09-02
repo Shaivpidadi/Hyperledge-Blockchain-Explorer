@@ -14,6 +14,8 @@ const TableStyles = styled.div`
     td {
       padding: 11px 10px 9px 10px;
       height: 75px;
+      text-align: center;
+      width: 2%;
     }
     tbody tr {
       background-color: #f0f0f0;
@@ -47,16 +49,34 @@ const DataTable = () => {
   const data = React.useMemo(
     () => [
       {
-        col1: 'Hello',
-        col2: 'World',
+        blockNumber: '587',
+        channelName: 'akcessglobal',
+        numberOfTx: '12',
+        dashHash: 'c6ef8c1d',
+        blockHash: 'a16ba16b00',
+        previousHash: '1d96036f37',
+        transactions: '1d96036bde',
+        size: '11',
       },
       {
-        col1: 'react-table',
-        col2: 'rocks',
+        blockNumber: '587',
+        channelName: 'akcessglobal',
+        numberOfTx: '12',
+        dashHash: 'c6ef8c1d',
+        blockHash: 'a16b00a16b',
+        previousHash: '1d96036bd67d8',
+        transactions: '1d96036bd67d8',
+        size: '11',
       },
       {
-        col1: 'whatever',
-        col2: 'you want',
+        blockNumber: '587',
+        channelName: 'akcessglobal',
+        numberOfTx: '12',
+        dashHash: 'c6ef8c1d',
+        blockHash: 'a16ba16b00',
+        previousHash: '1d96036bd67d8',
+        transactions: '1d96036bde',
+        size: '11',
       },
     ],
     [],
@@ -65,12 +85,36 @@ const DataTable = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Column 1',
-        accessor: 'col1', // accessor is the "key" in the data
+        Header: 'Block Number',
+        accessor: 'blockNumber', // accessor is the "key" in the data
       },
       {
-        Header: 'Column 2',
-        accessor: 'col2',
+        Header: 'Channel Name',
+        accessor: 'channelName',
+      },
+      {
+        Header: 'Number of Tx',
+        accessor: 'numberOfTx',
+      },
+      {
+        Header: 'Dash Hash',
+        accessor: 'dashHash',
+      },
+      {
+        Header: 'Block Hash',
+        accessor: 'blockHash',
+      },
+      {
+        Header: 'Previous Hash',
+        accessor: 'previousHash',
+      },
+      {
+        Header: 'Transactions',
+        accessor: 'transactions',
+      },
+      {
+        Header: 'Size (KB)',
+        accessor: 'size',
       },
     ],
     [],
