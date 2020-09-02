@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, Icon, Avatar, Tag } from '@shopify/polaris';
+import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 
 const LabelWithValue = ({ label, value }) => (
   <div>
@@ -52,7 +53,7 @@ const SingleBlockCard = ({ onClick }) => {
                 display: 'inline-block',
               }}
             >
-              124124124
+              <TextWithEllipses text="124124124asdasdasdasd" />
             </span>
           </div>
           <div>
