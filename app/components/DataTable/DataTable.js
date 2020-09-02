@@ -1,7 +1,7 @@
 import React from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
-import { Button } from '@shopify/polaris';
+import { Button, TextField } from '@shopify/polaris';
 
 import fakeData from './dummyData';
 
@@ -105,14 +105,35 @@ const DataTable = () => {
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize },
+    state: { pageIndex, pageSize, globalFilter },
+
+    // Search
+    setGlobalFilter,
   } = useTable(
     { columns, data, initialState: { pageIndex: 2 } },
+    useGlobalFilter,
     usePagination,
   );
 
   return (
     <TableStyles>
+      <div style={{ width: '350px' }}>
+        <TextField
+          className="tableSearch"
+          type="search"
+          placeholder="Search..."
+          value={globalFilter}
+          onChange={value => {
+            setGlobalFilter(value || undefined);
+          }}
+          autoComplete="off"
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="off"
+          role="combobox"
+          aria-label="Search table"
+        />
+      </div>
       <table {...getTableProps()}>
         <thead>
           {// Loop over the header rows
