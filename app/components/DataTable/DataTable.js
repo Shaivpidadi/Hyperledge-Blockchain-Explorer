@@ -1,6 +1,9 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 import styled from 'styled-components';
+import { Button } from '@shopify/polaris';
+
+import fakeData from './dummyData';
 
 const TableStyles = styled.div`
   table {
@@ -46,41 +49,7 @@ const TableStyles = styled.div`
 `;
 
 const DataTable = () => {
-  const data = React.useMemo(
-    () => [
-      {
-        blockNumber: '587',
-        channelName: 'akcessglobal',
-        numberOfTx: '12',
-        dashHash: 'c6ef8c1d',
-        blockHash: 'a16ba16b00',
-        previousHash: '1d96036f37',
-        transactions: '1d96036bde',
-        size: '11',
-      },
-      {
-        blockNumber: '587',
-        channelName: 'akcessglobal',
-        numberOfTx: '12',
-        dashHash: 'c6ef8c1d',
-        blockHash: 'a16b00a16b',
-        previousHash: '1d96036bd67d8',
-        transactions: '1d96036bd67d8',
-        size: '11',
-      },
-      {
-        blockNumber: '587',
-        channelName: 'akcessglobal',
-        numberOfTx: '12',
-        dashHash: 'c6ef8c1d',
-        blockHash: 'a16ba16b00',
-        previousHash: '1d96036bd67d8',
-        transactions: '1d96036bde',
-        size: '11',
-      },
-    ],
-    [],
-  );
+  const data = React.useMemo(() => fakeData, []);
 
   const columns = React.useMemo(
     () => [
@@ -124,9 +93,23 @@ const DataTable = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
     prepareRow,
-  } = useTable({ columns, data });
+
+    // For Pagintation
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 2 } },
+    usePagination,
+  );
 
   return (
     <TableStyles>
@@ -150,7 +133,7 @@ const DataTable = () => {
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
           {// Loop over the table rows
-          rows.map(row => {
+          page.map(row => {
             // Prepare the row for display
             prepareRow(row);
             return (
@@ -171,6 +154,50 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
+      <div className="pagination">
+        <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </Button>{' '}
+        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </Button>{' '}
+        <Button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </Button>{' '}
+        <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </Button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              gotoPage(page);
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </TableStyles>
   );
 };
