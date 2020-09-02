@@ -22,11 +22,11 @@ const TableStyles = styled.div`
     }
 
     tr td:first-of-type {
-      border-radius: 10px 0px 0px 10px;
+      border-radius: 5px 0px 0px 5px;
     }
 
     tr td:last-of-type {
-      border-radius: 0px 10px 10px 0px;
+      border-radius: 0px 5px 5px 0px;
     }
 
     thead th {
