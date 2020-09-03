@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
-import { Button, TextField, Card } from '@shopify/polaris';
+import { Button, TextField } from '@shopify/polaris';
+import { motion, AnimatePresence } from 'framer-motion';
 
+import './DataTable.scss';
 import fakeData from './dummyData';
 
 const TableStyles = styled.div`
@@ -115,6 +117,15 @@ const DataTable = () => {
     usePagination,
   );
 
+  const spring = React.useMemo(
+    () => ({
+      type: 'spring',
+      damping: 50,
+      stiffness: 100,
+    }),
+    [],
+  );
+
   return (
     <TableStyles>
       <div style={{ width: '350px' }}>
@@ -143,36 +154,53 @@ const DataTable = () => {
               {// Loop over the headers in each row
               headerGroup.headers.map(column => (
                 // Apply the header cell props
-                <th {...column.getHeaderProps()}>
+                <motion.th
+                  {...column.getHeaderProps({
+                    layoutTransition: spring,
+                  })}
+                >
                   {// Render the header
                   column.render('Header')}
-                </th>
+                </motion.th>
               ))}
             </tr>
           ))}
         </thead>
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
-          {// Loop over the table rows
-          page.map(row => {
-            // Prepare the row for display
-            prepareRow(row);
-            return (
-              // Apply the row props
-              <tr {...row.getRowProps()}>
-                {// Loop over the rows cells
-                row.cells.map(cell => {
-                  // Apply the cell props
-                  return (
-                    <td {...cell.getCellProps()}>
-                      {// Render the cell contents
-                      cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          <AnimatePresence>
+            {// Loop over the table rows
+            page.map(row => {
+              // Prepare the row for display
+              prepareRow(row);
+              return (
+                // Apply the row props
+                <motion.tr
+                  {...row.getRowProps({
+                    layoutTransition: spring,
+                    exit: { opacity: 0, maxHeight: 0 },
+                  })}
+                  onClick={() => console.log(row.values)}
+                  className="flip-horizontal-top"
+                >
+                  {// Loop over the rows cells
+                  row.cells.map(cell => {
+                    // Apply the cell props
+                    return (
+                      <motion.td
+                        {...cell.getCellProps({
+                          layoutTransition: spring,
+                        })}
+                      >
+                        {// Render the cell contents
+                        cell.render('Cell')}
+                      </motion.td>
+                    );
+                  })}
+                </motion.tr>
+              );
+            })}
+          </AnimatePresence>
         </tbody>
       </table>
 
