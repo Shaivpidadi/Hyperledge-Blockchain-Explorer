@@ -13,8 +13,6 @@ const HiddenScroll = forwardRef(({ children, ...props }, ref) => {
         overflow: '-moz-scrollbars-none',
         overflowY: 'scroll',
         scrollbarWidth: 'none',
-
-        // to hide scroolbar
         '&::-webkit-scrollbar': {
           width: '0 !important',
         },

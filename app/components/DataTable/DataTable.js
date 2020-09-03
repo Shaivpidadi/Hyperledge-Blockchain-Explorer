@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
-import { Button, TextField } from '@shopify/polaris';
+import { Button, TextField, Card } from '@shopify/polaris';
 
 import fakeData from './dummyData';
 
@@ -110,7 +110,7 @@ const DataTable = () => {
     // Search
     setGlobalFilter,
   } = useTable(
-    { columns, data, initialState: { pageIndex: 2 } },
+    { columns, data, initialState: { pageIndex: 0 } },
     useGlobalFilter,
     usePagination,
   );
@@ -175,44 +175,60 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
-      <div className="pagination">
-        <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </Button>{' '}
-        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </Button>{' '}
-        <Button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </Button>{' '}
-        <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </Button>{' '}
+
+      {/*  Pagination */}
+      <div
+        className="pagination"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '0 5px',
+          alignItems: 'center',
+        }}
+      >
+        <span>
+          <Button
+            size="slim"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {'<<'}
+          </Button>{' '}
+          <Button
+            size="slim"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            {'<'}
+          </Button>{' '}
+          <Button
+            size="slim"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            {'>'}
+          </Button>{' '}
+          <Button
+            size="slim"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {'>>'}
+          </Button>{' '}
+        </span>
         <span>
           Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{' '}
         </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(page);
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
         <select
           value={pageSize}
           onChange={e => {
             setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map(pageSize => (
+          {[10, 25, 50].map(pageSize => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
