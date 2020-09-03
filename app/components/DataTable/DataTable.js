@@ -1,6 +1,9 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
+import { Button, TextField } from '@shopify/polaris';
+
+import fakeData from './dummyData';
 
 const TableStyles = styled.div`
   table {
@@ -14,17 +17,19 @@ const TableStyles = styled.div`
     td {
       padding: 11px 10px 9px 10px;
       height: 75px;
+      text-align: center;
+      width: 2%;
     }
     tbody tr {
       background-color: #f0f0f0;
     }
 
     tr td:first-of-type {
-      border-radius: 10px 0px 0px 10px;
+      border-radius: 5px 0px 0px 5px;
     }
 
     tr td:last-of-type {
-      border-radius: 0px 10px 10px 0px;
+      border-radius: 0px 5px 5px 0px;
     }
 
     thead th {
@@ -44,33 +49,41 @@ const TableStyles = styled.div`
 `;
 
 const DataTable = () => {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: 'Hello',
-        col2: 'World',
-      },
-      {
-        col1: 'react-table',
-        col2: 'rocks',
-      },
-      {
-        col1: 'whatever',
-        col2: 'you want',
-      },
-    ],
-    [],
-  );
+  const data = React.useMemo(() => fakeData, []);
 
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Column 1',
-        accessor: 'col1', // accessor is the "key" in the data
+        Header: 'Block Number',
+        accessor: 'blockNumber', // accessor is the "key" in the data
       },
       {
-        Header: 'Column 2',
-        accessor: 'col2',
+        Header: 'Channel Name',
+        accessor: 'channelName',
+      },
+      {
+        Header: 'Number of Tx',
+        accessor: 'numberOfTx',
+      },
+      {
+        Header: 'Dash Hash',
+        accessor: 'dashHash',
+      },
+      {
+        Header: 'Block Hash',
+        accessor: 'blockHash',
+      },
+      {
+        Header: 'Previous Hash',
+        accessor: 'previousHash',
+      },
+      {
+        Header: 'Transactions',
+        accessor: 'transactions',
+      },
+      {
+        Header: 'Size (KB)',
+        accessor: 'size',
       },
     ],
     [],
@@ -80,12 +93,47 @@ const DataTable = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
     prepareRow,
-  } = useTable({ columns, data });
+
+    // For Pagintation
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize, globalFilter },
+
+    // Search
+    setGlobalFilter,
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 2 } },
+    useGlobalFilter,
+    usePagination,
+  );
 
   return (
     <TableStyles>
+      <div style={{ width: '350px' }}>
+        <TextField
+          className="tableSearch"
+          type="search"
+          placeholder="Search..."
+          value={globalFilter}
+          onChange={value => {
+            setGlobalFilter(value || undefined);
+          }}
+          autoComplete="off"
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="off"
+          role="combobox"
+          aria-label="Search table"
+        />
+      </div>
       <table {...getTableProps()}>
         <thead>
           {// Loop over the header rows
@@ -106,7 +154,7 @@ const DataTable = () => {
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
           {// Loop over the table rows
-          rows.map(row => {
+          page.map(row => {
             // Prepare the row for display
             prepareRow(row);
             return (
@@ -127,6 +175,50 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
+      <div className="pagination">
+        <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </Button>{' '}
+        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </Button>{' '}
+        <Button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </Button>{' '}
+        <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </Button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              gotoPage(page);
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </TableStyles>
   );
 };
