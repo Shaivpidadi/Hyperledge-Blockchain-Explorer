@@ -191,6 +191,7 @@ const DataTable = () => {
                         {...cell.getCellProps({
                           layoutTransition: spring,
                         })}
+                        className="highlight"
                       >
                         {// Render the cell contents
                         cell.render('Cell')}
