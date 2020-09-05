@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, TextField } from '@shopify/polaris';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -52,7 +53,7 @@ const TableStyles = styled.div`
 
 const DataTable = () => {
   const data = React.useMemo(() => fakeData, []);
-
+  const history = useHistory();
   const columns = React.useMemo(
     () => [
       {
@@ -180,7 +181,10 @@ const DataTable = () => {
                     layoutTransition: spring,
                     exit: { opacity: 0, maxHeight: 0 },
                   })}
-                  onClick={() => console.log(row.values)}
+                  // onClick={() => console.log(row.values)}
+                  onClick={() =>
+                    history.push(`/block/${row.values.blockNumber}`)
+                  }
                   className="flip-horizontal-top"
                 >
                   {// Loop over the rows cells

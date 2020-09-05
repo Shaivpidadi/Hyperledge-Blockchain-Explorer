@@ -15,6 +15,7 @@ import HomePage from '../../containers/HomePage/Loadable';
 import BlockPage from '../../containers/BlockPage/Loadable';
 import NotFoundPage from '../../containers/NotFoundPage/Loadable';
 import Header from '../../components/Header/Header';
+import BlockInfo from '../../containers/BlockInfo/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
@@ -26,6 +27,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/block" component={BlockPage} />
+          <Route exact path="/block/:blockId" component={BlockInfo} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppProvider>
