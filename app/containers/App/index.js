@@ -17,7 +17,7 @@ import NotFoundPage from '../../containers/NotFoundPage/Loadable';
 import Header from '../../components/Header/Header';
 import BlockInfo from '../../containers/BlockInfo/Loadable';
 import TransactionPage from '../../containers/AllTransctions/Loadable';
-
+import TransactionInfo from '../../containers/TransactionInfo/Loadable';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
@@ -30,6 +30,7 @@ export default function App() {
           <Route exact path="/block" component={BlockPage} />
           <Route exact path="/block/:blockId" component={BlockInfo} />
           <Route exact path="/transactions" component={TransactionPage} />
+          <Route exact path="/tx/:txId" component={TransactionInfo} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppProvider>

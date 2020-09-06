@@ -182,9 +182,7 @@ const DataTable = () => {
                     exit: { opacity: 0, maxHeight: 0 },
                   })}
                   // onClick={() => console.log(row.values)}
-                  onClick={() =>
-                    history.push(`/block/${row.values.blockNumber}`)
-                  }
+                  onClick={() => history.push(`/tx/${row.values.blockNumber}`)}
                   className="flip-horizontal-top"
                 >
                   {// Loop over the rows cells
