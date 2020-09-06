@@ -32,6 +32,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 2rem 2rem 2rem 0rem;
     padding-bottom: 2rem;
   }
+
+  .Polaris-Heading {
+    font-size: 3rem;
+  }
 `;
 
 export default GlobalStyle;
