@@ -66,11 +66,11 @@ const TransactionInfo = () => {
             </div>
 
             <div style={{ margin: '20px auto' }}>
-              <AccordianCard title="Reads" />
+              <AccordianCard title="Reads" containerData="Coming Soon ..." />
             </div>
 
             <div style={{ margin: '20px auto' }}>
-              <AccordianCard title="Writes" />
+              <AccordianCard title="Writes" containerData="Coming Soon ..." />
             </div>
           </div>
         </div>

@@ -1,11 +1,5 @@
-/**
- *
- * AccordianCard
- *
- */
-
 import React, { useState, useCallback } from 'react';
-// import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import {
   Card,
   Stack,
@@ -14,7 +8,7 @@ import {
   TextContainer,
 } from '@shopify/polaris';
 
-const AccordianCard = ({ title }) => {
+const AccordianCard = ({ title, containerData }) => {
   const [active, setActive] = useState(false);
 
   const handleToggle = useCallback(() => setActive(active => !active), []);
@@ -46,7 +40,7 @@ const AccordianCard = ({ title }) => {
             transition={{ duration: '150ms', timingFunction: 'ease' }}
           >
             <div style={{ padding: '20px' }}>
-              <TextContainer>Coming Soon ...</TextContainer>
+              <TextContainer>{containerData}</TextContainer>
             </div>
           </Collapsible>
         </Stack>
@@ -55,4 +49,8 @@ const AccordianCard = ({ title }) => {
   );
 };
 
+AccordianCard.propTypes = {
+  title: PropTypes.string,
+  containerData: PropTypes.object,
+};
 export default AccordianCard;
