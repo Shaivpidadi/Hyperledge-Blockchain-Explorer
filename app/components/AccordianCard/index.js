@@ -4,9 +4,11 @@ import {
   Card,
   Stack,
   Button,
+  Icon,
   Collapsible,
   TextContainer,
 } from '@shopify/polaris';
+import { CaretUpMinor, CaretDownMinor } from '@shopify/polaris-icons';
 
 const AccordianCard = ({ title, containerData }) => {
   const [active, setActive] = useState(false);
@@ -25,13 +27,15 @@ const AccordianCard = ({ title, containerData }) => {
           >
             <Card.Header title={title} />
             <Card.Header>
-              <Button
+              <div
                 onClick={handleToggle}
                 ariaExpanded={active}
                 ariaControls="basic-collapsible"
+                style={{ cursor: 'pointer' }}
               >
-                Toggle
-              </Button>
+                {active && <Icon source={CaretUpMinor} />}
+                {!active && <Icon source={CaretDownMinor} />}
+              </div>
             </Card.Header>
           </div>
           <Collapsible
