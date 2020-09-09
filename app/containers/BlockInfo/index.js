@@ -1,9 +1,3 @@
-/**
- *
- * BlockInfo
- *
- */
-
 import React from 'react';
 import { Card, Heading } from '@shopify/polaris';
 

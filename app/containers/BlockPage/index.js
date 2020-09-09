@@ -1,9 +1,3 @@
-/**
- *
- * BlockPage
- *
- */
-
 import React from 'react';
 import { Card } from '@shopify/polaris';
 import DataTable from '../../components/DataTable/DataTable';

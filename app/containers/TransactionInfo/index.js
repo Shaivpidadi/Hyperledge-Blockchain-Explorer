@@ -1,9 +1,3 @@
-/**
- *
- * TransactionInfo
- *
- */
-
 import React from 'react';
 import { Card } from '@shopify/polaris';
 
