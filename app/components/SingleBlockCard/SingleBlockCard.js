@@ -1,6 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Card, Icon, Avatar, Tag } from '@shopify/polaris';
+import TimeAgo from 'timeago-react';
+
 import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 
 const LabelWithValue = ({ label, value }) => (
@@ -81,7 +82,9 @@ const SingleBlockCard = ({
             fontWeight: 'bolder',
           }}
         >
-          <Tag>{timeStamp}</Tag>
+          <Tag>
+            <TimeAgo datetime={'2016-08-08 08:08:08'} />
+          </Tag>
         </div>
       </div>
     </Card>
