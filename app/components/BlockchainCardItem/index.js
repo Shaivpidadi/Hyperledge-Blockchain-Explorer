@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BlockchainCardItem = ({ label, value, labelStyle, valueStyle }) => {
+const BlockchainCardItem = ({
+  label,
+  value,
+  labelStyle,
+  valueStyle,
+  wrapperStyle,
+}) => {
   return (
-    <div style={{ lineHeight: '30px', fontSize: '16px' }}>
+    <div style={{ lineHeight: '30px', fontSize: '16px', ...wrapperStyle }}>
       <span
         style={{
           color: 'rgb(93, 106, 133)',
@@ -22,7 +28,6 @@ const BlockchainCardItem = ({ label, value, labelStyle, valueStyle }) => {
 BlockchainCardItem.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  labelStyle: PropTypes.shape,
 };
 
 export default BlockchainCardItem;

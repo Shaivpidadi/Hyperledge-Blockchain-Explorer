@@ -3,59 +3,27 @@ import { Card } from '@shopify/polaris';
 
 import BlockchainCardItem from '../BlockchainCardItem';
 
-const BlockchainCard = () => {
+const BlockchainCard = ({ title, cardItems }) => {
   return (
     <Card sectioned>
-      <Card.Header title="Blockchain Stats" />
+      <Card.Header title={title} />
       <div
         style={{
           display: 'flex',
-          padding: '20px',
-          fontSize: '12px',
-          justifyContent: 'space-between',
-          fontWeight: 'bolder',
+          margin: '20px 20px 10px',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '45%',
-          }}
-        >
-          <div>
-            <BlockchainCardItem label="Total Blocks" value="129" />
-            <BlockchainCardItem label="Total txs" value="123422" />
-            <BlockchainCardItem label="Total Channels" value="13" />
-            <BlockchainCardItem label="Total Chaincodes" value="38" />
-          </div>
-          <div>
-            <BlockchainCardItem label="Total Blocks" value="129" />
-            <BlockchainCardItem label="Total txs" value="123422" />
-            <BlockchainCardItem label="Total Channels" value="13" />
-            <BlockchainCardItem label="Total Chaincodes" value="38" />
-          </div>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '45%',
-          }}
-        >
-          <div>
-            <BlockchainCardItem label="Total Blocks" value="129" />
-            <BlockchainCardItem label="Total txs" value="123422" />
-            <BlockchainCardItem label="Total Channels" value="13" />
-            <BlockchainCardItem label="Total Chaincodes" value="38" />
-          </div>
-          <div>
-            <BlockchainCardItem label="Total Blocks" value="129" />
-            <BlockchainCardItem label="Total txs" value="123422" />
-            <BlockchainCardItem label="Total Channels" value="13" />
-            <BlockchainCardItem label="Total Chaincodes" value="38" />
-          </div>
-        </div>
+        {cardItems.map(({ label, value }) => (
+          <BlockchainCardItem
+            key={value}
+            label={label}
+            value={value}
+            wrapperStyle={{ width: '270px' }}
+            labelStyle={{ width: '150px' }}
+          />
+        ))}
       </div>
     </Card>
   );

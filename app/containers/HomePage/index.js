@@ -8,6 +8,17 @@ import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
+const BlockchainData = [
+  { label: 'Total Blocks', value: '129' },
+  { label: 'Total txs', value: '123422' },
+  { label: 'Total Channels', value: '13' },
+  { label: 'Total Chaincodes', value: '38' },
+  { label: 'Total Channels', value: '13' },
+  { label: 'Total Channels', value: '13' },
+  { label: 'Total Chaincodes', value: '38' },
+  { label: 'Total Channels', value: '13' },
+];
+
 const HomePage = ({ history }) => {
   return (
     <div style={{ marginTop: '40px' }}>
@@ -66,7 +77,7 @@ const HomePage = ({ history }) => {
       </div>
 
       <div style={{ marginTop: '2px' }}>
-        <BlockchainCard />
+        <BlockchainCard title="Blockchain Stats" cardItems={BlockchainData} />
       </div>
     </div>
   );
