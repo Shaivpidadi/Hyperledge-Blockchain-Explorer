@@ -71,7 +71,14 @@ const HomePage = ({ history }) => {
                   }}
                 >
                   <HiddenScroll height="400px">
-                    <SingleBlockCard onClick={() => history.push('/block')} />
+                    <SingleBlockCard
+                      onClick={() => history.push('/block')}
+                      blockHash="123121212412345345"
+                      blockNumber="12414"
+                      channelName="SHaIV"
+                      totalTxs="124"
+                      timeStamp={new Date().toString()}
+                    />
                     <SingleBlockCard />
                     <SingleBlockCard />
                     <SingleBlockCard />

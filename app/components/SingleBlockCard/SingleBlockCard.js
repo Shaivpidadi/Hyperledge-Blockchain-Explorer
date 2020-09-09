@@ -25,7 +25,14 @@ const LabelWithValue = ({ label, value }) => (
   </div>
 );
 
-const SingleBlockCard = ({ onClick }) => {
+const SingleBlockCard = ({
+  onClick,
+  blockHash,
+  blockNumber,
+  channelName,
+  totalTxs,
+  timeStamp,
+}) => {
   return (
     <Card>
       <div
@@ -53,17 +60,17 @@ const SingleBlockCard = ({ onClick }) => {
                 display: 'inline-block',
               }}
             >
-              <TextWithEllipses text="124124124asdasdasdasd" />
+              <TextWithEllipses text={blockHash} />
             </span>
           </div>
           <div>
-            <span style={{ color: 'rgb(0, 0, 0)' }}>{'wrw3erwer'}</span>
+            <span style={{ color: 'rgb(0, 0, 0)' }}>{blockNumber}</span>
           </div>
         </div>
 
         <div style={{ display: 'inline-block' }}>
-          <LabelWithValue label="Channel Name" value="Shaiv" />
-          <LabelWithValue label="Total txs" value="12312" />
+          <LabelWithValue label="Channel Name" value={channelName} />
+          <LabelWithValue label="Total txs" value={totalTxs} />
         </div>
 
         <div
@@ -74,7 +81,7 @@ const SingleBlockCard = ({ onClick }) => {
             fontWeight: 'bolder',
           }}
         >
-          <Tag>1 min ago</Tag>
+          <Tag>{timeStamp}</Tag>
         </div>
       </div>
     </Card>
