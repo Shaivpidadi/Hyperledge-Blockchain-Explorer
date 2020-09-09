@@ -1,20 +1,7 @@
 import React from 'react';
 import { Card } from '@shopify/polaris';
 
-const BlockchainCardItem = ({ label, value }) => (
-  <div>
-    <span
-      style={{
-        color: 'rgb(93, 106, 133)',
-        width: '130px',
-        display: 'inline-block',
-      }}
-    >
-      {`${label}:`}
-    </span>
-    <span style={{ color: 'rgb(0, 0, 0)' }}>{value}</span>
-  </div>
-);
+import BlockchainCardItem from '../BlockchainCardItem';
 
 const BlockchainCard = () => {
   return (

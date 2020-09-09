@@ -6,18 +6,9 @@
 
 import React from 'react';
 import { Card } from '@shopify/polaris';
-import AccordianCard from '../../components/AccordianCard';
 
-const BlockchainCardItem = ({ label, value }) => (
-  <div style={{ lineHeight: '30px', fontSize: '16px' }}>
-    <span
-      style={{ color: 'rgb(0, 0, 0)', width: '130px', display: 'inline-block' }}
-    >
-      <strong>{`${label}:`}</strong>
-    </span>
-    <span style={{ color: 'rgb(93, 106, 133)' }}>{value}</span>
-  </div>
-);
+import AccordianCard from '../../components/AccordianCard';
+import BlockchainCardItem from '../../components/BlockchainCardItem';
 
 const TransactionInfo = () => {
   return (

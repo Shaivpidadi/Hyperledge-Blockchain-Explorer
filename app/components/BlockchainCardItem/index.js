@@ -7,9 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BlockchainCardItem = ({ label, value, labelStyle }) => {
+const BlockchainCardItem = ({ label, value, labelStyle, valueStyle }) => {
   return (
-    <div>
+    <div style={{ lineHeight: '30px', fontSize: '16px' }}>
       <span
         style={{
           color: 'rgb(93, 106, 133)',
@@ -20,7 +20,7 @@ const BlockchainCardItem = ({ label, value, labelStyle }) => {
       >
         {`${label}:`}
       </span>
-      <span style={{ color: 'rgb(0, 0, 0)' }}>{value}</span>
+      <span style={{ color: 'rgb(0, 0, 0)', ...valueStyle }}>{value}</span>
     </div>
   );
 };
