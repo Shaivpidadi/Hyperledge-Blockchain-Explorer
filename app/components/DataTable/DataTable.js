@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, TextField } from '@shopify/polaris';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -51,47 +50,7 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = () => {
-  const data = React.useMemo(() => fakeData, []);
-  const history = useHistory();
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Block Number',
-        accessor: 'blockNumber', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Channel Name',
-        accessor: 'channelName',
-      },
-      {
-        Header: 'Number of Tx',
-        accessor: 'numberOfTx',
-      },
-      {
-        Header: 'Dash Hash',
-        accessor: 'dashHash',
-      },
-      {
-        Header: 'Block Hash',
-        accessor: 'blockHash',
-      },
-      {
-        Header: 'Previous Hash',
-        accessor: 'previousHash',
-      },
-      {
-        Header: 'Transactions',
-        accessor: 'transactions',
-      },
-      {
-        Header: 'Size (KB)',
-        accessor: 'size',
-      },
-    ],
-    [],
-  );
-
+const DataTable = ({ columns, rowsData, onRowClick }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -113,7 +72,7 @@ const DataTable = () => {
     // Search
     setGlobalFilter,
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0 } },
+    { columns, data: rowsData, initialState: { pageIndex: 0 } },
     useGlobalFilter,
     usePagination,
   );
@@ -182,7 +141,7 @@ const DataTable = () => {
                     exit: { opacity: 0, maxHeight: 0 },
                   })}
                   // onClick={() => console.log(row.values)}
-                  onClick={() => history.push(`/tx/${row.values.blockNumber}`)}
+                  onClick={() => onRowClick(row.values)}
                   className="flip-horizontal-top"
                 >
                   {// Loop over the rows cells
