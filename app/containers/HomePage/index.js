@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card, Layout } from '@shopify/polaris';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -13,18 +13,38 @@ const BlockchainData = [
   { label: 'Total txs', value: '123422' },
   { label: 'Total Channels', value: '13' },
   { label: 'Total Chaincodes', value: '38' },
-  { label: 'Total Channels', value: '13' },
-  { label: 'Total Channels', value: '13' },
-  { label: 'Total Chaincodes', value: '38' },
-  { label: 'Total Channels', value: '13' },
+  { label: 'Total Channels', value: '13s' },
+  { label: 'Total Channels', value: '1w3' },
+  { label: 'Total Chaincodes', value: '338' },
+  { label: 'Total Channels', value: '1313' },
 ];
 
 const HomePage = ({ history }) => {
+  const handleImportedAction = useCallback(
+    () => console.log('Imported action'),
+    [],
+  );
+
+  const handleExportedAction = useCallback(
+    () => console.log('Exported action'),
+    [],
+  );
+
+  const dropdownMenuList = [
+    {
+      content: 'Import file',
+      onAction: handleImportedAction,
+    },
+    {
+      content: 'Export file',
+      onAction: handleExportedAction,
+    },
+  ];
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
         <Card.Header title="Blockchain Explorer">
-          <Dropdown />
+          <Dropdown title="tx / block" dropdownMenuList={dropdownMenuList} />
         </Card.Header>
         <Card.Section>
           <div style={{ overflowX: 'auto', marginTop: '20px' }}>
