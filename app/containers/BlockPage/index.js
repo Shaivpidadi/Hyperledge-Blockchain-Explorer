@@ -56,7 +56,9 @@ const BlockPage = () => {
         <DataTable
           rowsData={rows || []}
           columns={columns}
-          onRowClick={({ blockNumber }) => history.push(`/tx/${blockNumber}`)}
+          onRowClick={({ blockNumber }) =>
+            history.push(`/block/${blockNumber}`)
+          }
         />
       </Card>
     </div>
