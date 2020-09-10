@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from '@shopify/polaris';
 
 import BlockchainCardItem from '../BlockchainCardItem';
+import networkStats from '../../../mock-data/network-stats.json';
 
 const BlockchainCard = ({ title, cardItems }) => {
   return (
@@ -15,11 +16,11 @@ const BlockchainCard = ({ title, cardItems }) => {
           flexWrap: 'wrap',
         }}
       >
-        {cardItems.map(({ label, value }) => (
+        {Object.keys(networkStats).map(key => (
           <BlockchainCardItem
-            key={value}
-            label={label}
-            value={value}
+            key={key}
+            label={key}
+            value={networkStats[key]}
             wrapperStyle={{ width: '270px' }}
             labelStyle={{ width: '150px' }}
           />
