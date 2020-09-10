@@ -1,0 +1,49 @@
+{
+  "status": 200,
+  "rows": [
+    {
+      "count": "26",
+      "creator_msp_id": "bank1"
+    },
+    {
+      "count": "2",
+      "creator_msp_id": "bank2"
+    },
+    {
+      "count": "99",
+      "creator_msp_id": "bank3"
+    },
+    {
+      "count": "104",
+      "creator_msp_id": "bank4"
+    },
+    {
+      "count": "14",
+      "creator_msp_id": "OrdererMSP"
+    },
+    {
+      "count": "1",
+      "creator_msp_id": "bank5"
+    },
+    {
+      "count": "1",
+      "creator_msp_id": "bank6"
+    },
+    {
+      "count": "1",
+      "creator_msp_id": "bank7"
+    },
+    {
+      "count": "2",
+      "creator_msp_id": "bank8"
+    },
+    {
+      "count": "1",
+      "creator_msp_id": "bank9"
+    },
+    {
+      "count": "2",
+      "creator_msp_id": "bank10"
+    }
+  ]
+}

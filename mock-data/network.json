@@ -1,0 +1,8 @@
+{
+  "networkList": [
+    {
+      "name": "akcess-network",
+      "authEnabled": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "status": 200,
+  "channels": [
+    {
+      "id": 3,
+      "channelname": "global",
+      "blocks": 672,
+      "channel_genesis_hash": "a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6",
+      "transactions": 676,
+      "createdat": "2020-07-21T05:57:49.000Z",
+      "channel_hash": ""
+    },
+    {
+      "id": 4,
+      "channelname": "shaivprivate",
+      "blocks": 10,
+      "channel_genesis_hash": "e3565283a44503a5f101788f5f14e18e96ad9fca38ece1fba030e75d96212830",
+      "transactions": 10,
+      "createdat": "2020-07-21T05:58:11.000Z",
+      "channel_hash": ""
+    },
+    {
+      "id": 8,
+      "channelname": "orgchannel",
+      "blocks": 57,
+      "channel_genesis_hash": "b90746c605a3947fd682abcba321c3af9e0a31c99ea0ed4b9316d226a69168d3",
+      "transactions": 57,
+      "createdat": "2020-07-21T05:58:05.000Z",
+      "channel_hash": ""
+    },
+    {
+      "id": 5,
+      "channelname": "boubyanprivate",
+      "blocks": 13,
+      "channel_genesis_hash": "5ff6627a789e843f620d0b9247be37aee26c789d0b9fa3f9fcf990ba4afed670",
+      "transactions": 13,
+      "createdat": "2020-07-21T05:58:19.000Z",
+      "channel_hash": ""
+    },
+    {
+      "id": 9,
+      "channelname": "burganprivate",
+      "blocks": 17,
+      "channel_genesis_hash": "ce2ccd9da3a43faed4351f9eab36b473b1d1ed8948cf14f1f511500f873fb257",
+      "transactions": 17,
+      "createdat": "2020-07-21T05:58:26.000Z",
+      "channel_hash": ""
+    }
+  ]
+}
