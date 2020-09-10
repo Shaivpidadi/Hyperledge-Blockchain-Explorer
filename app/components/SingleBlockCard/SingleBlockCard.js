@@ -83,7 +83,7 @@ const SingleBlockCard = ({
           }}
         >
           <Tag>
-            <TimeAgo datetime={'2016-08-08 08:08:08'} />
+            <TimeAgo datetime={timeStamp} />
           </Tag>
         </div>
       </div>
