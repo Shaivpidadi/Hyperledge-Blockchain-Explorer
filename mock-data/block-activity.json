@@ -11,7 +11,7 @@
       "txhash": [
         "e3cab53a0ea24e1e770ad1340962ff920ff992ee3361757f2a36db08cf981a20"
       ],
-      "channelname": "akcessglobal"
+      "channelname": "global"
     },
     {
       "blocknum": 670,
@@ -23,7 +23,7 @@
       "txhash": [
         "b8ff359ca63cb8dad1d45fd2577033903d05358d507a3afdb77484010871fb36"
       ],
-      "channelname": "akcessglobal"
+      "channelname": "global"
     },
     {
       "blocknum": 669,
@@ -35,7 +35,7 @@
       "txhash": [
         "e905fa511be2c3bb945a807b7ec8e70d327d8b9fca697cc8a11a68f78f15fe18"
       ],
-      "channelname": "akcessglobal"
+      "channelname": "global"
     }
   ]
 }

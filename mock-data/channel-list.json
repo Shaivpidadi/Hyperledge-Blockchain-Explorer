@@ -1,18 +1,4 @@
 {
   "status": 200,
-  "channels": [
-    "akcessglobal",
-    "al-rajhiprivate",
-    "aubprivate",
-    "boubyanprivate",
-    "burganprivate",
-    "cbkprivate",
-    "gulfprivate",
-    "ibkprivate",
-    "kfhprivate",
-    "kibprivate",
-    "nbkprivate",
-    "tijariprivate",
-    "warbaprivate"
-  ]
+  "channels": ["shaiv", "oneprivate", "private", "global"]
 }
