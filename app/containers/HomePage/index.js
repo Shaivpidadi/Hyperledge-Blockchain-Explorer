@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Card, Layout } from '@shopify/polaris';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -9,6 +9,7 @@ import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
 import blockList from '../../../mock-data/blockList.json';
+import txByOrg from '../../../mock-data/txByOrg.json';
 
 const BlockchainData = [
   { label: 'Total Blocks', value: '129' },
@@ -23,7 +24,16 @@ const BlockchainData = [
 
 const HomePage = ({ history }) => {
   const blockData = blockList?.rows || [];
+  let orgData = txByOrg?.rows || [];
 
+  orgData = orgData.map(({ creator_msp_id, count }) => {
+    return {
+      name: creator_msp_id,
+      uv: count,
+      pv: count,
+      fill: '#8884d8',
+    };
+  });
   const handleImportedAction = useCallback(
     () => console.log('Imported action'),
     [],
@@ -101,7 +111,7 @@ const HomePage = ({ history }) => {
             <Layout.Section oneHalf>
               <Card sectioned title="Transactions by Organization">
                 <div style={{ minHeight: '400px' }}>
-                  <RadicalChart />
+                  <RadicalChart data={orgData} />
                 </div>
               </Card>
             </Layout.Section>

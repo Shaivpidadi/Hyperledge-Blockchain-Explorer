@@ -28,7 +28,8 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const RadicalChart = () => {
+const RadicalChart = ({ data }) => {
+  console.log({ data });
   return (
     <RadialBarChart
       width={500}
