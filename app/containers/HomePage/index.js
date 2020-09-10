@@ -8,6 +8,8 @@ import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
+import blockList from '../../../mock-data/blockList.json';
+
 const BlockchainData = [
   { label: 'Total Blocks', value: '129' },
   { label: 'Total txs', value: '123422' },
@@ -19,51 +21,9 @@ const BlockchainData = [
   { label: 'Total Channels', value: '1313' },
 ];
 
-const blockData = [
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-  {
-    blockHash: '123121212412345345',
-    blockNumber: '12414',
-    channelName: 'SHaIV',
-    totalTxs: '124',
-    timeStamp: new Date(),
-  },
-];
 const HomePage = ({ history }) => {
+  const blockData = blockList?.rows || [];
+
   const handleImportedAction = useCallback(
     () => console.log('Imported action'),
     [],
@@ -117,19 +77,20 @@ const HomePage = ({ history }) => {
                   <HiddenScroll height="400px">
                     {blockData.map(
                       ({
-                        blockHash,
-                        blockNumber,
-                        channelName,
-                        totalTxs,
-                        timeStamp,
+                        blockhash,
+                        blocknum,
+                        channelname,
+                        txcount,
+                        createdt,
                       }) => (
                         <SingleBlockCard
+                          key={blocknum}
                           onClick={() => history.push('/block')}
-                          blockHash={blockHash}
-                          blockNumber={blockNumber}
-                          channelName={channelName}
-                          totalTxs={totalTxs}
-                          timeStamp={timeStamp}
+                          blockHash={blockhash}
+                          blockNumber={blocknum}
+                          channelName={channelname}
+                          totalTxs={txcount}
+                          timeStamp={createdt}
                         />
                       ),
                     )}
