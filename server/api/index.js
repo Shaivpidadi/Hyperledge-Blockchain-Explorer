@@ -37,7 +37,7 @@ router.get('/channels', async (req, res) => {
   try {
     let config = {
       headers: {
-        Authorization: `bearer ${authToken}`,
+        Authorization: authToken,
       },
     };
 
