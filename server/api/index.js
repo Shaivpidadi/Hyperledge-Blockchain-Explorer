@@ -32,4 +32,20 @@ router.get('/networklist', async (req, res) => {
   }
 });
 
+router.get('/channels', async (req, res) => {
+  const authToken = req.headers['Authorization'];
+  try {
+    let config = {
+      headers: {
+        Authorization: `bearer ${authToken}`,
+      },
+    };
+
+    const { data } = await explorer.get('/api/channels', config);
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 404, false, exception.message);
+  }
+});
+
 module.exports = router;
