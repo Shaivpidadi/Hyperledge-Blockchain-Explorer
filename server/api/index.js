@@ -249,4 +249,90 @@ router.get(
   },
 );
 
+router.get('/transactions/:channelGenesisHash/:txId', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, txId } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/transaction/${channelGenesisHash}/${txId}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get(
+  '/block/transactions/:channelGenesisHash/:number',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash, number } = req.params;
+      let config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/block/transactions/${channelGenesisHash}/${number}`,
+        config,
+      );
+      res.send(data);
+    } catch (exception) {
+      sendResponse(res, 401, false, exception.message);
+    }
+  },
+);
+
+router.get(
+  '/transactions/list/:channelGenesisHash/:number/:txId',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash, number, txId } = req.params;
+      let config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/txList/${channelGenesisHash}/${number}/${txId}`,
+        config,
+      );
+      res.send(data);
+    } catch (exception) {
+      sendResponse(res, 401, false, exception.message);
+    }
+  },
+);
+
+router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, number } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/blockAndtxList/${channelGenesisHash}/${number}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
 module.exports = router;
