@@ -26,14 +26,14 @@ router.post('/login', async (req, res) => {
 router.get('/networklist', async (req, res) => {
   try {
     const { data } = await explorer.get('/auth/networklist');
-    sendResponse(res, 404, true, 'Network List', data);
+    sendResponse(res, 200, true, 'Network List', data);
   } catch (exception) {
-    sendResponse(res, 404, false, exception.message);
+    sendResponse(res, 401, false, exception.message);
   }
 });
 
 router.get('/channels', async (req, res) => {
-  const authToken = req.headers['authorization'];
+  const authToken = req.headers['authorization'] || '';
   try {
     let config = {
       headers: {
@@ -44,12 +44,12 @@ router.get('/channels', async (req, res) => {
     const { data } = await explorer.get('/api/channels', config);
     res.send(data);
   } catch (exception) {
-    sendResponse(res, 404, false, exception.message);
+    sendResponse(res, 401, false, exception.message);
   }
 });
 
 router.get('/channels/info', async (req, res) => {
-  const authToken = req.headers['authorization'];
+  const authToken = req.headers['authorization'] || '';
   try {
     let config = {
       headers: {
@@ -66,7 +66,7 @@ router.get('/channels/info', async (req, res) => {
 
 router.get('/status/:channelGenesisHash', async (req, res) => {
   try {
-    const authToken = req.headers['authorization'];
+    const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
     let config = {
       headers: {
@@ -80,7 +80,7 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
     );
     res.send(data);
   } catch (exception) {
-    sendResponse(res, 404, false, exception.message);
+    sendResponse(res, 401, false, exception.message);
   }
 });
 
