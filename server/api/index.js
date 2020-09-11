@@ -19,16 +19,16 @@ router.post('/login', async (req, res) => {
     });
     res.send(data);
   } catch (exception) {
-    throw exception;
+    sendResponse(res, 404, false, exception.message);
   }
 });
 
 router.get('/networklist', async (req, res) => {
   try {
     const { data } = await explorer.get('/auth/networklist');
-    sendResponse(res, true, 200, data);
+    sendResponse(res, 404, true, 'Network List', data);
   } catch (exception) {
-    sendResponse(res, false, 404, exception.message);
+    sendResponse(res, 404, false, exception.message);
   }
 });
 

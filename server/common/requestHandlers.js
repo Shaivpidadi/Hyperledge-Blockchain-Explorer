@@ -1,9 +1,11 @@
-const sendResponse = async (res, status, statusCode, data) => {
-  res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+const sendResponse = async (res, status, success, message, data = '') => {
+  res.writeHead(status, { 'Content-Type': 'application/json' });
 
   res.write(
     JSON.stringify({
       status,
+      success,
+      message,
       data,
     }),
   );
