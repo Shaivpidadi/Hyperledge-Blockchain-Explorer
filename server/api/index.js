@@ -33,7 +33,7 @@ router.get('/networklist', async (req, res) => {
 });
 
 router.get('/channels', async (req, res) => {
-  const authToken = req.headers['Authorization'];
+  const authToken = req.headers['authorization'];
   try {
     let config = {
       headers: {
@@ -42,6 +42,22 @@ router.get('/channels', async (req, res) => {
     };
 
     const { data } = await explorer.get('/api/channels', config);
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 404, false, exception.message);
+  }
+});
+
+router.get('/channels/info', async (req, res) => {
+  const authToken = req.headers['authorization'];
+  try {
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get('/api/channels/info', config);
     res.send(data);
   } catch (exception) {
     sendResponse(res, 404, false, exception.message);
