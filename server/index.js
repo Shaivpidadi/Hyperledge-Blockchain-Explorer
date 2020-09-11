@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const logger = require('./logger');
 
 const argv = require('./argv');
@@ -14,6 +15,9 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Add your custom backend-specific middleware here
 app.use('/api', myApi);
