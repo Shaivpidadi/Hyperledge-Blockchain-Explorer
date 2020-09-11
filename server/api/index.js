@@ -6,9 +6,6 @@ const router = express.Router();
 const explorer = axios.create({
   baseURL: process.env.EXPLORER_URL,
   timeout: 15000,
-  headers: {
-    'User-Agent': 'Sia-Agent',
-  },
 });
 
 router.get('/networklist', async (req, res) => {
