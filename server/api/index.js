@@ -335,4 +335,64 @@ router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
   }
 });
 
+router.get('/txByMinute/:channelGenesisHash/:hours', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, hours } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/txByMinute/${channelGenesisHash}/${hours}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get('/txByHour/:channelGenesisHash/:days', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, days } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/txByMinute/${channelGenesisHash}/${days}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get('/txByOrg/:channelGenesisHash/', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/txByOrg/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
 module.exports = router;
