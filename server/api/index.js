@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 
+const { sendResponse } = require('../common/requestHandlers');
 const router = express.Router();
 
 const explorer = axios.create({
@@ -11,9 +12,10 @@ const explorer = axios.create({
 router.get('/networklist', async (req, res) => {
   try {
     const { data } = await explorer.get('/auth/networklist');
-    res.send(data);
+    sendResponse(res, true, 200, data);
   } catch (exception) {
-    throw exception;
+    // throw exception;
+    sendResponse(res, false, 404, exception.message);
   }
 });
 
