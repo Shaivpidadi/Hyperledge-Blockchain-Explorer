@@ -123,4 +123,43 @@ router.get(
   },
 );
 
+router.get('/peer/:channelGenesisHash', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/peer/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get('/chaincode/:channelGenesisHash', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/chaincode/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
 module.exports = router;
