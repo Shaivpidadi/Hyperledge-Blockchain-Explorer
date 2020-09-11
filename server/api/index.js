@@ -84,4 +84,43 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
   }
 });
 
+router.get('/channel/curChannel', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get('api/curChannel', config);
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get(
+  '/channel/getChangeChannel/:channelGenesisHash',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash } = req.params;
+      let config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/channel/getChangeChannel/${channelGenesisHash}`,
+        config,
+      );
+      res.send(data);
+    } catch (exception) {
+      sendResponse(res, 401, false, exception.message);
+    }
+  },
+);
+
 module.exports = router;
