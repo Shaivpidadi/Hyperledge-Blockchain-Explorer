@@ -64,4 +64,24 @@ router.get('/channels/info', async (req, res) => {
   }
 });
 
+router.get('/status/:channelGenesisHash', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'];
+    const { channelGenesisHash } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `/api/status/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 404, false, exception.message);
+  }
+});
+
 module.exports = router;
