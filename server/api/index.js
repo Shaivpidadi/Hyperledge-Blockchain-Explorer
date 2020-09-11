@@ -162,4 +162,91 @@ router.get('/chaincode/:channelGenesisHash', async (req, res) => {
     sendResponse(res, 401, false, exception.message);
   }
 });
+
+router.get('/block/:channelGenesisHash/:number', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, number } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/block/${channelGenesisHash}/${number}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash } = req.params;
+    let config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/blockActivity/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get(
+  '/block/blocksByMinute/:channelGenesisHash/:hours',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash, hours } = req.params;
+      let config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/blocksByMinute/${channelGenesisHash}/${hours}`,
+        config,
+      );
+      res.send(data);
+    } catch (exception) {
+      sendResponse(res, 401, false, exception.message);
+    }
+  },
+);
+
+router.get(
+  '/block/blocksByHour/:channelGenesisHash/:days',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash, days } = req.params;
+      let config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/blocksByHour/${channelGenesisHash}/${days}`,
+        config,
+      );
+      res.send(data);
+    } catch (exception) {
+      sendResponse(res, 401, false, exception.message);
+    }
+  },
+);
+
 module.exports = router;
