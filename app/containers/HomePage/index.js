@@ -10,6 +10,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
 import blockList from '../../../mock-data/blockList.json';
 import txByOrg from '../../../mock-data/txByOrg.json';
+import getOrgColor from '../../components/Charts/getOrgColor';
 
 const BlockchainData = [
   { label: 'Total Blocks', value: '129' },
@@ -31,7 +32,7 @@ const HomePage = ({ history }) => {
       name: creator_msp_id,
       uv: count,
       pv: count,
-      fill: '#8884d8',
+      fill: getOrgColor(creator_msp_id),
     };
   });
   const handleImportedAction = useCallback(
