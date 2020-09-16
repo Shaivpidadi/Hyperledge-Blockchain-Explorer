@@ -16,11 +16,11 @@ const BlockchainCard = ({ title, cardItems }) => {
           flexWrap: 'wrap',
         }}
       >
-        {Object.keys(networkStats).map(key => (
+        {Object.keys(cardItems).map(key => (
           <BlockchainCardItem
             key={key}
             label={key}
-            value={networkStats[key]}
+            value={cardItems[key]}
             wrapperStyle={{ width: '270px' }}
             labelStyle={{ width: '150px' }}
           />

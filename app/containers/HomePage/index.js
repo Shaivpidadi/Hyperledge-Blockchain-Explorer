@@ -12,19 +12,11 @@ import blockList from '../../../mock-data/blockList.json';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-const BlockchainData = [
-  { label: 'Total Blocks', value: '129' },
-  { label: 'Total txs', value: '123422' },
-  { label: 'Total Channels', value: '13' },
-  { label: 'Total Chaincodes', value: '38' },
-  { label: 'Total Channels', value: '13s' },
-  { label: 'Total Channels', value: '1w3' },
-  { label: 'Total Chaincodes', value: '338' },
-  { label: 'Total Channels', value: '1313' },
-];
+import { fetchNetworkStats } from '../../lib/api';
 
 const HomePage = ({ history }) => {
   const blockData = blockList?.rows || [];
+  const BlockchainData = fetchNetworkStats();
   let orgData = txByOrg?.rows || [];
 
   orgData = orgData.map(({ creator_msp_id, count }) => {
