@@ -2,6 +2,8 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const logger = require('./logger');
 
 const argv = require('./argv');
@@ -16,6 +18,7 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
