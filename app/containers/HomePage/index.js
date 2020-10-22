@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Card, Layout } from '@shopify/polaris';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -19,14 +19,12 @@ const HomePage = ({ history }) => {
   const BlockchainData = fetchNetworkStats();
   let orgData = txByOrg?.rows || [];
 
-  orgData = orgData.map(({ creator_msp_id, count }) => {
-    return {
-      name: creator_msp_id,
-      uv: count,
-      pv: count,
-      fill: getOrgColor(creator_msp_id),
-    };
-  });
+  orgData = orgData.map(({ creator_msp_id, count }) => ({
+    name: creator_msp_id,
+    uv: count,
+    pv: count,
+    fill: getOrgColor(creator_msp_id),
+  }));
   const handleImportedAction = useCallback(
     () => console.log('Imported action'),
     [],
