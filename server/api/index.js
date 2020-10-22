@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 const express = require('express');
 const axios = require('axios');
 
@@ -35,7 +36,7 @@ router.get('/networklist', async (req, res) => {
 router.get('/channels', async (req, res) => {
   const authToken = req.headers['authorization'] || '';
   try {
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -51,7 +52,7 @@ router.get('/channels', async (req, res) => {
 router.get('/channels/info', async (req, res) => {
   const authToken = req.headers['authorization'] || '';
   try {
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -68,7 +69,7 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -87,7 +88,7 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
 router.get('/channel/curChannel', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -106,7 +107,7 @@ router.get(
     try {
       const authToken = req.headers['authorization'] || '';
       const { channelGenesisHash } = req.params;
-      let config = {
+      const config = {
         headers: {
           Authorization: authToken,
         },
@@ -127,7 +128,7 @@ router.get('/peer/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -147,7 +148,7 @@ router.get('/chaincode/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -167,7 +168,7 @@ router.get('/block/:channelGenesisHash/:number', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, number } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -187,7 +188,7 @@ router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -209,7 +210,7 @@ router.get(
     try {
       const authToken = req.headers['authorization'] || '';
       const { channelGenesisHash, hours } = req.params;
-      let config = {
+      const config = {
         headers: {
           Authorization: authToken,
         },
@@ -232,7 +233,7 @@ router.get(
     try {
       const authToken = req.headers['authorization'] || '';
       const { channelGenesisHash, days } = req.params;
-      let config = {
+      const config = {
         headers: {
           Authorization: authToken,
         },
@@ -253,7 +254,7 @@ router.get('/transactions/:channelGenesisHash/:txId', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, txId } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -275,7 +276,7 @@ router.get(
     try {
       const authToken = req.headers['authorization'] || '';
       const { channelGenesisHash, number } = req.params;
-      let config = {
+      const config = {
         headers: {
           Authorization: authToken,
         },
@@ -298,7 +299,7 @@ router.get(
     try {
       const authToken = req.headers['authorization'] || '';
       const { channelGenesisHash, number, txId } = req.params;
-      let config = {
+      const config = {
         headers: {
           Authorization: authToken,
         },
@@ -319,7 +320,7 @@ router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, number } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -339,7 +340,7 @@ router.get('/txByMinute/:channelGenesisHash/:hours', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, hours } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -359,7 +360,7 @@ router.get('/txByHour/:channelGenesisHash/:days', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, days } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
@@ -379,7 +380,7 @@ router.get('/txByOrg/:channelGenesisHash/', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash } = req.params;
-    let config = {
+    const config = {
       headers: {
         Authorization: authToken,
       },
