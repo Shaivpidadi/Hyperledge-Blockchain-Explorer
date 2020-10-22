@@ -1,15 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import Axios from 'axios';
 import { loginRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
+import axiosMain from '../../../http/axios/axiosMain';
 
 // eslint-disable-next-line no-unused-vars
 function* loginRequestSaga({ payload }) {
   try {
     const { username, password } = payload;
-    // yield put(showLoader());
-    const response = yield Axios.post('/auth/login', {
+    const response = yield axiosMain.post('/auth/login', {
       username,
       password,
     });
