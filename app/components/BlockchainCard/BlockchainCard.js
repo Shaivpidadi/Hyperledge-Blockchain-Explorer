@@ -18,14 +18,13 @@ const BlockchainCard = ({ title, cardItems }) => {
         }}
       >
         {Object.keys(networkStats).map(key => (
-          // <BlockchainCardItem
-          //   key={key}
-          //   label={key}
-          //   value={cardItems[key]}
-          //   wrapperStyle={{ width: '270px' }}
-          //   labelStyle={{ width: '150px' }}
-          // />
-          <SkeletonBodyText />
+          <BlockchainCardItem
+            key={key}
+            label={key}
+            value={cardItems[key]}
+            wrapperStyle={{ width: '270px' }}
+            labelStyle={{ width: '150px' }}
+          />
         ))}
       </div>
     </Card>

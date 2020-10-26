@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Card, Layout, SkeletonBodyText } from '@shopify/polaris';
+import { Card, Layout, SkeletonBodyText, SkeletonThumbnail } from '@shopify/polaris';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -16,6 +16,31 @@ import getOrgColor from '../../components/Charts/getOrgColor';
 import { networkDetailsRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
+
+const SkeletonBlockCard = ({ number }) => {
+
+  return (
+    <> 
+      <div>
+        <div style={{float: "left", marginTop: '3px'}}>
+        <SkeletonThumbnail size="small" />
+        </div>
+        <div style={{width: '85%', float: "right"}}>
+        <SkeletonBodyText />
+        </div>
+      </div>
+
+      <div style={{ marginTop: '10px'}}>
+        <div style={{float: "left", marginTop: '26px'}}>
+        <SkeletonThumbnail size="small" />
+        </div>
+        <div style={{width: '85%', float: "right", marginTop: '20px'}}>
+        <SkeletonBodyText />
+        </div>
+      </div>
+    </>
+  )
+}
 const HomePage = ({ history }) => {
   // const [isEverythingLoaded, updateIsEverythingLoaded] = useState(false);
   const { networkStats } = useSelector(state => state.networkStats);
@@ -91,7 +116,7 @@ const HomePage = ({ history }) => {
                   }}
                 >
                   <HiddenScroll height="400px">
-                    {blockData.map(
+                    {isEverythingLoaded ?  blockData.map(
                       ({
                         blockhash,
                         blocknum,
@@ -109,7 +134,7 @@ const HomePage = ({ history }) => {
                           timeStamp={createdt}
                         />
                       ),
-                    )}
+                     ) : (<> <SkeletonBlockCard /> </>)}
                   </HiddenScroll>
                 </div>
               </Card>
