@@ -95,7 +95,7 @@
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.8.0",
-    "react-redux": "7.0.2",
+    "react-redux": "7.2.0",
     "react-router-dom": "^5.2.0",
     "react-table": "^7.5.0",
     "recharts": "^1.8.5",

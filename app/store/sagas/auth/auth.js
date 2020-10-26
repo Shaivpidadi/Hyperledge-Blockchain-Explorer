@@ -13,15 +13,15 @@ function* loginRequestSaga({ payload }) {
       password,
     });
     if (response.status === 200) {
-      yield localStorage.setItem('userToken', response.headers['x-auth-token']);
+      yield localStorage.setItem('userToken', response.data.token);
       yield localStorage.setItem(
         'userData',
-        JSON.stringify(response.data.userData),
+        JSON.stringify(response.data.user),
       );
       yield put(
         loginRequestSuccess({
-          authToken: response.headers['x-auth-token'],
-          userData: response.data.userData,
+          authToken: response.data.token,
+          userData: response.data.user,
         }),
       );
     } else {

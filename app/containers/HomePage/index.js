@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Card, Layout } from '@shopify/polaris';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
@@ -12,11 +13,21 @@ import blockList from '../../../mock-data/blockList.json';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { fetchNetworkStats } from '../../lib/api';
+import { networkDetailsRequest } from '../../store/actions';
 
 const HomePage = ({ history }) => {
+
+  const { networkStats } = useSelector(state => state.networkStats);
+  const dispatch = useDispatch();
+  
   const blockData = blockList?.rows || [];
-  const BlockchainData = fetchNetworkStats();
+
+  useEffect(() => {
+    if (Object.keys(networkStats).length === 0) {
+      dispatch(networkDetailsRequest());
+    }
+  }, [networkStats])
+
   let orgData = txByOrg?.rows || [];
 
   orgData = orgData.map(({ creator_msp_id, count }) => ({
@@ -111,7 +122,7 @@ const HomePage = ({ history }) => {
       </div>
 
       <div style={{ marginTop: '2px' }}>
-        <BlockchainCard title="Blockchain Stats" cardItems={BlockchainData} />
+        <BlockchainCard title="Blockchain Stats" cardItems={networkStats} />
       </div>
     </div>
   );

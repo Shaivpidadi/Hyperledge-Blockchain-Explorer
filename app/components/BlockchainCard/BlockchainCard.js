@@ -5,6 +5,7 @@ import BlockchainCardItem from '../BlockchainCardItem';
 import networkStats from '../../../mock-data/network-stats.json';
 
 const BlockchainCard = ({ title, cardItems }) => {
+  console.log({ networkStats })
   return (
     <Card sectioned>
       <Card.Header title={title} />
@@ -16,7 +17,7 @@ const BlockchainCard = ({ title, cardItems }) => {
           flexWrap: 'wrap',
         }}
       >
-        {Object.keys(cardItems).map(key => (
+        {Object.keys(networkStats).map(key => (
           <BlockchainCardItem
             key={key}
             label={key}
