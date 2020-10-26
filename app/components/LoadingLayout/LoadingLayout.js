@@ -50,3 +50,5 @@ const LoadingLayout = () => {
     </SkeletonPage>
   )
 }
+
+export default LoadingLayout;

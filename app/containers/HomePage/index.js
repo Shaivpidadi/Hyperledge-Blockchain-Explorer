@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Card, Layout } from '@shopify/polaris';
+import { Card, Layout, SkeletonBodyText } from '@shopify/polaris';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
@@ -14,9 +14,10 @@ import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
 import { networkDetailsRequest } from '../../store/actions';
+import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
 const HomePage = ({ history }) => {
-
+  // const [isEverythingLoaded, updateIsEverythingLoaded] = useState(false);
   const { networkStats } = useSelector(state => state.networkStats);
   const dispatch = useDispatch();
   
@@ -24,6 +25,7 @@ const HomePage = ({ history }) => {
 
   useEffect(() => {
     if (Object.keys(networkStats).length === 0) {
+      console.log('in', !!networkStats);
       dispatch(networkDetailsRequest());
     }
   }, [networkStats])
@@ -56,6 +58,8 @@ const HomePage = ({ history }) => {
       onAction: handleExportedAction,
     },
   ];
+
+  const isEverythingLoaded = !!Object.keys(networkStats).length;
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
@@ -64,14 +68,14 @@ const HomePage = ({ history }) => {
         </Card.Header>
         <Card.Section>
           <div style={{ overflowX: 'auto', marginTop: '20px' }}>
-            <ExplorerBarChart
+            {isEverythingLoaded ? (<ExplorerBarChart
               width={1100}
               height={110}
               onBarClick={data => {
                 console.log({ data });
                 history.push('/block');
               }}
-            />
+            />) : (<SkeletonBodyText />)}
           </div>
         </Card.Section>
       </Card>
