@@ -9,6 +9,7 @@ import Header from '../../components/Header/Header';
 import BlockInfo from '../../containers/BlockInfo/Loadable';
 import TransactionPage from '../../containers/AllTransctions/Loadable';
 import TransactionInfo from '../../containers/TransactionInfo/Loadable';
+import LoginPage from '../../containers/LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={LoginPage} />
           <Route exact path="/block" component={BlockPage} />
           <Route exact path="/block/:blockId" component={BlockInfo} />
           <Route exact path="/transactions" component={TransactionPage} />
