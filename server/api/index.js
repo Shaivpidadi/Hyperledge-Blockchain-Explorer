@@ -164,26 +164,6 @@ router.get('/chaincode/:channelGenesisHash', async (req, res) => {
   }
 });
 
-router.get('/block/:channelGenesisHash/:number', async (req, res) => {
-  try {
-    const authToken = req.headers['authorization'] || '';
-    const { channelGenesisHash, number } = req.params;
-    const config = {
-      headers: {
-        Authorization: authToken,
-      },
-    };
-
-    const { data } = await explorer.get(
-      `api/block/${channelGenesisHash}/${number}`,
-      config,
-    );
-    res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
-  }
-});
-
 router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
@@ -196,6 +176,26 @@ router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
 
     const { data } = await explorer.get(
       `api/blockActivity/${channelGenesisHash}`,
+      config,
+    );
+    res.send(data);
+  } catch (exception) {
+    sendResponse(res, 401, false, exception.message);
+  }
+});
+
+router.get('/block/:channelGenesisHash/:number', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const { channelGenesisHash, number } = req.params;
+    const config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get(
+      `api/block/${channelGenesisHash}/${number}`,
       config,
     );
     res.send(data);
