@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Card,
   Layout,
   SkeletonBodyText,
   SkeletonThumbnail,
+  ButtonGroup,
+  Button
 } from '@shopify/polaris';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,6 +35,7 @@ const SkeletonBlockCard = () => (
 );
 
 const HomePage = ({ history }) => {
+  const [selectedTransactionChart, updateSelectedTransactionChart] = useState('TX / Hour')
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
   const { txsByOrg } = useSelector(state => state.transaction);
@@ -56,33 +59,36 @@ const HomePage = ({ history }) => {
     }))
   }, [txsByOrg]);
 
-  const handleImportedAction = useCallback(
-    () => console.log('Imported action'),
-    [],
-  );
+  const handleTxHourAction = useCallback(() => {
+    updateSelectedTransactionChart('TX / Hour')
+  }, []);
 
-  const handleExportedAction = useCallback(
-    () => console.log('Exported action'),
-    [],
-  );
-
-  const dropdownMenuList = [
-    {
-      content: 'Import file',
-      onAction: handleImportedAction,
-    },
-    {
-      content: 'Export file',
-      onAction: handleExportedAction,
-    },
-  ];
+  const handleTxMinuteAction = useCallback(() => {
+    updateSelectedTransactionChart('TX / Minute')
+  }, []);
 
   const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg;
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
         <Card.Header title="Blockchain Explorer">
-          <Dropdown title="tx / block" dropdownMenuList={dropdownMenuList} />
+          <ButtonGroup segmented>
+            <Button
+              onClick={handleTxHourAction}
+              disabled={selectedTransactionChart === 'TX / Hour'}
+              outline
+            >
+              TX / Hour
+            </Button>
+
+            <Button
+              onClick={handleTxMinuteAction}
+              disabled={selectedTransactionChart === 'TX / Minute'}
+              outline
+            >
+              TX / Minute
+            </Button>
+          </ButtonGroup>
         </Card.Header>
         <Card.Section>
           <div style={{ overflowX: 'auto', marginTop: '20px' }}>
