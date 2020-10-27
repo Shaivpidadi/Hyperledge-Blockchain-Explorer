@@ -19,7 +19,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div class="container">
+    <div className="container">
       <h1>Login</h1>
 
       <FormLayout>
