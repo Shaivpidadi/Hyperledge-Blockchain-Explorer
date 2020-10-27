@@ -8,13 +8,12 @@ import axiosMain from '../../../http/axios/axiosMain';
 function* loginRequestSaga({ payload }) {
   try {
     const { user, password, network } = payload;
-    const response = yield axiosMain.post('/auth/login', {
+    const response = yield axiosMain.post('/login', {
       network,
       user,
       password,
     });
 
-    console.log({ response });
     if (response.status === 200) {
       yield localStorage.setItem('userToken', response.data.token);
       yield localStorage.setItem(
