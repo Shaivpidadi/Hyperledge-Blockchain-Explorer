@@ -1,6 +1,9 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { AppProvider } from '@shopify/polaris';
+import { useSelector, useDispatch } from 'react-redux';
+
+import axios from '../../http/axios/axiosMain';
 
 import HomePage from '../../containers/HomePage/Loadable';
 import BlockPage from '../../containers/BlockPage/Loadable';
@@ -13,13 +16,38 @@ import LoginPage from '../../containers/LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+  const { isLogin, userToken: auth } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    (function() {
+      const authorizationToken = localStorage.getItem('userToken');
+      const token = `bearer ${authorizationToken}`;
+      if (authorizationToken) {
+        axios.defaults.headers.common['Authorization'] = token;
+      } else {
+        axios.defaults.headers.common['Authorization'] = null;
+      }
+    })();
+  });
+
+  useEffect(() => {
+    if (location.pathname !== '/login' && !auth) {
+      history.push('/login');
+    } else if (location.pathname === '/login' && auth && isLogin) {
+      history.push('/');
+    }
+  }, [auth, history, location.pathname, isLogin]);
+
   return (
     <div>
       <AppProvider>
         <Header />
         <Switch>
+          <Route path="/login" component={LoginPage} />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/login" component={LoginPage} />
           <Route exact path="/block" component={BlockPage} />
           <Route exact path="/block/:blockId" component={BlockInfo} />
           <Route exact path="/transactions" component={TransactionPage} />
