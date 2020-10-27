@@ -45,15 +45,6 @@ const HomePage = ({ history }) => {
     dispatch(getTransactionByOrgRequest());
   }, [])
 
-  // let orgData = txByOrg?.rows || [];
-
-  // orgData = orgData.map(({ creator_msp_id, count }) => ({
-  //   name: creator_msp_id,
-  //   uv: count,
-  //   pv: count,
-  //   fill: getOrgColor(creator_msp_id),
-  // }));
-
   const orgData = useMemo(() => {
     let txs = txsByOrg || [];
 
@@ -64,17 +55,6 @@ const HomePage = ({ history }) => {
       fill: getOrgColor(creator_msp_id),
     }))
   }, [txsByOrg]);
-
-  // const users = useMemo(() => {
-  //   let users = data?.users?.nodes || [];
-  //   users = users.map((user) => ({
-  //     ...user,
-  //     userId: user.id,
-  //     department: user.userType,
-  //   }));
-
-  //   return users;
-  // }, [loading, data]);
 
   const handleImportedAction = useCallback(
     () => console.log('Imported action'),

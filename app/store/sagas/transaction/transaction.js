@@ -1,5 +1,5 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { getBlocklistRequestSuccess, showLoader, hideLoader, getTransactionByOrgRequestSuccess } from '../../actions';
+import { showLoader, hideLoader, getTransactionByOrgRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
