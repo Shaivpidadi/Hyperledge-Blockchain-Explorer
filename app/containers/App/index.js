@@ -19,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const { isLogin, userToken: auth } = useSelector(state => state.auth);
+  const { userToken: auth } = useSelector(state => state.auth);
 
   useEffect(() => {
     (function() {
@@ -36,10 +36,10 @@ const App = () => {
   useEffect(() => {
     if (location.pathname !== '/login' && !auth) {
       history.push('/login');
-    } else if (location.pathname === '/login' && auth && isLogin) {
+    } else if (location.pathname === '/login' && auth) {
       history.push('/');
     }
-  }, [auth, history, location.pathname, isLogin]);
+  }, [auth, history, location.pathname]);
 
   return (
     <div>

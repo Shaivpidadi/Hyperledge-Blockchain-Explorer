@@ -1,7 +1,6 @@
 import * as actionLabels from '../../actionLabels';
 
 const initialState = {
-  isLogin: false,
   userToken: localStorage.getItem('userToken'),
   userData: localStorage.getItem('userData'),
 };
@@ -12,7 +11,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userToken: action.payload,
-        isLogin: true,
       };
     }
     default:
