@@ -5,7 +5,6 @@ import BlockchainCardItem from '../BlockchainCardItem';
 import networkStats from '../../../mock-data/network-stats.json';
 
 const BlockchainCard = ({ title, cardItems }) => {
-  console.log({ networkStats })
   return (
     <Card sectioned>
       <Card.Header title={title} />
