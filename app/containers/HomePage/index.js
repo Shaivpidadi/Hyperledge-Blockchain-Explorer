@@ -20,7 +20,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequestSuccess, getTransactionByMinuteRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
 const SkeletonBlockCard = () => (
@@ -38,7 +38,7 @@ const HomePage = ({ history }) => {
   const [selectedTransactionChart, updateSelectedTransactionChart] = useState('TX / Hour')
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
-  const { txsByOrg } = useSelector(state => state.transaction);
+  const { txsByOrg, txByHour, txsByMinute } = useSelector(state => state.transaction);
 
   const dispatch = useDispatch();
 
@@ -46,6 +46,8 @@ const HomePage = ({ history }) => {
     dispatch(getBlocklistRequest());
     dispatch(networkDetailsRequest());
     dispatch(getTransactionByOrgRequest());
+    dispatch(getTransactionByHourRequest());
+    dispatch(getTransactionByMinuteRequest());
   }, [])
 
   const orgData = useMemo(() => {

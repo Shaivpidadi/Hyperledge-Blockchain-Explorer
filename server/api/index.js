@@ -367,7 +367,7 @@ router.get('/txByHour/:channelGenesisHash/:days', async (req, res) => {
     };
 
     const { data } = await explorer.get(
-      `api/txByMinute/${channelGenesisHash}/${days}`,
+      `api/txByHour/${channelGenesisHash}/${days}`,
       config,
     );
     res.send(data);
