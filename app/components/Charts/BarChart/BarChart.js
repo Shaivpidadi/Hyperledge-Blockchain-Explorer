@@ -81,7 +81,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const ExplorerBarChart = ({ width, height, onBarClick }) => {
+const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
   return (
     <div className="bar-chart-wrapper">
       <BarChart width={width} height={height} data={data}>

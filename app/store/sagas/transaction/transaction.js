@@ -43,7 +43,7 @@ function* getTransactionByMinuteRequestSaga() {
   try {
     yield put(showLoader());
     // Temporary
-    const response = yield axiosMain.get('/txByMinute/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6/10');
+    const response = yield axiosMain.get('/txByMinute/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6/1');
     if (response.status === 200) {
       yield put(getTransactionByMinuteRequestSuccess(response.data.rows));
       yield put(hideLoader());

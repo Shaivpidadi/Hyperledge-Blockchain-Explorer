@@ -38,7 +38,7 @@ const HomePage = ({ history }) => {
   const [selectedTransactionChart, updateSelectedTransactionChart] = useState('TX / Hour')
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
-  const { txsByOrg, txByHour, txsByMinute } = useSelector(state => state.transaction);
+  const { txsByOrg, txsByHour, txsByMinute } = useSelector(state => state.transaction);
 
   const dispatch = useDispatch();
 
@@ -69,7 +69,24 @@ const HomePage = ({ history }) => {
     updateSelectedTransactionChart('TX / Minute')
   }, []);
 
+  const txsChartData = useMemo(() => {
+    let txsData = selectedTransactionChart === 'TX / Minute' ? txsByMinute : txsByHour;
+
+    txsData = txsData?.map((txs) => {
+      return ({
+        ...txs,
+        name: 'Name',
+        uv: txs.count,
+        pv: txs.count,
+        amt: txs.count,
+      })
+    });
+
+    return txsData;
+  }, [txsByHour, txsByMinute, selectedTransactionChart]);
+
   const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg;
+
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
@@ -98,6 +115,7 @@ const HomePage = ({ history }) => {
               <ExplorerBarChart
                 width={1100}
                 height={110}
+                data={txsChartData}
                 onBarClick={data => {
                   console.log({ data });
                   history.push('/block');
