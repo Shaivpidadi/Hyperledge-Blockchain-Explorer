@@ -5,7 +5,8 @@ import dummySagas from './dummy/dummy';
 import authSagas from './auth/auth';
 import networkDetails from './networkDetails/networkDetails';
 import blockSagas from './block/block';
+import transactionSagas from './transaction/transaction';
 
 export default function* rootSaga() {
-  yield all([dummySagas(), authSagas(), networkDetails(), blockSagas()]);
+  yield all([dummySagas(), authSagas(), networkDetails(), blockSagas(), transactionSagas()]);
 }

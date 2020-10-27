@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { networkDetailsRequestSuccess, showLoader } from '../../actions';
+import { networkDetailsRequestSuccess, showLoader, hideLoader } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 

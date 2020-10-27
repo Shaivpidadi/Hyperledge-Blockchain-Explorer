@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import {
   Card,
   Layout,
@@ -18,7 +18,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest, getBlocklistRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
 const SkeletonBlockCard = () => (
@@ -35,22 +35,47 @@ const SkeletonBlockCard = () => (
 const HomePage = ({ history }) => {
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
+  const { txsByOrg } = useSelector(state => state.transaction);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBlocklistRequest());
     dispatch(networkDetailsRequest());
+    dispatch(getTransactionByOrgRequest());
   }, [])
 
-  let orgData = txByOrg?.rows || [];
+  // let orgData = txByOrg?.rows || [];
 
-  orgData = orgData.map(({ creator_msp_id, count }) => ({
-    name: creator_msp_id,
-    uv: count,
-    pv: count,
-    fill: getOrgColor(creator_msp_id),
-  }));
+  // orgData = orgData.map(({ creator_msp_id, count }) => ({
+  //   name: creator_msp_id,
+  //   uv: count,
+  //   pv: count,
+  //   fill: getOrgColor(creator_msp_id),
+  // }));
+
+  const orgData = useMemo(() => {
+    let txs = txsByOrg || [];
+
+    return txs.map(({ creator_msp_id, count }) => ({
+      name: creator_msp_id,
+      uv: count,
+      pv: count,
+      fill: getOrgColor(creator_msp_id),
+    }))
+  }, [txsByOrg]);
+
+  // const users = useMemo(() => {
+  //   let users = data?.users?.nodes || [];
+  //   users = users.map((user) => ({
+  //     ...user,
+  //     userId: user.id,
+  //     department: user.userType,
+  //   }));
+
+  //   return users;
+  // }, [loading, data]);
+
   const handleImportedAction = useCallback(
     () => console.log('Imported action'),
     [],
@@ -72,7 +97,7 @@ const HomePage = ({ history }) => {
     },
   ];
 
-  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList;
+  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg;
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
