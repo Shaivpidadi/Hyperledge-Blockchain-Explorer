@@ -12,6 +12,18 @@ export default (state = initialState, action) => {
         txsByOrg: action.payload,
       };
     }
+    case actionLabels.GET_TRANSACTION_BY_HOUR_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        txsByHour: action.payload,
+      };
+    }
+    case actionLabels.GET_TRANSACTION_BY_MINUTE_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        txsByMinute: action.payload,
+      };
+    }
     default:
       return state;
   }
