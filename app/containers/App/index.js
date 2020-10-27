@@ -12,7 +12,7 @@ import TransactionInfo from '../../containers/TransactionInfo/Loadable';
 import LoginPage from '../../containers/LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
-export default function App() {
+const App = () => {
   return (
     <div>
       <AppProvider>
@@ -30,4 +30,6 @@ export default function App() {
       <GlobalStyle />
     </div>
   );
-}
+};
+
+export default App;

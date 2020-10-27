@@ -15,7 +15,6 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   const submitLogin = data => {
-    console.log(data);
     dispatch(loginRequest(data));
   };
 
