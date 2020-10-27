@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { loginRequestSuccess } from '../../actions';
+import { loginRequestSuccess, showLoader, hideLoader } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -8,6 +8,7 @@ import axiosMain from '../../../http/axios/axiosMain';
 function* loginRequestSaga({ payload }) {
   try {
     const { user, password, network } = payload;
+    yield put(showLoader());
     const response = yield axiosMain.post('/login', {
       network,
       user,
@@ -26,11 +27,14 @@ function* loginRequestSaga({ payload }) {
           userData: response.data.user,
         }),
       );
+      yield put(hideLoader());
     } else {
       console.log('error');
+      yield put(hideLoader());
     }
   } catch (error) {
     console.log(error);
+    yield put(hideLoader());
   }
 }
 
