@@ -3,6 +3,7 @@ import { Button, FormLayout, TextField } from '@shopify/polaris';
 import { useDispatch } from 'react-redux';
 
 import { loginRequest } from '../../store/actions';
+import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 
 const LoginPage = () => {
   const [values, setValues] = useState({
@@ -48,4 +49,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SetTokenInterval(LoginPage);
