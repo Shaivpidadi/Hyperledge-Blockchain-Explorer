@@ -21,27 +21,16 @@ import getOrgColor from '../../components/Charts/getOrgColor';
 import { networkDetailsRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
-const SkeletonBlockCard = ({ number }) => {
+const SkeletonBlockCard = () => {
   return (
-    <>
-      <div>
-        <div style={{ float: 'left', marginTop: '3px' }}>
-          <SkeletonThumbnail size="small" />
-        </div>
-        <div style={{ width: '85%', float: 'right' }}>
-          <SkeletonBodyText />
-        </div>
+    <div style={{ display: "flex", alignItems: 'center', marginTop: '25px' }}>
+      <div style={{}}>
+        <SkeletonThumbnail size="small" />
       </div>
-
-      <div style={{ marginTop: '10px' }}>
-        <div style={{ float: 'left', marginTop: '26px' }}>
-          <SkeletonThumbnail size="small" />
-        </div>
-        <div style={{ width: '85%', float: 'right', marginTop: '20px' }}>
-          <SkeletonBodyText />
-        </div>
+      <div style={{ width: '90%', marginLeft: '20px' }}>
+        <SkeletonBodyText />
       </div>
-    </>
+    </div>
   );
 };
 const HomePage = ({ history }) => {
@@ -105,8 +94,8 @@ const HomePage = ({ history }) => {
                 }}
               />
             ) : (
-              <SkeletonBodyText />
-            )}
+                <SkeletonBodyText />
+              )}
           </div>
         </Card.Section>
       </Card>
@@ -122,15 +111,14 @@ const HomePage = ({ history }) => {
                   }}
                 >
                   <HiddenScroll height="400px">
-                    {isEverythingLoaded ? (
-                      blockData.map(
-                        ({
-                          blockhash,
-                          blocknum,
-                          channelname,
-                          txcount,
-                          createdt,
-                        }) => (
+                    {isEverythingLoaded ? blockData.map(
+                      ({
+                        blockhash,
+                        blocknum,
+                        channelname,
+                        txcount,
+                        createdt,
+                      }) => (
                           <SingleBlockCard
                             key={blocknum}
                             onClick={() => history.push('/block')}
@@ -141,12 +129,7 @@ const HomePage = ({ history }) => {
                             timeStamp={createdt}
                           />
                         ),
-                      )
-                    ) : (
-                      <>
-                        <SkeletonBlockCard />
-                      </>
-                    )}
+                    ) : (<> {Array(10).fill(1).map((_, idx) => (<SkeletonBlockCard key={idx} />))}</>)}
                   </HiddenScroll>
                 </div>
               </Card>
@@ -154,7 +137,9 @@ const HomePage = ({ history }) => {
             <Layout.Section oneHalf>
               <Card sectioned title="Transactions by Organization">
                 <div style={{ minHeight: '400px' }}>
-                  <RadicalChart data={orgData} />
+                  {isEverythingLoaded ? (<RadicalChart data={orgData} />) : (<Card.Section>
+                    <SkeletonBodyText />
+                  </Card.Section>)}
                 </div>
               </Card>
             </Layout.Section>
@@ -170,13 +155,13 @@ const HomePage = ({ history }) => {
             isLoading={isEverythingLoaded}
           />
         ) : (
-          <Card sectioned>
-            <Card.Header title="Blockchain Stats" />
-            <Card.Section>
-              <SkeletonBodyText />
-            </Card.Section>
-          </Card>
-        )}
+            <Card sectioned>
+              <Card.Header title="Blockchain Stats" />
+              <Card.Section>
+                <SkeletonBodyText />
+              </Card.Section>
+            </Card>
+          )}
       </div>
     </div>
   );
