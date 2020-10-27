@@ -3,7 +3,7 @@ const express = require('express');
 const axios = require('axios');
 
 const { sendResponse } = require('../common/requestHandlers');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const explorer = axios.create({
   baseURL: process.env.EXPLORER_URL,

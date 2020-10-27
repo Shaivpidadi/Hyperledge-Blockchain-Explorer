@@ -14,11 +14,11 @@ import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
-import blockList from '../../../mock-data/blockList.json';
+// import blockList from '../../../mock-data/blockList.json';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
 const SkeletonBlockCard = () => (
@@ -31,18 +31,26 @@ const SkeletonBlockCard = () => (
     </div>
   </div>
 );
+
 const HomePage = ({ history }) => {
   // const [isEverythingLoaded, updateIsEverythingLoaded] = useState(false);
   const { networkStats } = useSelector(state => state.networkStats);
+  const { blockList } = useSelector(state => state.block);
+
   const dispatch = useDispatch();
 
-  const blockData = blockList?.rows || [];
+
+
+  // useEffect(() => {
+  //   if (Object.keys(networkStats).length === 0) {
+  //     dispatch(networkDetailsRequest());
+  //   }
+  // }, [networkStats]);
 
   useEffect(() => {
-    if (Object.keys(networkStats).length === 0) {
-      dispatch(networkDetailsRequest());
-    }
-  }, [networkStats]);
+    dispatch(getBlocklistRequest());
+    dispatch(networkDetailsRequest());
+  }, [])
 
   let orgData = txByOrg?.rows || [];
 
@@ -73,7 +81,7 @@ const HomePage = ({ history }) => {
     },
   ];
 
-  const isEverythingLoaded = !!Object.keys(networkStats).length;
+  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList;
   return (
     <div style={{ marginTop: '40px' }}>
       <Card sectioned>
@@ -110,7 +118,7 @@ const HomePage = ({ history }) => {
                 >
                   <HiddenScroll height="400px">
                     {isEverythingLoaded ? (
-                      blockData.map(
+                      blockList.map(
                         ({
                           blockhash,
                           blocknum,
@@ -131,7 +139,6 @@ const HomePage = ({ history }) => {
                       )
                     ) : (
                         <>
-                          {' '}
                           {Array(10)
                             .fill(1)
                             .map((_, idx) => (

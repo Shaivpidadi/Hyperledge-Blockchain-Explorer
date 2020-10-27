@@ -5,6 +5,7 @@ export const loginRequest = payload => ({
   payload,
 });
 
-export const loginRequestSuccess = () => ({
+export const loginRequestSuccess = (payload) => ({
   type: actionLabels.LOGIN_REQUEST_SUCCESS,
+  payload
 });
