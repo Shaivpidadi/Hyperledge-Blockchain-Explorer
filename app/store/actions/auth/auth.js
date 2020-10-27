@@ -1,7 +1,8 @@
 import * as actionLabels from '../../actionLabels';
 
-export const loginRequest = () => ({
+export const loginRequest = payload => ({
   type: actionLabels.LOGIN_REQUEST,
+  payload,
 });
 
 export const loginRequestSuccess = () => ({

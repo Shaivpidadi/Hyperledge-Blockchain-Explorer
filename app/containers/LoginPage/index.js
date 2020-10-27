@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { Button, FormLayout, TextField } from '@shopify/polaris';
+import { useDispatch } from 'react-redux';
+
+import { loginRequest } from '../../store/actions';
 
 const LoginPage = () => {
-  const [values, setValues] = useState({ username: '', password: '' });
+  const [values, setValues] = useState({
+    network: '',
+    user: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
 
   const submitLogin = data => {
     console.log(data);
+    dispatch(loginRequest(data));
   };
 
   return (
@@ -14,10 +24,16 @@ const LoginPage = () => {
 
       <FormLayout>
         <TextField
-          name="username"
-          label="username"
-          value={values?.username}
-          onChange={value => setValues({ ...values, username: value })}
+          name="network"
+          label="Network"
+          value={values?.network}
+          onChange={value => setValues({ ...values, network: value })}
+        />
+        <TextField
+          name="user"
+          label="User"
+          value={values?.user}
+          onChange={value => setValues({ ...values, user: value })}
         />
         <TextField
           name="password"

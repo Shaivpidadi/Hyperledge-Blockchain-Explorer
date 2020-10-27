@@ -7,11 +7,14 @@ import axiosMain from '../../../http/axios/axiosMain';
 // eslint-disable-next-line no-unused-vars
 function* loginRequestSaga({ payload }) {
   try {
-    const { username, password } = payload;
+    const { user, password, network } = payload;
     const response = yield axiosMain.post('/auth/login', {
-      username,
+      network,
+      user,
       password,
     });
+
+    console.log({ response });
     if (response.status === 200) {
       yield localStorage.setItem('userToken', response.data.token);
       yield localStorage.setItem(
