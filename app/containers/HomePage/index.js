@@ -33,19 +33,10 @@ const SkeletonBlockCard = () => (
 );
 
 const HomePage = ({ history }) => {
-  // const [isEverythingLoaded, updateIsEverythingLoaded] = useState(false);
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
 
   const dispatch = useDispatch();
-
-
-
-  // useEffect(() => {
-  //   if (Object.keys(networkStats).length === 0) {
-  //     dispatch(networkDetailsRequest());
-  //   }
-  // }, [networkStats]);
 
   useEffect(() => {
     dispatch(getBlocklistRequest());
