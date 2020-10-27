@@ -4,7 +4,10 @@ import { Button, FormLayout, TextField } from '@shopify/polaris';
 const LoginPage = () => {
   const [values, setValues] = useState({ username: '', password: '' });
 
-  console.log(values);
+  const submitLogin = data => {
+    console.log(data);
+  };
+
   return (
     <div class="container">
       <h1>Login</h1>
@@ -23,7 +26,7 @@ const LoginPage = () => {
           value={values?.password}
           onChange={value => setValues({ ...values, password: value })}
         />
-        <Button onClick={() => console.log(values)}>Login</Button>
+        <Button onClick={() => submitLogin(values)}>Login</Button>
       </FormLayout>
     </div>
   );
