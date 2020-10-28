@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, Tooltip } from 'recharts';
+import { BarChart, Bar, Tooltip, ResponsiveContainer } from 'recharts';
 import { css } from 'styled-components';
 
 const data = [
@@ -83,8 +83,9 @@ const CustomTooltip = ({ active, payload }) => {
 
 const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
   return (
+    // <ResponsiveContainer width='100%' height={height}>
     <div className="bar-chart-wrapper">
-      <BarChart width={width} height={height} data={data}>
+      <BarChart data={data} width={width} height={height}>
         <Tooltip
           content={CustomTooltip}
           wrapperStyle={{
@@ -98,6 +99,7 @@ const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
           dataKey="uv"
           fill="#f3f5f8"
           onClick={data => onBarClick(data)}
+          // minPointSize={30}
           shape={
             <CustomBarShape
               x="463.26"
@@ -110,6 +112,7 @@ const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
         />
       </BarChart>
     </div>
+    // </ResponsiveContainer>
   );
 };
 

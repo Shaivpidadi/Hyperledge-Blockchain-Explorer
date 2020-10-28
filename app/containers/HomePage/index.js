@@ -72,7 +72,7 @@ const HomePage = ({ history }) => {
   const txsChartData = useMemo(() => {
     let txsData = selectedTransactionChart === 'TX / Minute' ? txsByMinute : txsByHour;
 
-    txsData = txsData?.map((txs) => {
+    txsData = txsData?.slice(0, 23).map((txs) => {
       return ({
         ...txs,
         name: 'Name',
@@ -85,7 +85,7 @@ const HomePage = ({ history }) => {
     return txsData;
   }, [txsByHour, txsByMinute, selectedTransactionChart]);
 
-  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg;
+  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg && !!txsChartData;
 
   return (
     <div style={{ marginTop: '40px' }}>
