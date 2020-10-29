@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, FormLayout, TextField } from '@shopify/polaris';
 import { useDispatch } from 'react-redux';
-
+import { withRouter } from 'react-router';
 import { loginRequest } from '../../store/actions';
 // import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 
@@ -48,4 +48,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);

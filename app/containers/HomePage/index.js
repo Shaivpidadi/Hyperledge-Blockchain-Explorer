@@ -22,6 +22,8 @@ import getOrgColor from '../../components/Charts/getOrgColor';
 
 import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
+import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
+import axiosMain from '../../http/axios/axiosMain';
 
 const SkeletonBlockCard = () => (
   <div style={{ display: 'flex', alignItems: 'center', marginTop: '25px' }}>
@@ -214,4 +216,4 @@ const HomePage = ({ history }) => {
   );
 };
 
-export default HomePage;
+export default SetTokenInterval(HomePage, axiosMain);
