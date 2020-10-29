@@ -14,24 +14,29 @@ import TransactionPage from '../../containers/AllTransctions/Loadable';
 import TransactionInfo from '../../containers/TransactionInfo/Loadable';
 import LoginPage from '../../containers/LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
+import { getCurrentChannelRequest } from '../../store/actions';
 
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const { userToken: auth } = useSelector(state => state.auth);
+  const isCurrentChannelPresent = !!localStorage.getItem('currentChannel');
 
   useEffect(() => {
-    (function() {
-      const authorizationToken = localStorage.getItem('userToken');
-      const token = `bearer ${authorizationToken}`;
-      if (authorizationToken) {
-        axios.defaults.headers.common['Authorization'] = token;
-      } else {
-        axios.defaults.headers.common['Authorization'] = null;
+    const authorizationToken = localStorage.getItem('userToken');
+    const token = `bearer ${authorizationToken}`;
+    if (authorizationToken) {
+      axios.defaults.headers.common['Authorization'] = token;
+
+      if (!isCurrentChannelPresent) {
+        dispatch(getCurrentChannelRequest());
       }
-    })();
-  });
+
+    } else {
+      axios.defaults.headers.common['Authorization'] = null;
+    }
+  }, []);
 
   useEffect(() => {
     if (location.pathname !== '/login' && !auth) {

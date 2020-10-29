@@ -7,7 +7,6 @@ function* getCurrentChannelRequestSaga() {
   try {
     yield put(showLoader());
     const response = yield axiosMain.get('/channel/curChannel');
-
     if (response.status === 200) {
       yield localStorage.setItem('currentChannel', response.data.currentChannel);
       yield put(getCurrentChannelRequestSuccess(response.data.currentChannel));
