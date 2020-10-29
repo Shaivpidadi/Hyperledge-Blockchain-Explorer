@@ -13,6 +13,7 @@ import networkReducer from './store/reducer/networkDetails/networkDetails';
 import blockReducer from './store/reducer/block/block';
 import loaderReducer from './store/reducer/loader/loader';
 import transactionReducer from './store/reducer/transaction/transaction';
+import channelReducer from './store/reducer/channel/channel';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -26,6 +27,7 @@ export default function createReducer(injectedReducers = {}) {
     block: blockReducer,
     loader: loaderReducer,
     transaction: transactionReducer,
+    channel: channelReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });
