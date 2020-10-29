@@ -20,7 +20,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequestSuccess, getTransactionByMinuteRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 
 const SkeletonBlockCard = () => (
@@ -39,16 +39,21 @@ const HomePage = ({ history }) => {
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
   const { txsByOrg, txsByHour, txsByMinute } = useSelector(state => state.transaction);
+  const { currentChannel } = useSelector(state => state.channel);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBlocklistRequest());
-    dispatch(networkDetailsRequest());
-    dispatch(getTransactionByOrgRequest());
-    dispatch(getTransactionByHourRequest());
-    dispatch(getTransactionByMinuteRequest());
-  }, [])
+    if (!!currentChannel) {
+      dispatch(getBlocklistRequest());
+      dispatch(networkDetailsRequest());
+      dispatch(getTransactionByOrgRequest());
+      dispatch(getTransactionByHourRequest());
+      dispatch(getTransactionByMinuteRequest());
+    } else {
+      dispatch(getCurrentChannelRequest())
+    }
+  }, [currentChannel])
 
   const orgData = useMemo(() => {
     let txs = txsByOrg || [];

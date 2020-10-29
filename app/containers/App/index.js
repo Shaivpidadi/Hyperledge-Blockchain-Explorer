@@ -21,17 +21,13 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
   const { userToken: auth } = useSelector(state => state.auth);
-  const isCurrentChannelPresent = !!localStorage.getItem('currentChannel');
+  const isTokenPresent = !!localStorage.getItem("userToken");
 
   useEffect(() => {
     const authorizationToken = localStorage.getItem('userToken');
     const token = `bearer ${authorizationToken}`;
     if (authorizationToken) {
       axios.defaults.headers.common['Authorization'] = token;
-
-      if (!isCurrentChannelPresent) {
-        dispatch(getCurrentChannelRequest());
-      }
 
     } else {
       axios.defaults.headers.common['Authorization'] = null;
@@ -41,10 +37,10 @@ const App = () => {
   useEffect(() => {
     if (location.pathname !== '/login' && !auth) {
       history.push('/login');
-    } else if (location.pathname === '/login' && auth) {
+    } else if (location.pathname === '/login' && auth && isTokenPresent) {
       history.push('/');
     }
-  }, [auth, history, location.pathname]);
+  }, [auth, history, location.pathname, isTokenPresent]);
 
   return (
     <div>
