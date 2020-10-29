@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import enTranslations from '@shopify/polaris/locales/en.json';
 import { AppProvider } from '@shopify/polaris';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -44,7 +45,7 @@ const App = () => {
 
   return (
     <div>
-      <AppProvider>
+      <AppProvider i18n={enTranslations}>
         <Header />
         <Switch>
           <Route path="/login" component={LoginPage} />

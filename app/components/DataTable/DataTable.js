@@ -90,7 +90,7 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
   return (
     <TableStyles>
 
-      <div>
+      <div style={{ width: '350px' }}>
         <Calender />
       </div>
 
