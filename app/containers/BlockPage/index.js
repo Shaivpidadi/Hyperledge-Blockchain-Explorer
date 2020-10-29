@@ -53,13 +53,15 @@ const BlockPage = () => {
       <Card sectioned>
         <Card.Header title="All Blocks" />
 
-        <DataTable
-          rowsData={rows || []}
-          columns={columns}
-          onRowClick={({ blockNumber }) =>
-            history.push(`/block/${blockNumber}`)
-          }
-        />
+        <div style={{ marginTop: '25px' }}>
+          <DataTable
+            rowsData={rows || []}
+            columns={columns}
+            onRowClick={({ blockNumber }) =>
+              history.push(`/block/${blockNumber}`)
+            }
+          />
+        </div>
       </Card>
     </div>
   );

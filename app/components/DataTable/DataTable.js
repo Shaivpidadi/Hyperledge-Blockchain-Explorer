@@ -58,7 +58,7 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
     page,
     prepareRow,
 
-    // For Pagintation
+    // For Pagination
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -108,60 +108,60 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
       <table {...getTableProps()}>
         <thead>
           {// Loop over the header rows
-          headerGroups.map(headerGroup => (
-            // Apply the header row props
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {// Loop over the headers in each row
-              headerGroup.headers.map(column => (
-                // Apply the header cell props
-                <motion.th
-                  {...column.getHeaderProps({
-                    layoutTransition: spring,
-                  })}
-                >
-                  {// Render the header
-                  column.render('Header')}
-                </motion.th>
-              ))}
-            </tr>
-          ))}
+            headerGroups.map(headerGroup => (
+              // Apply the header row props
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {// Loop over the headers in each row
+                  headerGroup.headers.map(column => (
+                    // Apply the header cell props
+                    <motion.th
+                      {...column.getHeaderProps({
+                        layoutTransition: spring,
+                      })}
+                    >
+                      {// Render the header
+                        column.render('Header')}
+                    </motion.th>
+                  ))}
+              </tr>
+            ))}
         </thead>
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
           <AnimatePresence>
             {// Loop over the table rows
-            page.map(row => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <motion.tr
-                  {...row.getRowProps({
-                    layoutTransition: spring,
-                    exit: { opacity: 0, maxHeight: 0 },
-                  })}
-                  // onClick={() => console.log(row.values)}
-                  onClick={() => onRowClick(row.values)}
-                  className="flip-horizontal-top"
-                >
-                  {// Loop over the rows cells
-                  row.cells.map(cell => {
-                    // Apply the cell props
-                    return (
-                      <motion.td
-                        {...cell.getCellProps({
-                          layoutTransition: spring,
-                        })}
-                        className="highlight"
-                      >
-                        {// Render the cell contents
-                        cell.render('Cell')}
-                      </motion.td>
-                    );
-                  })}
-                </motion.tr>
-              );
-            })}
+              page.map(row => {
+                // Prepare the row for display
+                prepareRow(row);
+                return (
+                  // Apply the row props
+                  <motion.tr
+                    {...row.getRowProps({
+                      layoutTransition: spring,
+                      exit: { opacity: 0, maxHeight: 0 },
+                    })}
+                    // onClick={() => console.log(row.values)}
+                    onClick={() => onRowClick(row.values)}
+                    className="flip-horizontal-top"
+                  >
+                    {// Loop over the rows cells
+                      row.cells.map(cell => {
+                        // Apply the cell props
+                        return (
+                          <motion.td
+                            {...cell.getCellProps({
+                              layoutTransition: spring,
+                            })}
+                            className="highlight"
+                          >
+                            {// Render the cell contents
+                              cell.render('Cell')}
+                          </motion.td>
+                        );
+                      })}
+                  </motion.tr>
+                );
+              })}
           </AnimatePresence>
         </tbody>
       </table>
