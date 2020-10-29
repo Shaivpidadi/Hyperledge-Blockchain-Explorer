@@ -6,8 +6,9 @@ import axiosMain from '../../../http/axios/axiosMain';
 function* getTransactionByOrgRequestSaga() {
   try {
     yield put(showLoader());
-    // Temporary
-    const response = yield axiosMain.get('/txByOrg/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6');
+    const currentChannel = localStorage.getItem('currentChannel');
+
+    const response = yield axiosMain.get(`/txByOrg/${currentChannel}`);
     if (response.status === 200) {
       yield put(getTransactionByOrgRequestSuccess(response.data.rows));
       yield put(hideLoader());
@@ -24,8 +25,9 @@ function* getTransactionByOrgRequestSaga() {
 function* getTransactionByHourRequestSaga() {
   try {
     yield put(showLoader());
-    // Temporary
-    const response = yield axiosMain.get('/txByHour/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6/2');
+    const currentChannel = localStorage.getItem('currentChannel');
+
+    const response = yield axiosMain.get(`/txByHour/${currentChannel}/2`);
     if (response.status === 200) {
       yield put(getTransactionByHourRequestSuccess(response.data.rows));
       yield put(hideLoader());
@@ -42,8 +44,9 @@ function* getTransactionByHourRequestSaga() {
 function* getTransactionByMinuteRequestSaga() {
   try {
     yield put(showLoader());
-    // Temporary
-    const response = yield axiosMain.get('/txByMinute/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6/1');
+    const currentChannel = localStorage.getItem('currentChannel');
+
+    const response = yield axiosMain.get(`/txByMinute/${currentChannel}/1`);
     if (response.status === 200) {
       yield put(getTransactionByMinuteRequestSuccess(response.data.rows));
       yield put(hideLoader());

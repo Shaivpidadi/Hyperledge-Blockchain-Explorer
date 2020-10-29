@@ -3,14 +3,12 @@ import { getBlocklistRequestSuccess, showLoader, hideLoader } from '../../action
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
-import axios from 'axios';
-
 function* getBlocklostRequestSaga() {
   try {
-
     yield put(showLoader());
-    // Temporary
-    const response = yield axiosMain.get('/block/blockActivity/a68f5ce2234e9d53510f652036f37d34dbef692a696c8295b5d8d7435887b0b6');
+    const currentChannel = localStorage.getItem('currentChannel')
+
+    const response = yield axiosMain.get(`/block/blockActivity/${currentChannel}`);
 
     if (response.status === 200) {
       yield put(getBlocklistRequestSuccess(response.data.row));
