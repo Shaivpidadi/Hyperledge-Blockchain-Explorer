@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import './DataTable.scss';
 import fakeData from './dummyData';
+import Calender from '../Calender/Calender';
 
 const TableStyles = styled.div`
   table {
@@ -88,7 +89,12 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
 
   return (
     <TableStyles>
-      <div style={{ width: '350px' }}>
+
+      <div>
+        <Calender />
+      </div>
+
+      <div style={{ width: '350px', marginTop: '25px' }}>
         <TextField
           className="tableSearch"
           type="search"
