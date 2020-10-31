@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Card } from '@shopify/polaris';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DataTable from '../../components/DataTable/DataTable';
 import fakeData from '../../components/DataTable/dummyData';
+import { getTransactionByOrgRequest } from '../../store/actions';
 
 const BlockPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { txsByOrg } = useSelector(state => state.transaction);
 
   const rows = React.useMemo(() => fakeData, []);
 
@@ -52,6 +56,20 @@ const BlockPage = () => {
     console.log(dates);
   };
 
+  useEffect(() => {
+    if (!txsByOrg.length) {
+      dispatch(getTransactionByOrgRequest())
+    }
+  }, []);
+
+  const options = useMemo(() => {
+    return txsByOrg?.map((item) => ({
+      ...item,
+      value: item.creator_msp_id,
+      label: item.creator_msp_id
+    }))
+  }, [txsByOrg]) || [];
+
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -65,7 +83,7 @@ const BlockPage = () => {
               history.push(`/block/${blockNumber}`)
             }
             onDateChange={(dates) => onDateChange(dates)}
-            dropdownOptions={[{ value: '1', label: 1 }, { value: '2', label: 2 }]}
+            dropdownOptions={options}
             onSelectChange={(selected) => console.log(selected)}
           />
         </div>
