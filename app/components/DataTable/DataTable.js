@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
 import { Button, TextField } from '@shopify/polaris';
 import { motion, AnimatePresence } from 'framer-motion';
+import Select from "react-select";
 
 import './DataTable.scss';
 import fakeData from './dummyData';
@@ -51,7 +52,9 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = ({ columns, rowsData, onRowClick, onDateChange }) => {
+const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -87,6 +90,11 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange }) => {
     [],
   );
 
+  const selectChangeHandler = (selectedValue) => {
+    setSelectedOption(selectedValue);
+    onSelectChange(selectedValue)
+  };
+
   return (
     <TableStyles>
       <div style={{ marginTop: '25px', display: 'flex' }}>
@@ -108,8 +116,16 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange }) => {
           />
         </div>
 
-        <div style={{ flex: 1, width: '30%' }}>
+        <div style={{ flex: 1, width: '30%', marginRight: '10px' }}>
           <Calender onChangeDate={(dates) => onDateChange(dates)} />
+        </div>
+
+        <div style={{ flex: 1, width: '30%' }}>
+          <Select
+            defaultValue={selectedOption}
+            onChange={selectChangeHandler}
+            options={dropdownOptions}
+          />
         </div>
 
       </div>
