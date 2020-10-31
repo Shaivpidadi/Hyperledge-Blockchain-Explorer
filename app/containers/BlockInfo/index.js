@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Heading } from '@shopify/polaris';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DataTable from '../../components/DataTable/DataTable';
 import BlockchainCardItem from '../../components/BlockchainCardItem';
 import fakeData from '../../components/DataTable/dummyData';
+import { getBlockDetailsRequest } from '../../store/actions';
 
 const BlockInfo = () => {
   const history = useHistory();
+  const { blockId } = useParams();
+  const dispatch = useDispatch();
+  const { blockDetails } = useSelector(state => state.block);
+
+  useEffect(() => {
+    dispatch(getBlockDetailsRequest({ blockId }))
+  }, [blockId]);
 
   const rows = React.useMemo(() => fakeData, []);
 

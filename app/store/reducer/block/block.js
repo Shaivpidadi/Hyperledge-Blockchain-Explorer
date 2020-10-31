@@ -1,7 +1,8 @@
 import * as actionLabels from '../../actionLabels';
 
 const initialState = {
-  blockList: []
+  blockList: [],
+  blockDetails: {}
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +11,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         blockList: action.payload,
+      };
+    }
+    case actionLabels.GET_BLOCK_DETAILS_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        blockDetails: action.payload,
       };
     }
     default:
