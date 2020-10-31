@@ -51,7 +51,7 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = ({ columns, rowsData, onRowClick }) => {
+const DataTable = ({ columns, rowsData, onRowClick, onDateChange }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -109,7 +109,7 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
         </div>
 
         <div style={{ flex: 1, width: '30%' }}>
-          <Calender onChangeDate={(dates) => console.log(dates)} />
+          <Calender onChangeDate={(dates) => onDateChange(dates)} />
         </div>
 
       </div>

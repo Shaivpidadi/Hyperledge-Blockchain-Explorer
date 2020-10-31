@@ -48,6 +48,10 @@ const BlockPage = () => {
     [],
   );
 
+  const onDateChange = (dates) => {
+    console.log(dates);
+  };
+
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -60,6 +64,7 @@ const BlockPage = () => {
             onRowClick={({ blockNumber }) =>
               history.push(`/block/${blockNumber}`)
             }
+            onDateChange={(dates) => onDateChange(dates)}
           />
         </div>
       </Card>
