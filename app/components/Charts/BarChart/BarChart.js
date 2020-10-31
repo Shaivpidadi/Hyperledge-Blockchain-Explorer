@@ -99,7 +99,8 @@ const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
           dataKey="uv"
           fill="#f3f5f8"
           onClick={data => onBarClick(data)}
-          // minPointSize={30}
+          minPointSize={10}
+          // maxBarSize={20}
           shape={
             <CustomBarShape
               x="463.26"

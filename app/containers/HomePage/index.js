@@ -79,7 +79,7 @@ const HomePage = ({ history }) => {
   const txsChartData = useMemo(() => {
     let txsData = selectedTransactionChart === 'TX / Minute' ? txsByMinute : txsByHour;
 
-    txsData = txsData?.slice(0, 23).map((txs) => {
+    txsData = txsData?.slice(0, 30).map((txs) => {
       return ({
         ...txs,
         name: 'Name',
@@ -123,10 +123,12 @@ const HomePage = ({ history }) => {
                 width={1100}
                 height={110}
                 data={txsChartData}
-                onBarClick={data => {
-                  console.log({ data });
-                  history.push('/block');
-                }}
+              // API ONLY RETURNS NUMBER, NEED TO CREATE SOME LOGIC FOR REDIRECTION
+
+              // onBarClick={data => {
+              //   console.log({ data });
+              //   history.push('/block');
+              // }}
               />
             ) : (
                 <SkeletonBodyText />
