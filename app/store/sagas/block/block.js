@@ -3,7 +3,7 @@ import { getBlocklistRequestSuccess, showLoader, hideLoader } from '../../action
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
-function* getBlocklostRequestSaga() {
+function* getBlocklistRequestSaga() {
   try {
     yield put(showLoader());
     const currentChannel = localStorage.getItem('currentChannel')
@@ -24,5 +24,5 @@ function* getBlocklostRequestSaga() {
 }
 
 export default function* rootsaga() {
-  yield all([yield takeEvery(actionLabels.GET_BLOCK_LIST_REQUEST, getBlocklostRequestSaga)]);
+  yield all([yield takeEvery(actionLabels.GET_BLOCK_LIST_REQUEST, getBlocklistRequestSaga)]);
 }
