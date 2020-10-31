@@ -3,8 +3,6 @@ import { Card } from '@shopify/polaris';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import DataTable from '../../components/DataTable/DataTable';
-import fakeData from '../../components/DataTable/dummyData';
 import { getTransactionByOrgRequest, getBlockAndTransactionsListRequest } from '../../store/actions';
 import BlockDataTable from '../../components/DataTable/BlockDataTable';
 
@@ -12,8 +10,6 @@ const BlockPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
-
-  const rows = React.useMemo(() => fakeData, []);
 
   const onDateChange = (dates) => {
     console.log(dates);
