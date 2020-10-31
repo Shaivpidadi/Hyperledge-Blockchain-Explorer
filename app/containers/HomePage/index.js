@@ -157,7 +157,7 @@ const HomePage = ({ history }) => {
                         }) => (
                             <SingleBlockCard
                               key={blocknum}
-                              onClick={() => history.push('/block')}
+                              onClick={() => history.push(`/block/${blocknum}`)}
                               blockHash={blockhash}
                               blockNumber={blocknum}
                               channelName={channelname}
