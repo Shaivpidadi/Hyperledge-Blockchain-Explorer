@@ -65,7 +65,7 @@ const BlockPage = () => {
               history.push(`/block/${blockNumber}`)
             }
             onDateChange={(dates) => onDateChange(dates)}
-            dropdownOptions={[{ value: '1', label: 1 }]}
+            dropdownOptions={[{ value: '1', label: 1 }, { value: '2', label: 2 }]}
             onSelectChange={(selected) => console.log(selected)}
           />
         </div>

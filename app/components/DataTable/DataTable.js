@@ -125,6 +125,7 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
             defaultValue={selectedOption}
             onChange={selectChangeHandler}
             options={dropdownOptions}
+            isMulti
           />
         </div>
 
