@@ -89,27 +89,29 @@ const DataTable = ({ columns, rowsData, onRowClick }) => {
 
   return (
     <TableStyles>
+      <div style={{ marginTop: '25px', display: 'flex' }}>
+        <div style={{ flex: 1, width: '30%', marginRight: '10px' }}>
+          <TextField
+            className="tableSearch"
+            type="search"
+            placeholder="Search..."
+            value={globalFilter}
+            onChange={value => {
+              setGlobalFilter(value || undefined);
+            }}
+            autoComplete="off"
+            spellCheck={false}
+            autoCorrect="off"
+            autoCapitalize="off"
+            role="combobox"
+            aria-label="Search table"
+          />
+        </div>
 
-      <div style={{ width: '350px' }}>
-        <Calender />
-      </div>
+        <div style={{ flex: 1, width: '30%' }}>
+          <Calender onChangeDate={(dates) => console.log(dates)} />
+        </div>
 
-      <div style={{ width: '350px', marginTop: '25px' }}>
-        <TextField
-          className="tableSearch"
-          type="search"
-          placeholder="Search..."
-          value={globalFilter}
-          onChange={value => {
-            setGlobalFilter(value || undefined);
-          }}
-          autoComplete="off"
-          spellCheck={false}
-          autoCorrect="off"
-          autoCapitalize="off"
-          role="combobox"
-          aria-label="Search table"
-        />
       </div>
       <table {...getTableProps()}>
         <thead>
