@@ -7,35 +7,35 @@ const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions,
     () => [
       {
         Header: 'Block Number',
-        accessor: 'blockNumber', // accessor is the "key" in the data
+        accessor: 'blocknum', // accessor is the "key" in the data
       },
       {
         Header: 'Channel Name',
-        accessor: 'channelName',
+        accessor: 'channelname',
       },
       {
         Header: 'Number of Tx',
-        accessor: 'numberOfTx',
+        accessor: 'txcount',
       },
       {
         Header: 'Dash Hash',
-        accessor: 'dashHash',
+        accessor: 'datahash',
       },
       {
         Header: 'Block Hash',
-        accessor: 'blockHash',
+        accessor: 'blockhash',
       },
       {
         Header: 'Previous Hash',
-        accessor: 'previousHash',
+        accessor: 'prehash',
       },
       {
         Header: 'Transactions',
-        accessor: 'transactions',
+        accessor: 'txhash',
       },
       {
         Header: 'Size (KB)',
-        accessor: 'size',
+        accessor: 'blksize',
       },
     ],
     [],

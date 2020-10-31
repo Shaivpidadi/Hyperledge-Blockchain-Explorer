@@ -37,8 +37,8 @@ const BlockPage = () => {
     }))
   }, [txsByOrg]) || [];
 
-  const onBlockClick = ({ blockNumber }) => {
-    history.push(`/block/${blockNumber}`)
+  const onBlockClick = ({ blocknum }) => {
+    history.push(`/block/${blocknum}`)
   };
 
   return (
@@ -48,7 +48,7 @@ const BlockPage = () => {
 
         <div style={{ marginTop: '25px' }}>
           <BlockDataTable
-            rowsData={rows}
+            rowsData={blockTxsList}
             onBlockClick={onBlockClick}
             onDateChange={(dates) => onDateChange(dates)}
             dropdownOptions={options}
