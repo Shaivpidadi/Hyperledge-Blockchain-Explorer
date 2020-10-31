@@ -26,3 +26,12 @@ export const getTransactionByMinuteRequestSuccess = (payload) => ({
     type: actionLabels.GET_TRANSACTION_BY_MINUTE_REQUEST_SUCCESS,
     payload,
 });
+
+export const getBlockAndTransactionsListRequest = () => ({
+    type: actionLabels.GET_BLOCK_AND_TRANSACTION_LIST_REQUEST,
+});
+
+export const getBlockAndTransactionsListRequestSuccess = (payload) => ({
+    type: actionLabels.GET_BLOCK_AND_TRANSACTION_LIST_REQUEST_SUCCESS,
+    payload,
+});

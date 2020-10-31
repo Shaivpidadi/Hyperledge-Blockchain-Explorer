@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DataTable from '../../components/DataTable/DataTable';
 import fakeData from '../../components/DataTable/dummyData';
-import { getTransactionByOrgRequest } from '../../store/actions';
+import { getTransactionByOrgRequest, getBlockAndTransactionsListRequest } from '../../store/actions';
 
 const BlockPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { txsByOrg } = useSelector(state => state.transaction);
+  const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
 
   const rows = React.useMemo(() => fakeData, []);
 
@@ -58,9 +58,13 @@ const BlockPage = () => {
 
   useEffect(() => {
     if (!txsByOrg.length) {
-      dispatch(getTransactionByOrgRequest())
+      dispatch(getTransactionByOrgRequest());
     }
-  }, []);
+  }, [txsByOrg]);
+
+  useEffect(() => {
+    dispatch(getBlockAndTransactionsListRequest());
+  }, [])
 
   const options = useMemo(() => {
     return txsByOrg?.map((item) => ({
@@ -77,7 +81,7 @@ const BlockPage = () => {
 
         <div style={{ marginTop: '25px' }}>
           <DataTable
-            rowsData={rows || []}
+            rowsData={rows}
             columns={columns}
             onRowClick={({ blockNumber }) =>
               history.push(`/block/${blockNumber}`)

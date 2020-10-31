@@ -1,7 +1,10 @@
 import * as actionLabels from '../../actionLabels';
 
 const initialState = {
-  txsByOrg: []
+  txsByOrg: [],
+  txsByHour: [],
+  txsByMinute: [],
+  blockTxsList: []
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +25,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         txsByMinute: action.payload,
+      };
+    }
+    case actionLabels.GET_BLOCK_AND_TRANSACTION_LIST_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        blockTxsList: action.payload,
       };
     }
     default:
