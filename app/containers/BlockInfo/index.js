@@ -63,23 +63,23 @@ const BlockInfo = () => {
         <Heading style={{ fontSize: '40px' }}>BlockInfo</Heading>
         <div style={{ marginTop: '40px' }}>
           <BlockchainCardItem label="Channel Name" value="shaiv" />
-          <BlockchainCardItem label="Block Number" value="3213" />
+          <BlockchainCardItem label="Block Number" value={blockDetails?.number} />
           <BlockchainCardItem
             label="Craeted at"
             value="2020-08-31T1210:41.913Z"
           />
-          <BlockchainCardItem label="# of Txs" value="3325" />
+          <BlockchainCardItem label="# of Txs" value={blockDetails?.transactions?.length} />
           <BlockchainCardItem
             label="Block Hash"
             value="csui12t4yuuidasdaoiuq880j"
           />
           <BlockchainCardItem
             label="Data Hash"
-            value="cqkdyfgasiu57q562732837ygqwf"
+            value={blockDetails?.data_hash}
           />
           <BlockchainCardItem
             label="Prehash"
-            value="ccwfklh2u638127giohiatfg7"
+            value={blockDetails?.previous_hash}
           />
         </div>
       </Card>
