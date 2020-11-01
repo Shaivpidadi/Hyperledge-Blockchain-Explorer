@@ -92,7 +92,11 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
 
   const selectChangeHandler = (selectedValue) => {
     setSelectedOption(selectedValue);
-    onSelectChange(selectedValue)
+    let orgValue = '';
+    selectedValue?.map(({ value }, index) => {
+      orgValue += `orgs=${value}${index === selectedValue.length - 1 ? '' : '&&'}`;
+    });
+    onSelectChange(orgValue);
   };
 
   const onDateChangeHandler = ({ start, end }) => {
