@@ -95,6 +95,11 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
     onSelectChange(selectedValue)
   };
 
+  const onDateChangeHandler = ({ start, end }) => {
+    const query = `from=${start}&&to=${end}`;
+    onDateChange(query);
+  };
+
   return (
     <TableStyles>
       <div style={{ marginTop: '25px', display: 'flex' }}>
@@ -117,7 +122,7 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
         </div>
 
         <div style={{ flex: 1, width: '30%', marginRight: '10px' }}>
-          <Calender onChangeDate={(dates) => onDateChange(dates)} />
+          <Calender onChangeDate={onDateChangeHandler} />
         </div>
 
         <div style={{ flex: 1, width: '30%' }}>
