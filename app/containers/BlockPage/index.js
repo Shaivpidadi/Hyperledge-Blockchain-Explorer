@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Card } from '@shopify/polaris';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,14 +7,28 @@ import { getTransactionByOrgRequest, getBlockAndTransactionsListRequest } from '
 import BlockDataTable from '../../components/DataTable/BlockDataTable';
 
 const BlockPage = () => {
+  const [queryString, setQueryString] = useState({ date: '', orgs: '' });
   const history = useHistory();
   const dispatch = useDispatch();
   const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
 
   const onDateChange = (dates) => {
-    dispatch(getBlockAndTransactionsListRequest(dates));
+    setQueryString({ ...queryString, date: dates });
+    let query = dates;
+    if (!!queryString.orgs) {
+      query += `&&${queryString.orgs}`
+    };
+    dispatch(getBlockAndTransactionsListRequest(query));
   };
 
+  const onSelectChange = (selected) => {
+    setQueryString({ ...queryString, orgs: selected });
+    let query = selected;
+    if (!!queryString.date) {
+      query += `&&${queryString.date}`
+    };
+    dispatch(getBlockAndTransactionsListRequest(query));
+  }
   useEffect(() => {
     if (!txsByOrg.length) {
       dispatch(getTransactionByOrgRequest());
@@ -50,7 +64,7 @@ const BlockPage = () => {
             onBlockClick={onBlockClick}
             onDateChange={(dates) => onDateChange(dates)}
             dropdownOptions={options}
-            onSelectChange={(selected) => console.log(selected)}
+            onSelectChange={onSelectChange}
           />
         </div>
       </Card>
