@@ -12,7 +12,7 @@ const BlockPage = () => {
   const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
 
   const onDateChange = (dates) => {
-    console.log(dates);
+    dispatch(getBlockAndTransactionsListRequest(dates));
   };
 
   useEffect(() => {
@@ -37,6 +37,8 @@ const BlockPage = () => {
     history.push(`/block/${blocknum}`)
   };
 
+  const blockTxsListData = useMemo(() => blockTxsList, [blockTxsList]);
+
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -44,7 +46,7 @@ const BlockPage = () => {
 
         <div style={{ marginTop: '25px' }}>
           <BlockDataTable
-            rowsData={blockTxsList}
+            rowsData={blockTxsListData}
             onBlockClick={onBlockClick}
             onDateChange={(dates) => onDateChange(dates)}
             dropdownOptions={options}

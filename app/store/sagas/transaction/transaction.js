@@ -60,12 +60,12 @@ function* getTransactionByMinuteRequestSaga() {
   }
 }
 
-function* getBlockAndTxsListRequestSaga() {
+function* getBlockAndTxsListRequestSaga({ payload }) {
   try {
     yield put(showLoader());
     const currentChannel = localStorage.getItem('currentChannel');
 
-    const response = yield axiosMain.get(`/blockAndtxList/${currentChannel}/0`);
+    const response = yield axiosMain.get(`/blockAndtxList/${currentChannel}/0${!!payload ? '?' + payload : ''}`);
     if (response.status === 200) {
       yield put(getBlockAndTransactionsListRequestSuccess(response.data.rows));
       yield put(hideLoader());
