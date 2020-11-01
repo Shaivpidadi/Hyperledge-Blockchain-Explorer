@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTable from './DataTable';
+import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 
 const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange, onResetClick }) => {
 
@@ -18,16 +19,19 @@ const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions,
         accessor: 'txcount',
       },
       {
-        Header: 'Dash Hash',
+        Header: 'Data Hash',
         accessor: 'datahash',
+        Cell: ({ value }) => <TextWithEllipses text={value} />
       },
       {
         Header: 'Block Hash',
         accessor: 'blockhash',
+        Cell: ({ value }) => <TextWithEllipses text={value} />
       },
       {
         Header: 'Previous Hash',
         accessor: 'prehash',
+        Cell: ({ value }) => <TextWithEllipses text={value} />
       },
       {
         Header: 'Transactions',
