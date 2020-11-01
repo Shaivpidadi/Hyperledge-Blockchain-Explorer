@@ -317,6 +317,8 @@ router.get(
 );
 
 router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
+  // console.log('params', req.params);
+  console.log('query', req.query);
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, number } = req.params;
@@ -326,8 +328,15 @@ router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
       },
     };
 
+    const isQueryParameterAdded = !!Object.keys(req.query).length;
+
+    let queryParameters = '';
+    Object.entries(req.query).forEach(([key, value], index) => {
+      queryParameters += `${key}=${value}${index === Object.keys(req.query).length - 1 ? '' : '&&'}`;
+    });
+
     const { data } = await explorer.get(
-      `api/blockAndtxList/${channelGenesisHash}/${number}`,
+      `api/blockAndtxList/${channelGenesisHash}/${number}${isQueryParameterAdded ? '?' + queryParameters : ''}`,
       config,
     );
     res.send(data);
