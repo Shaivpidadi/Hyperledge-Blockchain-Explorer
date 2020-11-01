@@ -52,7 +52,7 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange }) => {
+const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange, onResetClick }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const {
@@ -107,7 +107,7 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
   return (
     <TableStyles>
       <div style={{ marginTop: '25px', display: 'flex' }}>
-        <div style={{ flex: 1, width: '30%', marginRight: '10px' }}>
+        <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
           <TextField
             className="tableSearch"
             type="search"
@@ -125,11 +125,11 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
           />
         </div>
 
-        <div style={{ flex: 1, width: '30%', marginRight: '10px' }}>
+        <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
           <Calender onChangeDate={onDateChangeHandler} />
         </div>
 
-        <div style={{ flex: 1, width: '30%' }}>
+        <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
           <Select
             defaultValue={selectedOption}
             onChange={selectChangeHandler}
@@ -138,6 +138,9 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
           />
         </div>
 
+        <div style={{ flex: 1, width: '25%' }}>
+          <Button onClick={onResetClick}>Reset</Button>
+        </div>
       </div>
       <table {...getTableProps()}>
         <thead>

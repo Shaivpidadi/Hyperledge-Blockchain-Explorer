@@ -51,6 +51,11 @@ const BlockPage = () => {
     history.push(`/block/${blocknum}`)
   };
 
+  const onResetClick = () => {
+    setQueryString({ date: '', orgs: '' });
+    dispatch(getBlockAndTransactionsListRequest());
+  };
+
   const blockTxsListData = useMemo(() => blockTxsList, [blockTxsList]);
 
   return (
@@ -65,6 +70,7 @@ const BlockPage = () => {
             onDateChange={(dates) => onDateChange(dates)}
             dropdownOptions={options}
             onSelectChange={onSelectChange}
+            onResetClick={onResetClick}
           />
         </div>
       </Card>

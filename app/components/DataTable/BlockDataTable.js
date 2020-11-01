@@ -1,7 +1,7 @@
 import React from 'react';
 import DataTable from './DataTable';
 
-const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange }) => {
+const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange, onResetClick }) => {
 
   const columns = React.useMemo(
     () => [
@@ -49,6 +49,7 @@ const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions,
       onDateChange={onDateChange}
       dropdownOptions={dropdownOptions}
       onSelectChange={onSelectChange}
+      onResetClick={onResetClick}
     />
   )
 }
