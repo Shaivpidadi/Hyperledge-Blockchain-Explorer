@@ -7,15 +7,15 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
     () => [
       {
         Header: 'Creator',
-        accessor: 'creator',
+        accessor: 'creator_msp_id',
       },
       {
         Header: 'Channel Name',
-        accessor: 'channelName',
+        accessor: 'channelname',
       },
       {
         Header: 'Tx Id',
-        accessor: 'txId',
+        accessor: 'txhash',
       },
       {
         Header: 'Type',
@@ -23,11 +23,11 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       },
       {
         Header: 'Chaincode',
-        accessor: 'chaincode',
+        accessor: 'chaincodename',
       },
       {
         Header: 'Timestamp',
-        accessor: 'timestamp',
+        accessor: 'createdt',
       }
     ],
     [],

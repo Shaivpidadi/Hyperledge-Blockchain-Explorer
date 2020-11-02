@@ -4,7 +4,8 @@ const initialState = {
   txsByOrg: [],
   txsByHour: [],
   txsByMinute: [],
-  blockTxsList: []
+  blockTxsList: [],
+  txsList: []
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +32,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         blockTxsList: action.payload,
+      };
+    }
+    case actionLabels.GET_TRANSACTION_LIST_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        txsList: action.payload,
       };
     }
     default:
