@@ -13,8 +13,8 @@ const AllTransctions = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onTransactionClick = ({ blockNumber }) => {
-    history.push(`/tx/${blockNumber}`)
+  const onTransactionClick = ({ txhash }) => {
+    history.push(`/tx/${txhash}`)
   };
 
   const onDateChange = (dates) => {
