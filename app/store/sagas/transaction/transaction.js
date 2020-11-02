@@ -107,7 +107,7 @@ function* getTransactionDetailsRequestSaga({ payload }) {
 
     const response = yield axiosMain.get(`/transaction/${currentChannel}/${txId}`);
     if (response.status === 200) {
-      yield put(getTransactionDetailsRequestSuccess(response.data));
+      yield put(getTransactionDetailsRequestSuccess(response.data.row));
       yield put(hideLoader());
     } else {
       console.log('error');

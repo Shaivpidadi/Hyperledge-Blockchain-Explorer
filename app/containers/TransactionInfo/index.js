@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card } from '@shopify/polaris';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import AccordianCard from '../../components/AccordianCard';
 import BlockchainCardItem from '../../components/BlockchainCardItem';
+import { getTransactionDetailsRequest } from '../../store/actions';
 
 const TransactionInfo = () => {
+  const { txId } = useParams();
+  const dispatch = useDispatch();
+  const { txDetails } = useSelector(state => state.transaction);
+
+  useEffect(() => {
+    dispatch(getTransactionDetailsRequest({ txId }))
+  }, [txId]);
+
+  console.log({ txDetails })
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -15,7 +27,7 @@ const TransactionInfo = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Card.Header title="Transaction # 234123293423423..." />
+            <Card.Header title={`Transaction #${txDetails?.txhash}`} />
             <Card.Header title="2020-09-05" />
           </div>
 
@@ -25,26 +37,26 @@ const TransactionInfo = () => {
                 <div style={{ padding: '20px' }}>
                   <BlockchainCardItem
                     label="Transaction ID"
-                    value="fbe6ebb45b424"
+                    value={txDetails?.txhash}
                   />
-                  <BlockchainCardItem label="Validation Code" value="VALID" />
+                  <BlockchainCardItem label="Validation Code" value={txDetails?.validation_code} />
                   <BlockchainCardItem
                     label="Payload Hash"
-                    value="82a3665a8504337c2af00d"
+                    value={txDetails?.payload_proposal_hash}
                   />
-                  <BlockchainCardItem label="Creator MSP" value="shaivMSP" />
+                  <BlockchainCardItem label="Creator MSP" value={txDetails?.creator_msp_id} />
                   <BlockchainCardItem
                     label="Endoser"
-                    value="{'sdfasdf', 'asdf'}"
+                    value={txDetails?.endorser_msp_id}
                   />
-                  <BlockchainCardItem label="Chaincode" value="SHaIV" />
+                  <BlockchainCardItem label="Chaincode" value={txDetails?.chaincodename} />
                   <BlockchainCardItem
                     label="Type"
-                    value="ENDORSER_TRANSACTION"
+                    value={txDetails?.type}
                   />
                   <BlockchainCardItem
                     label="Time"
-                    value="2020-09-02T13:36:25.469Z"
+                    value={txDetails?.createdt}
                   />
                 </div>
               </Card>
