@@ -15,12 +15,8 @@ const FullScreenMenu = () => {
 
       const init = () => {
         body = document.querySelector('body');
-        console.log({ body })
         menu = document.querySelector('.menu-icon');
-        console.log({ menu })
         menuItems = document.querySelectorAll('.nav__list-item');
-        console.log({ menuItems })
-
         applyListeners();
       }
 
@@ -50,10 +46,10 @@ const FullScreenMenu = () => {
       <div className="nav">
         <div className="nav__content">
           <ul className="nav__list">
-            <li className="nav__list-item">Dashboard</li>
+            <li className="nav__list-item" onClick={() => { history.push('/') }}>Dashboard</li>
             <li className="nav__list-item">Network</li>
             <li className="nav__list-item" onClick={() => history.push('/block')}>Blocks</li>
-            <li className="nav__list-item">Transactions</li>
+            <li className="nav__list-item" onClick={() => history.push('/transactions')}>Transactions</li>
             <li className="nav__list-item">Channel</li>
           </ul>
         </div>
