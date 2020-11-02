@@ -59,6 +59,8 @@ const AllTransctions = () => {
 
   const txsListData = useMemo(() => txsList, [txsList]);
 
+  console.log('--==>', txsList.length);
+
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
