@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Card, Heading } from '@shopify/polaris';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,57 +6,51 @@ import { useSelector, useDispatch } from 'react-redux';
 import DataTable from '../../components/DataTable/DataTable';
 import BlockchainCardItem from '../../components/BlockchainCardItem';
 import fakeData from '../../components/DataTable/dummyData';
-import { getBlockDetailsRequest } from '../../store/actions';
+import { getBlockDetailsRequest, getTransactionByOrgRequest } from '../../store/actions';
+import TransactionDataTable from '../../components/DataTable/TransactionDataTable';
 
 const BlockInfo = () => {
   const history = useHistory();
   const { blockId } = useParams();
   const dispatch = useDispatch();
   const { blockDetails } = useSelector(state => state.block);
+  const { txsByOrg } = useSelector(state => state.transaction);
 
   useEffect(() => {
     dispatch(getBlockDetailsRequest({ blockId }))
   }, [blockId]);
 
-  const rows = React.useMemo(() => fakeData, []);
+  useEffect(() => {
+    if (!txsByOrg.length) {
+      dispatch(getTransactionByOrgRequest());
+    }
+  }, [txsByOrg]);
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Block Number',
-        accessor: 'blockNumber', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Channel Name',
-        accessor: 'channelName',
-      },
-      {
-        Header: 'Number of Tx',
-        accessor: 'numberOfTx',
-      },
-      {
-        Header: 'Dash Hash',
-        accessor: 'dashHash',
-      },
-      {
-        Header: 'Block Hash',
-        accessor: 'blockHash',
-      },
-      {
-        Header: 'Previous Hash',
-        accessor: 'previousHash',
-      },
-      {
-        Header: 'Transactions',
-        accessor: 'transactions',
-      },
-      {
-        Header: 'Size (KB)',
-        accessor: 'size',
-      },
-    ],
-    [],
-  );
+  const blockTransactions = useMemo(() => {
+    let transactions = blockDetails?.transactions || [];
+
+    return transactions.map(({ payload }) => ({
+      creator_msp_id: payload?.header?.signature_header?.creator?.Mspid,
+      channelname: payload?.header?.channel_header?.channel_id,
+      txhash: payload?.header?.channel_header?.tx_id,
+      type: payload?.header?.channel_header?.typeString,
+      chaincodename: payload?.data?.actions[0]?.payload?.chaincode_proposal_payload?.input?.chaincode_spec?.chaincode_id?.name,
+      createdt: payload?.header?.channel_header?.timestamp
+    }))
+  })
+
+  const options = useMemo(() => {
+    return txsByOrg?.map((item) => ({
+      ...item,
+      value: item.creator_msp_id,
+      label: item.creator_msp_id
+    }))
+  }, [txsByOrg]) || [];
+
+  const onTransactionClick = ({ txhash }) => {
+    history.push(`/tx/${txhash}`)
+  };
+
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -65,7 +59,7 @@ const BlockInfo = () => {
           <BlockchainCardItem label="Channel Name" value="shaiv" />
           <BlockchainCardItem label="Block Number" value={blockDetails?.number} />
           <BlockchainCardItem
-            label="Craeted at"
+            label="Created at"
             value="2020-08-31T1210:41.913Z"
           />
           <BlockchainCardItem label="# of Txs" value={blockDetails?.transactions?.length} />
@@ -89,12 +83,13 @@ const BlockInfo = () => {
             <Heading>{`All Transaction From Block #${blockId}`}</Heading>
           </div>
           <div style={{ padding: '20px' }}>
-            <DataTable
-              rowsData={rows || []}
-              columns={columns}
-              onRowClick={({ blockNumber }) =>
-                history.push(`/tx/${blockNumber}`)
-              }
+            <TransactionDataTable
+              rowsData={blockTransactions}
+              onTransactionClick={onTransactionClick}
+              onDateChange={(dates) => console.log({ dates })}
+              dropdownOptions={options}
+              onSelectChange={(selectedOrgs) => console.log({ selectedOrgs })}
+              onResetClick={() => { console.log('reset clicked') }}
             />
           </div>
         </Card>
