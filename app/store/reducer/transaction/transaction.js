@@ -5,7 +5,8 @@ const initialState = {
   txsByHour: [],
   txsByMinute: [],
   blockTxsList: [],
-  txsList: []
+  txsList: [],
+  txDetails: {}
 };
 
 export default (state = initialState, action) => {
@@ -38,6 +39,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         txsList: action.payload,
+      };
+    }
+    case actionLabels.GET_TRANSACTION_DETAILS_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        txDetails: action.payload,
       };
     }
     default:

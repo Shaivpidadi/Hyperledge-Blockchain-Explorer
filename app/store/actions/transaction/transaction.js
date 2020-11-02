@@ -46,3 +46,13 @@ export const getTransactionListRequestSuccess = (payload) => ({
   type: actionLabels.GET_TRANSACTION_LIST_REQUEST_SUCCESS,
   payload,
 });
+
+export const getTransactionDetailsRequest = (payload) => ({
+  type: actionLabels.GET_TRANSACTION_DETAILS_REQUEST,
+  payload
+});
+
+export const getTransactionDetailsRequestSuccess = (payload) => ({
+  type: actionLabels.GET_TRANSACTION_DETAILS_REQUEST_SUCCESS,
+  payload,
+});
