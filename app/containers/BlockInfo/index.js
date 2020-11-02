@@ -86,7 +86,7 @@ const BlockInfo = () => {
       <div style={{ marginTop: '20px' }}>
         <Card>
           <div style={{ padding: '20px' }}>
-            <Heading>All Transaction From Block #1242</Heading>
+            <Heading>{`All Transaction From Block #${blockId}`}</Heading>
           </div>
           <div style={{ padding: '20px' }}>
             <DataTable

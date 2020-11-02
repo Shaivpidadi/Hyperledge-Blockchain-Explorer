@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import './FullScreenMenu.scss';
 
 // Originally by -https://codepen.io/RSH87/pen/rmgYbo
 const FullScreenMenu = () => {
+  const history = useHistory();
 
   useEffect(() => {
     const app = (() => {
@@ -34,7 +37,7 @@ const FullScreenMenu = () => {
 
       init();
     })();
-  });
+  }, []);
 
   return (
     <>
@@ -49,7 +52,7 @@ const FullScreenMenu = () => {
           <ul className="nav__list">
             <li className="nav__list-item">Dashboard</li>
             <li className="nav__list-item">Network</li>
-            <li className="nav__list-item">Blocks</li>
+            <li className="nav__list-item" onClick={() => history.push('/block')}>Blocks</li>
             <li className="nav__list-item">Transactions</li>
             <li className="nav__list-item">Channel</li>
           </ul>
