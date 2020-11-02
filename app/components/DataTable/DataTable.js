@@ -52,7 +52,7 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange, onResetClick }) => {
+const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange, onResetClick, hideFilters }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const {
@@ -125,22 +125,27 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
           />
         </div>
 
-        <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
-          <Calender onChangeDate={onDateChangeHandler} />
-        </div>
+        {hideFilters ? null : (
+          <>
+            <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
+              <Calender onChangeDate={onDateChangeHandler} />
+            </div>
 
-        <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
-          <Select
-            defaultValue={selectedOption}
-            onChange={selectChangeHandler}
-            options={dropdownOptions}
-            isMulti
-          />
-        </div>
+            <div style={{ flex: 1, width: '25%', marginRight: '10px' }}>
+              <Select
+                defaultValue={selectedOption}
+                onChange={selectChangeHandler}
+                options={dropdownOptions}
+                isMulti
+              />
+            </div>
 
-        <div style={{ flex: 1, width: '25%' }}>
-          <Button onClick={onResetClick}>Reset</Button>
-        </div>
+            <div style={{ flex: 1, width: '25%' }}>
+              <Button onClick={onResetClick}>Reset</Button>
+            </div>
+          </>
+        )}
+
       </div>
       <table {...getTableProps()}>
         <thead>
@@ -264,6 +269,10 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
       </div>
     </TableStyles>
   );
+};
+
+DataTable.defaultProps = {
+  hideFilters: false,
 };
 
 export default DataTable;
