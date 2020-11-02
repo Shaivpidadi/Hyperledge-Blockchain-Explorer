@@ -250,7 +250,7 @@ router.get(
   },
 );
 
-router.get('/transactions/:channelGenesisHash/:txId', async (req, res) => {
+router.get('/transaction/:channelGenesisHash/:txId', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
     const { channelGenesisHash, txId } = req.params;
