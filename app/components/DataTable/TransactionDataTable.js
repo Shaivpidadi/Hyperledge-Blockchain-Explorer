@@ -1,5 +1,8 @@
 import React from 'react';
 import DataTable from './DataTable';
+import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
+import moment from 'moment';
+import { Tag } from '@shopify/polaris';
 
 const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, dropdownOptions, onSelectChange }) => {
 
@@ -16,10 +19,19 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       {
         Header: 'Tx Id',
         accessor: 'txhash',
+        Cell: ({ value }) => <TextWithEllipses text={value} />
       },
       {
         Header: 'Type',
         accessor: 'type',
+        Cell: ({ value }) => {
+          // Need to add map later
+          if (value === 'ENDORSER_TRANSACTION') {
+            return 'Endorser'
+          } else {
+            <TextWithEllipses text={value} />
+          }
+        }
       },
       {
         Header: 'Chaincode',
@@ -28,6 +40,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       {
         Header: 'Timestamp',
         accessor: 'createdt',
+        Cell: ({ value }) => <Tag>{moment(value).fromNow()}</Tag>
       }
     ],
     [],
