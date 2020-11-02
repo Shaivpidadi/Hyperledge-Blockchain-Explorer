@@ -16,6 +16,7 @@ import TransactionInfo from '../../containers/TransactionInfo/Loadable';
 import LoginPage from '../../containers/LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
 import { getCurrentChannelRequest } from '../../store/actions';
+import FullScreenMenu from '../../components/FullScreenMenu/FullScreenMenu';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const App = () => {
     <div>
       <AppProvider i18n={enTranslations}>
         <Header />
+        <FullScreenMenu />
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route exact path="/" component={HomePage} />
