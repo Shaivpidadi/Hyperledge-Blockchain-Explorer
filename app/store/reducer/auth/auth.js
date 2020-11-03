@@ -13,6 +13,13 @@ export default (state = initialState, action) => {
         userToken: action.payload,
       };
     }
+    case actionLabels.LOGOUT_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        userToken: null,
+        userData: null,
+      };
+    }
     default:
       return state;
   }

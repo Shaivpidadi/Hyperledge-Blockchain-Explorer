@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { loginRequestSuccess, showLoader, hideLoader } from '../../actions';
+import { loginRequestSuccess, showLoader, hideLoader, logoutRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -29,15 +29,34 @@ function* loginRequestSaga({ payload }) {
       );
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    yield put(hideLoader());
+  }
+}
+
+function* logoutRequestSaga() {
+  try {
+    yield put(showLoader());
+    const response = yield axiosMain.post('/login');
+
+    if (response.status === 200) {
+      yield put(
+        logoutRequestSuccess()
+      );
+      yield put(hideLoader());
+    } else {
+      yield put(hideLoader());
+    }
+  } catch (error) {
     yield put(hideLoader());
   }
 }
 
 export default function* rootsaga() {
-  yield all([yield takeEvery(actionLabels.LOGIN_REQUEST, loginRequestSaga)]);
+  yield all([
+    yield takeEvery(actionLabels.LOGIN_REQUEST, loginRequestSaga),
+    yield takeEvery(actionLabels.LOGOUT_REQUEST, logoutRequestSaga)
+  ]);
 }

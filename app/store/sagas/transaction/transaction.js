@@ -1,5 +1,5 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { showLoader, hideLoader, getTransactionByOrgRequestSuccess, getTransactionByHourRequestSuccess, getTransactionByMinuteRequestSuccess, getBlockAndTransactionsListRequest, getBlockAndTransactionsListRequestSuccess, getTransactionListRequestSuccess, getTransactionDetailsRequestSuccess } from '../../actions';
+import { showLoader, hideLoader, getTransactionByOrgRequestSuccess, getTransactionByHourRequestSuccess, getTransactionByMinuteRequestSuccess, getBlockAndTransactionsListRequest, getBlockAndTransactionsListRequestSuccess, getTransactionListRequestSuccess, getTransactionDetailsRequestSuccess, logoutRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -17,6 +17,7 @@ function* getTransactionByOrgRequestSaga() {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
@@ -37,6 +38,7 @@ function* getTransactionByHourRequestSaga() {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
@@ -57,6 +59,7 @@ function* getTransactionByMinuteRequestSaga() {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
@@ -77,6 +80,7 @@ function* getBlockAndTxsListRequestSaga({ payload }) {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
@@ -98,6 +102,7 @@ function* getTransactionListRequestSaga({ payload }) {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
@@ -119,6 +124,7 @@ function* getTransactionDetailsRequestSaga({ payload }) {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());

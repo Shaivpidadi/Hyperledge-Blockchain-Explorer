@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { networkDetailsRequestSuccess, showLoader, hideLoader } from '../../actions';
+import { networkDetailsRequestSuccess, showLoader, hideLoader, logoutRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -19,6 +19,7 @@ function* networkDetailsRequestSaga() {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());

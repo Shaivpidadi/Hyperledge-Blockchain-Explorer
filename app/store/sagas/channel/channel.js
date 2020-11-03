@@ -1,5 +1,5 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { showLoader, hideLoader, getCurrentChannelRequestSuccess } from '../../actions';
+import { showLoader, hideLoader, getCurrentChannelRequestSuccess, logoutRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -16,6 +16,7 @@ function* getCurrentChannelRequestSaga() {
     }
   } catch (error) {
     if (error.message === 'Request failed with status code 401') {
+      yield put(logoutRequestSuccess());
       localStorage.clear();
     }
     yield put(hideLoader());
