@@ -14,11 +14,12 @@ function* getBlocklistRequestSaga() {
       yield put(getBlocklistRequestSuccess(response.data.row));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -35,11 +36,12 @@ function* getBlockDetailsRequestSaga({ payload }) {
       yield put(getBlockDetailsRequestSuccess(response.data));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }

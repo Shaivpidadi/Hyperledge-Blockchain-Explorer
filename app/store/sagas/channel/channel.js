@@ -12,11 +12,12 @@ function* getCurrentChannelRequestSaga() {
       yield put(getCurrentChannelRequestSuccess(response.data.currentChannel));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }

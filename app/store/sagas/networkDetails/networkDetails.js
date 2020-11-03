@@ -18,16 +18,15 @@ function* networkDetailsRequestSaga() {
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
 
 export default function* rootsaga() {
   yield all([
-    yield takeEvery(
-      actionLabels.NETWORKLIST_REQUEST,
-      networkDetailsRequestSaga,
-    ),
+    yield takeEvery(actionLabels.NETWORKLIST_REQUEST, networkDetailsRequestSaga),
   ]);
 }

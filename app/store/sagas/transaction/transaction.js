@@ -13,11 +13,12 @@ function* getTransactionByOrgRequestSaga() {
       yield put(getTransactionByOrgRequestSuccess(response.data.rows));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -32,11 +33,12 @@ function* getTransactionByHourRequestSaga() {
       yield put(getTransactionByHourRequestSuccess(response.data.rows));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -51,11 +53,12 @@ function* getTransactionByMinuteRequestSaga() {
       yield put(getTransactionByMinuteRequestSuccess(response.data.rows));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -70,11 +73,12 @@ function* getBlockAndTxsListRequestSaga({ payload }) {
       yield put(getBlockAndTransactionsListRequestSuccess(response.data.rows));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -90,11 +94,12 @@ function* getTransactionListRequestSaga({ payload }) {
       yield put(getTransactionListRequestSuccess(response.data.rows));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
@@ -110,11 +115,12 @@ function* getTransactionDetailsRequestSaga({ payload }) {
       yield put(getTransactionDetailsRequestSuccess(response.data.row));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 401') {
+      localStorage.clear();
+    }
     yield put(hideLoader());
   }
 }
