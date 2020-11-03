@@ -18,6 +18,7 @@ import GlobalStyle from '../../global-styles';
 import { getCurrentChannelRequest } from '../../store/actions';
 import FullScreenMenu from '../../components/FullScreenMenu/FullScreenMenu';
 import ChannelPage from '../ChannelPage';
+import NetworkPage from '../NetworkPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const App = () => {
           <Route exact path="/transactions" component={TransactionPage} />
           <Route exact path="/tx/:txId" component={TransactionInfo} />
           <Route exact path="/channels" component={ChannelPage} />
+          <Route exact path="/networks" component={NetworkPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppProvider>
