@@ -1,7 +1,5 @@
 import React from 'react';
 
-const ChannelPage = () => {
-  return <h1> Channels </h1>
-}
+const ChannelPage = () => <h1> Channels </h1>;
 
 export default ChannelPage;

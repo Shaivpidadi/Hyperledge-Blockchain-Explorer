@@ -6,14 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import axios from '../../http/axios/axiosMain';
 
-import HomePage from '../../containers/HomePage/Loadable';
-import BlockPage from '../../containers/BlockPage/Loadable';
-import NotFoundPage from '../../containers/NotFoundPage/Loadable';
+import HomePage from '../HomePage/Loadable';
+import BlockPage from '../BlockPage/Loadable';
+import NotFoundPage from '../NotFoundPage/Loadable';
 import Header from '../../components/Header/Header';
-import BlockInfo from '../../containers/BlockInfo/Loadable';
-import TransactionPage from '../../containers/AllTransctions/Loadable';
-import TransactionInfo from '../../containers/TransactionInfo/Loadable';
-import LoginPage from '../../containers/LoginPage/Loadable';
+import BlockInfo from '../BlockInfo/Loadable';
+import TransactionPage from '../AllTransctions/Loadable';
+import TransactionInfo from '../TransactionInfo/Loadable';
+import LoginPage from '../LoginPage/Loadable';
 import GlobalStyle from '../../global-styles';
 import { getCurrentChannelRequest } from '../../store/actions';
 import FullScreenMenu from '../../components/FullScreenMenu/FullScreenMenu';
@@ -24,16 +24,15 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
   const { userToken: auth } = useSelector(state => state.auth);
-  const isTokenPresent = !!localStorage.getItem("userToken");
+  const isTokenPresent = !!localStorage.getItem('userToken');
 
   useEffect(() => {
     const authorizationToken = localStorage.getItem('userToken');
     const token = `bearer ${authorizationToken}`;
     if (authorizationToken) {
-      axios.defaults.headers.common['Authorization'] = token;
-
+      axios.defaults.headers.common.Authorization = token;
     } else {
-      axios.defaults.headers.common['Authorization'] = null;
+      axios.defaults.headers.common.Authorization = null;
     }
   }, []);
 
