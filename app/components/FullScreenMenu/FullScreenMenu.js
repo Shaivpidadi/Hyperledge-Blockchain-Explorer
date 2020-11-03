@@ -47,10 +47,10 @@ const FullScreenMenu = () => {
         <div className="nav__content">
           <ul className="nav__list">
             <li className="nav__list-item" onClick={() => { history.push('/') }}>Dashboard</li>
-            <li className="nav__list-item">Network</li>
+            <li className="nav__list-item" onClick={() => { history.push('/networks') }}>Network</li>
             <li className="nav__list-item" onClick={() => history.push('/block')}>Blocks</li>
             <li className="nav__list-item" onClick={() => history.push('/transactions')}>Transactions</li>
-            <li className="nav__list-item">Channel</li>
+            <li className="nav__list-item" onClick={() => { history.push('/channels') }}>Channel</li>
           </ul>
         </div>
       </div>
