@@ -19,8 +19,8 @@ router.post('/login', async (req, res) => {
       network,
     });
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 404, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -28,8 +28,8 @@ router.get('/networklist', async (req, res) => {
   try {
     const { data } = await explorer.get('/auth/networklist');
     sendResponse(res, 200, true, 'Network List', data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -44,8 +44,8 @@ router.get('/channels', async (req, res) => {
 
     const { data } = await explorer.get('/api/channels', config);
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -60,8 +60,8 @@ router.get('/channels/info', async (req, res) => {
 
     const { data } = await explorer.get('/api/channels/info', config);
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 404, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -80,8 +80,8 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -96,8 +96,8 @@ router.get('/channel/curChannel', async (req, res) => {
 
     const { data } = await explorer.get('api/curChannel', config);
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -118,8 +118,8 @@ router.get(
         config,
       );
       res.send(data);
-    } catch (exception) {
-      sendResponse(res, 401, false, exception.message);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
     }
   },
 );
@@ -139,8 +139,8 @@ router.get('/peer/:channelGenesisHash', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -159,8 +159,8 @@ router.get('/chaincode/:channelGenesisHash', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -179,8 +179,8 @@ router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -199,8 +199,8 @@ router.get('/block/:channelGenesisHash/:number', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -221,8 +221,8 @@ router.get(
         config,
       );
       res.send(data);
-    } catch (exception) {
-      sendResponse(res, 401, false, exception.message);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
     }
   },
 );
@@ -244,8 +244,8 @@ router.get(
         config,
       );
       res.send(data);
-    } catch (exception) {
-      sendResponse(res, 401, false, exception.message);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
     }
   },
 );
@@ -265,8 +265,8 @@ router.get('/transaction/:channelGenesisHash/:txId', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -287,8 +287,8 @@ router.get(
         config,
       );
       res.send(data);
-    } catch (exception) {
-      sendResponse(res, 401, false, exception.message);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
     }
   },
 );
@@ -305,21 +305,24 @@ router.get(
         },
       };
 
-
       const isQueryParameterAdded = !!Object.keys(req.query).length;
 
       let queryParameters = '';
       Object.entries(req.query).forEach(([key, value], index) => {
-        queryParameters += `${key}=${value}${index === Object.keys(req.query).length - 1 ? '' : '&&'}`;
+        queryParameters += `${key}=${value}${
+          index === Object.keys(req.query).length - 1 ? '' : '&&'
+        }`;
       });
 
       const { data } = await explorer.get(
-        `api/txList/${channelGenesisHash}/${number}/${txId}${isQueryParameterAdded ? '?' + queryParameters : ''}`,
+        `api/txList/${channelGenesisHash}/${number}/${txId}${
+          isQueryParameterAdded ? `?${queryParameters}` : ''
+        }`,
         config,
       );
       res.send(data);
-    } catch (exception) {
-      sendResponse(res, 401, false, exception.message);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
     }
   },
 );
@@ -338,16 +341,20 @@ router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
 
     let queryParameters = '';
     Object.entries(req.query).forEach(([key, value], index) => {
-      queryParameters += `${key}=${value}${index === Object.keys(req.query).length - 1 ? '' : '&&'}`;
+      queryParameters += `${key}=${value}${
+        index === Object.keys(req.query).length - 1 ? '' : '&&'
+      }`;
     });
 
     const { data } = await explorer.get(
-      `api/blockAndtxList/${channelGenesisHash}/${number}${isQueryParameterAdded ? '?' + queryParameters : ''}`,
+      `api/blockAndtxList/${channelGenesisHash}/${number}${
+        isQueryParameterAdded ? `?${queryParameters}` : ''
+      }`,
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -366,8 +373,8 @@ router.get('/txByMinute/:channelGenesisHash/:hours', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -386,8 +393,8 @@ router.get('/txByHour/:channelGenesisHash/:days', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
@@ -406,8 +413,8 @@ router.get('/txByOrg/:channelGenesisHash/', async (req, res) => {
       config,
     );
     res.send(data);
-  } catch (exception) {
-    sendResponse(res, 401, false, exception.message);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
   }
 });
 
