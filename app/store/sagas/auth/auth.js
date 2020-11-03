@@ -39,12 +39,10 @@ function* loginRequestSaga({ payload }) {
 function* logoutRequestSaga() {
   try {
     yield put(showLoader());
-    const response = yield axiosMain.post('/login');
+    const response = yield axiosMain.post('/logout');
 
     if (response.status === 200) {
-      yield put(
-        logoutRequestSuccess()
-      );
+      yield put(logoutRequestSuccess());
       yield put(hideLoader());
     } else {
       yield put(hideLoader());
