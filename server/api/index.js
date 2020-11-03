@@ -24,6 +24,24 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/logout', async (req, res) => {
+  try {
+    console.log('logging out')
+    const authToken = req.headers['authorization'] || '';
+
+    const config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.post('/auth/logout', config);
+    res.send(data);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
+  }
+});
+
 router.get('/networklist', async (req, res) => {
   try {
     const { data } = await explorer.get('/auth/networklist');
@@ -311,12 +329,12 @@ router.get(
       Object.entries(req.query).forEach(([key, value], index) => {
         queryParameters += `${key}=${value}${
           index === Object.keys(req.query).length - 1 ? '' : '&&'
-        }`;
+          }`;
       });
 
       const { data } = await explorer.get(
         `api/txList/${channelGenesisHash}/${number}/${txId}${
-          isQueryParameterAdded ? `?${queryParameters}` : ''
+        isQueryParameterAdded ? `?${queryParameters}` : ''
         }`,
         config,
       );
@@ -343,12 +361,12 @@ router.get('/blockAndtxList/:channelGenesisHash/:number', async (req, res) => {
     Object.entries(req.query).forEach(([key, value], index) => {
       queryParameters += `${key}=${value}${
         index === Object.keys(req.query).length - 1 ? '' : '&&'
-      }`;
+        }`;
     });
 
     const { data } = await explorer.get(
       `api/blockAndtxList/${channelGenesisHash}/${number}${
-        isQueryParameterAdded ? `?${queryParameters}` : ''
+      isQueryParameterAdded ? `?${queryParameters}` : ''
       }`,
       config,
     );
