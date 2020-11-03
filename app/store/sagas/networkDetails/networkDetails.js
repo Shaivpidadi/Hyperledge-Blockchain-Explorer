@@ -14,7 +14,6 @@ function* networkDetailsRequestSaga() {
       yield put(networkDetailsRequestSuccess(response.data));
       yield put(hideLoader());
     } else {
-      console.log('error');
       yield put(hideLoader());
     }
   } catch (error) {

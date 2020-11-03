@@ -16,7 +16,6 @@ const TransactionInfo = () => {
     dispatch(getTransactionDetailsRequest({ txId }))
   }, [txId]);
 
-  console.log({ txDetails })
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>

@@ -26,7 +26,6 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
   try {
-    console.log('logging out')
     const authToken = req.headers['authorization'] || '';
 
     const config = {

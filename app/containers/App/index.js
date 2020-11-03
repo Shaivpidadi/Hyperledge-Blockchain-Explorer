@@ -27,7 +27,6 @@ const App = () => {
   const { userToken: auth } = useSelector(state => state.auth);
   const isTokenPresent = !!localStorage.getItem('userToken');
 
-  console.log(auth, isTokenPresent);
   useEffect(() => {
     const authorizationToken = localStorage.getItem('userToken');
     const token = `bearer ${authorizationToken}`;
@@ -39,7 +38,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('called');
     if (location.pathname !== '/login' && !auth) {
       history.push('/login');
     } else if (location.pathname === '/login' && auth && isTokenPresent) {
