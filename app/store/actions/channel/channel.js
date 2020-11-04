@@ -8,3 +8,12 @@ export const getCurrentChannelRequestSuccess = (payload) => ({
     type: actionLabels.GET_CURRENT_CHANNEL_REQUEST_SUCCESS,
     payload
 });
+
+export const getChannelListRequest = () => ({
+    type: actionLabels.GET_CHANNEL_LIST_REQUEST,
+});
+
+export const getChannelListRequestSuccess = (payload) => ({
+    type: actionLabels.GET_CHANNEL_LIST_REQUEST_SUCCESS,
+    payload
+});
