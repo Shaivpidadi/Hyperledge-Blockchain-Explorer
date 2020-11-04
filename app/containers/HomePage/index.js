@@ -24,6 +24,7 @@ import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest,
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 import axiosMain from '../../http/axios/axiosMain';
+import NeumorphicCard from '../../components/NeumorphicCard/NeumorphicCard';
 
 const SkeletonBlockCard = () => (
   <div style={{ display: 'flex', alignItems: 'center', marginTop: '25px' }}>
@@ -215,6 +216,15 @@ const HomePage = ({ history }) => {
               </Card.Section>
             </Card>
           )}
+      </div>
+
+      <div style={{ marginTop: '20px' }}>
+        <Card sectioned>
+          <Card.Header title="Blockchain Stats" />
+          <Card.Section>
+            <NeumorphicCard />
+          </Card.Section>
+        </Card>
       </div>
     </div>
   );
