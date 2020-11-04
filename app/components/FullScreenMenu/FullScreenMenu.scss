@@ -32,6 +32,9 @@ $transition--length: .8;
 	}
 }
 
+.hide-nav-content {
+	display: none;
+}
 .nav{
 	$width: calc(100vw - 160px);
 	$height: 100vh;

@@ -15,16 +15,21 @@ const FullScreenMenu = () => {
   let body;
   let menu;
   let menuItems;
+  let navContents;
 
   const init = () => {
     body = document.querySelector('body');
     menu = document.querySelector('.menu-icon');
     menuItems = document.querySelectorAll('.nav__list-item');
+    navContents = document.querySelector('.nav__content');
     applyListeners();
   }
 
   const applyListeners = () => {
-    menu?.addEventListener('click', () => toggleClass(body, 'nav-active'));
+    menu?.addEventListener('click', () => {
+      toggleClass(body, 'nav-active');
+      // toggleClass(navContents, 'hide-nav-content');
+    });
   }
 
   const toggleClass = (element, stringClass) => {
@@ -39,17 +44,22 @@ const FullScreenMenu = () => {
   }, []);
 
   const onLogoutClick = () => {
-    body = document.querySelector('body');
-    toggleClass(body, 'nav-active');
+    handleDomManuplation();
     dispatch(logoutRequest());
     dispatch(resetApp());
     localStorage.clear();
   }
 
-  const handleMenuClick = (route = '') => {
+  const handleDomManuplation = () => {
     body = document.querySelector('body');
-    history.push(`/${route}`);
+    // navContents = document.querySelector('.nav__content');
     toggleClass(body, 'nav-active');
+    // toggleClass(navContents, 'hide-nav-content');
+  }
+
+  const handleMenuClick = (route = '') => {
+    handleDomManuplation();
+    history.push(`/${route}`);
   }
 
   return (
@@ -61,7 +71,7 @@ const FullScreenMenu = () => {
       </div>
 
       <div className="nav">
-        <div className="nav__content">
+        <div className="nav__content hide-nav-content">
           <ul className="nav__list">
             <li className="nav__list-item" onClick={() => handleMenuClick()}> Dashboard </li>
             <li className="nav__list-item" onClick={() => handleMenuClick('networks')}>Network</li>
