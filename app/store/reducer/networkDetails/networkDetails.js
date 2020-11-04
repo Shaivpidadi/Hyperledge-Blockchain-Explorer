@@ -1,7 +1,8 @@
 import * as actionLabels from '../../actionLabels';
 
 const initialState = {
-  networkStats: {}
+  networkStats: {},
+  networkList: []
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +11,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         networkStats: action.payload,
+      };
+    }
+    case actionLabels.NETWORK_LIST_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        networkList: action.payload,
       };
     }
     default:

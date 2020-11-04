@@ -102,45 +102,6 @@ router.get('/status/:channelGenesisHash', async (req, res) => {
   }
 });
 
-router.get('/channel/curChannel', async (req, res) => {
-  try {
-    const authToken = req.headers['authorization'] || '';
-    const config = {
-      headers: {
-        Authorization: authToken,
-      },
-    };
-
-    const { data } = await explorer.get('api/curChannel', config);
-    res.send(data);
-  } catch ({ response }) {
-    sendResponse(res, response.status, false, response.statusText);
-  }
-});
-
-router.get(
-  '/channel/getChangeChannel/:channelGenesisHash',
-  async (req, res) => {
-    try {
-      const authToken = req.headers['authorization'] || '';
-      const { channelGenesisHash } = req.params;
-      const config = {
-        headers: {
-          Authorization: authToken,
-        },
-      };
-
-      const { data } = await explorer.get(
-        `api/channel/getChangeChannel/${channelGenesisHash}`,
-        config,
-      );
-      res.send(data);
-    } catch ({ response }) {
-      sendResponse(res, response.status, false, response.statusText);
-    }
-  },
-);
-
 router.get('/peer/:channelGenesisHash', async (req, res) => {
   try {
     const authToken = req.headers['authorization'] || '';
@@ -180,6 +141,46 @@ router.get('/chaincode/:channelGenesisHash', async (req, res) => {
     sendResponse(res, response.status, false, response.statusText);
   }
 });
+
+
+router.get('/channel/curChannel', async (req, res) => {
+  try {
+    const authToken = req.headers['authorization'] || '';
+    const config = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+
+    const { data } = await explorer.get('api/curChannel', config);
+    res.send(data);
+  } catch ({ response }) {
+    sendResponse(res, response.status, false, response.statusText);
+  }
+});
+
+router.get(
+  '/channel/getChangeChannel/:channelGenesisHash',
+  async (req, res) => {
+    try {
+      const authToken = req.headers['authorization'] || '';
+      const { channelGenesisHash } = req.params;
+      const config = {
+        headers: {
+          Authorization: authToken,
+        },
+      };
+
+      const { data } = await explorer.get(
+        `api/channel/getChangeChannel/${channelGenesisHash}`,
+        config,
+      );
+      res.send(data);
+    } catch ({ response }) {
+      sendResponse(res, response.status, false, response.statusText);
+    }
+  },
+);
 
 router.get('/block/blockActivity/:channelGenesisHash', async (req, res) => {
   try {
