@@ -142,13 +142,9 @@ const HomePage = ({ history }) => {
       </Card>
 
       <div style={{ marginTop: '20px', justifyContent: 'space-between', display: "flex" }}>
-        {Object.entries(networkStats).map((value) => {
-          if (isEverythingLoaded) {
-            return (<NeumorphicCard key={value[0]} title={value[0]} value={value[1]} />)
-          } else {
-            return <div style={{ width: '200px' }}><SkeletonDisplayText size="extraLarge" /></div>
-          }
-        }
+        {Object.entries(networkStats).map((value) => (
+          <NeumorphicCard key={value[0]} title={value[0]} value={value[1]} />
+        )
         )}
       </div>
 

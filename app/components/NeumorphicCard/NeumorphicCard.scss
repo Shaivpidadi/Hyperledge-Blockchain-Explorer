@@ -18,3 +18,10 @@
 		}
 	}
 }
+
+$breakpoint-tablet: 769px;
+@media (max-width: $breakpoint-tablet) {
+	.containerCard {
+		display: none;
+	}
+}
