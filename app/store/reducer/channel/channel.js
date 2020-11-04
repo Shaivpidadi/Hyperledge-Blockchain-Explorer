@@ -2,6 +2,7 @@ import * as actionLabels from '../../actionLabels';
 
 const initialState = {
   currentChannel: localStorage.getItem('currentChannel'),
+  channelList: []
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +16,7 @@ export default (state = initialState, action) => {
     case actionLabels.GET_CHANNEL_LIST_REQUEST_SUCCESS: {
       return {
         ...state,
-        currentChannel: action.payload,
+        channelList: action.payload,
       };
     }
     default:

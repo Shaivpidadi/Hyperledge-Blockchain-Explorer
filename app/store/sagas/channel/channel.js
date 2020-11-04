@@ -28,7 +28,7 @@ function* getChannelListRequestSaga() {
     yield put(showLoader());
     const response = yield axiosMain.get('/channels/info');
     if (response.status === 200) {
-      yield put(getChannelListRequestSuccess(response.data.currentChannel));
+      yield put(getChannelListRequestSuccess(response.data.channels));
       yield put(hideLoader());
     } else {
       yield put(hideLoader());
