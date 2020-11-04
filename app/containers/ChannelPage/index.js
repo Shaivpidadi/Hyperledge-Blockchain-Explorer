@@ -3,7 +3,7 @@ import { Card } from '@shopify/polaris';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ChannelDataTable from '../../components/DataTable/ChannelDataTable';
-import { getNetworkListRequest } from '../../store/actions';
+import { getChannelListRequest } from '../../store/actions';
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const ChannelPage = () => {
 
   useEffect(() => {
     if (!channelList.length) {
-      dispatch(getNetworkListRequest());
+      dispatch(getChannelListRequest());
     }
   }, [])
 
