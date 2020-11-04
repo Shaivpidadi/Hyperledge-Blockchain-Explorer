@@ -1,0 +1,20 @@
+.containerCard {
+	display: flex;
+	justify-content: space-between;
+	.neumorphic {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+		margin: .5em;
+		padding: 1em;
+    width: 200px;
+    height: auto;
+		background: #efeeee;
+		border-radius: 10px;
+		box-shadow: -6px -6px 16px #fff, 6px 6px 16px #d1cdc7;
+		&:active {
+			box-shadow: inset -6px -6px 16px #fff, inset 6px 6px 16px #d1cdc7;
+		}
+	}
+}

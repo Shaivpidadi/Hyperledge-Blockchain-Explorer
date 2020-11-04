@@ -5,7 +5,8 @@ import {
   SkeletonBodyText,
   SkeletonThumbnail,
   ButtonGroup,
-  Button
+  Button,
+  SkeletonDisplayText
 } from '@shopify/polaris';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -140,6 +141,17 @@ const HomePage = ({ history }) => {
         </Card.Section>
       </Card>
 
+      <div style={{ marginTop: '20px', justifyContent: 'space-between', display: "flex" }}>
+        {Object.entries(networkStats).map((value) => {
+          if (isEverythingLoaded) {
+            return (<NeumorphicCard key={value[0]} title={value[0]} value={value[1]} />)
+          } else {
+            return <div style={{ width: '200px' }}><SkeletonDisplayText size="extraLarge" /></div>
+          }
+        }
+        )}
+      </div>
+
       <div style={{ margin: '20px 0px', minHeight: '500px' }}>
         <Card>
           <Layout style={{ margin: '0px !important' }}>
@@ -201,7 +213,10 @@ const HomePage = ({ history }) => {
         </Card>
       </div>
 
-      <div style={{ marginTop: '2px' }}>
+
+      {/* Might be using this design in future */}
+
+      {/* <div style={{ marginTop: '2px' }}>
         {isEverythingLoaded ? (
           <BlockchainCard
             title="Blockchain Stats"
@@ -216,17 +231,9 @@ const HomePage = ({ history }) => {
               </Card.Section>
             </Card>
           )}
-      </div>
+      </div> */}
 
-      <div style={{ marginTop: '20px' }}>
-        <Card sectioned>
-          <Card.Header title="Blockchain Stats" />
-          <Card.Section>
-            <NeumorphicCard />
-          </Card.Section>
-        </Card>
-      </div>
-    </div>
+    </div >
   );
 };
 
