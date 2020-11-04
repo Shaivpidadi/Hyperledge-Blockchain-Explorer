@@ -11,7 +11,7 @@ $transition--length: .8;
 	height: $size;
 	width: $size;
 	position: fixed;
-	z-index:2;
+	z-index:99;
 	left: 50px;
 	top: 30px;
 	cursor: pointer;
@@ -38,7 +38,7 @@ $transition--length: .8;
 	$font--size--calc: calc(1vw + 10px);
 	$transition--easing: cubic-bezier(.77,0,.175,1);
 	position: fixed;
-	z-index:1;
+	z-index:99;
 	&:before,&:after{
 		content: "";
 		position: fixed;
@@ -47,7 +47,7 @@ $transition--length: .8;
 		background: rgba(#eaeaea, .2);
 		z-index: -1;
 		transition: transform $transition--easing $transition--length + s;
-		transform: translateX(0%) translateY(-110%);
+		transform: translateX(0%) translateY(-125%);
 	}
 	&:after{
 		background: rgba(#ffffff, 1);
