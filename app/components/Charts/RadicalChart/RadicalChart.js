@@ -39,6 +39,7 @@ const RadicalChart = ({ data }) => {
       outerRadius={140}
       barSize={10}
       data={data}
+      style={{ margin: 'auto' }}
     >
       <RadialBar
         className="radialBar"
