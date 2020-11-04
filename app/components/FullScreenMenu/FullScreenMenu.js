@@ -48,6 +48,7 @@ const FullScreenMenu = () => {
     dispatch(logoutRequest());
     dispatch(resetApp());
     localStorage.clear();
+    window.location.reload(false);
   }
 
   const handleDomManuplation = () => {
