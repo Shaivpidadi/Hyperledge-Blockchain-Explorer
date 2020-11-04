@@ -49,7 +49,7 @@ const App = () => {
     <div>
       <AppProvider i18n={enTranslations}>
         <Header />
-        <FullScreenMenu />
+        {(!!auth && isTokenPresent) && <FullScreenMenu />}
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route exact path="/" component={HomePage} />
