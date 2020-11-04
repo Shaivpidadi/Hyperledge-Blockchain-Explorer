@@ -34,7 +34,13 @@ const NetworkDataTable = ({ rowsData }) => {
       {
         Header: 'Unsigned',
         accessor: 'ledger_height_unsigned',
-        Cell: ({ value }) => value.toString()
+        Cell: ({ value }) => {
+          if (!!value) {
+            return value?.toString()
+          } else {
+            return '-'
+          }
+        }
       }
     ],
     [],
