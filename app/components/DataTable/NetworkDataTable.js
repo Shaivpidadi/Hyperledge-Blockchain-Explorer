@@ -42,7 +42,7 @@ const NetworkDataTable = ({ rowsData }) => {
 
   return (
     <DataTable
-      rowsData={rowsData?.peers}
+      rowsData={rowsData}
       columns={columns}
       onRowClick={(data) => console.log(data)}
       hideFilters

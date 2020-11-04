@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { networkDetailsRequestSuccess, showLoader, hideLoader, logoutRequestSuccess, networkListRequestSuccess } from '../../actions';
+import { networkDetailsRequestSuccess, showLoader, hideLoader, logoutRequestSuccess, getNetworkListRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -32,7 +32,7 @@ function* networkListRequestSaga() {
 
     const response = yield axiosMain.get(`/peer/${currentChannel}`);
     if (response.status === 200) {
-      yield put(networkListRequestSuccess(response.data));
+      yield put(getNetworkListRequestSuccess(response.data.peers));
       yield put(hideLoader());
     } else {
       yield put(hideLoader());
@@ -49,6 +49,6 @@ function* networkListRequestSaga() {
 export default function* rootsaga() {
   yield all([
     yield takeEvery(actionLabels.NETWORK_REQUEST, networkDetailsRequestSaga),
-    yield takeEvery(actionLabels.NETWORK_LIST_REQUEST, networkListRequestSaga)
+    yield takeEvery(actionLabels.GET_NETWORK_LIST_REQUEST, networkListRequestSaga)
   ]);
 }

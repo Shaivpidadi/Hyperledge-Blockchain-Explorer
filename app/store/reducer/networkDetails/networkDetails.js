@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
         networkStats: action.payload,
       };
     }
-    case actionLabels.NETWORK_LIST_REQUEST_SUCCESS: {
+    case actionLabels.GET_NETWORK_LIST_REQUEST_SUCCESS: {
       return {
         ...state,
         networkList: action.payload,

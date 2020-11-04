@@ -20,7 +20,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest, getNetworkListRequest } from '../../store/actions';
 import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 import axiosMain from '../../http/axios/axiosMain';
@@ -52,6 +52,7 @@ const HomePage = ({ history }) => {
       dispatch(getTransactionByOrgRequest());
       dispatch(getTransactionByHourRequest());
       dispatch(getTransactionByMinuteRequest());
+      dispatch(getNetworkListRequest());
     } else {
       dispatch(getCurrentChannelRequest())
     }

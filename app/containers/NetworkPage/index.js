@@ -2,26 +2,20 @@ import React, { useEffect, useMemo } from 'react';
 import { Card } from '@shopify/polaris';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getTransactionByOrgRequest, getBlockAndTransactionsListRequest } from '../../store/actions';
+import { getNetworkListRequest } from '../../store/actions';
 import NetworkDataTable from '../../components/DataTable/NetworkDataTable';
-
-import peerDetails from '../../../mock-data/peer-status.json';
 
 const NetworkPage = () => {
   const dispatch = useDispatch();
-  const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
+  const { networkList } = useSelector(state => state.networkStats);
 
   useEffect(() => {
-    if (!txsByOrg.length) {
-      dispatch(getTransactionByOrgRequest());
+    if (!networkList.length) {
+      dispatch(getNetworkListRequest());
     }
-  }, [txsByOrg]);
-
-  useEffect(() => {
-    dispatch(getBlockAndTransactionsListRequest());
   }, [])
 
-  const blockTxsListData = useMemo(() => blockTxsList, [blockTxsList]);
+  const networkPeersList = useMemo(() => networkList, [networkList]);
 
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
@@ -29,12 +23,11 @@ const NetworkPage = () => {
         <Card.Header title="Network" />
 
         <div style={{ marginTop: '25px' }}>
-          <NetworkDataTable rowsData={peerDetails} />
+          <NetworkDataTable rowsData={networkPeersList} />
         </div>
       </Card>
     </div>
   );
-
 }
 
 export default NetworkPage;

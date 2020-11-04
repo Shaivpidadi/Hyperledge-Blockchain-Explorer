@@ -9,11 +9,11 @@ export const networkDetailsRequestSuccess = (payload) => ({
   payload
 });
 
-export const networkListRequest = () => ({
-  type: actionLabels.NETWORK_LIST_REQUEST,
+export const getNetworkListRequest = () => ({
+  type: actionLabels.GET_NETWORK_LIST_REQUEST,
 });
 
-export const networkListRequestSuccess = (payload) => ({
-  type: actionLabels.NETWORK_LIST_REQUEST_SUCCESS,
+export const getNetworkListRequestSuccess = (payload) => ({
+  type: actionLabels.GET_NETWORK_LIST_REQUEST_SUCCESS,
   payload
 });
