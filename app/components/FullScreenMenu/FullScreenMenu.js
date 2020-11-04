@@ -67,7 +67,7 @@ const FullScreenMenu = () => {
             <li className="nav__list-item" onClick={() => handleMenuClick('block')}>Blocks</li>
             <li className="nav__list-item" onClick={() => handleMenuClick('transactions')}>Transactions</li>
             <li className="nav__list-item" onClick={() => handleMenuClick('channels')}>Channel</li>
-            <li className="nav__list-item" onClick={onLogoutClick}>Logout</li>
+            <li className="nav__list-item" onClick={() => onLogoutClick()}>Logout</li>
           </ul>
         </div>
       </div>
