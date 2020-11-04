@@ -71,7 +71,7 @@ const FullScreenMenu = () => {
       </div>
 
       <div className="nav">
-        <div className="nav__content hide-nav-content">
+        <div className="nav__content">
           <ul className="nav__list">
             <li className="nav__list-item" onClick={() => handleMenuClick()}> Dashboard </li>
             <li className="nav__list-item" onClick={() => handleMenuClick('networks')}>Network</li>
