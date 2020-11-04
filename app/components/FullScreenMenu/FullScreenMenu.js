@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import './FullScreenMenu.scss';
-import { logoutRequest } from '../../store/actions';
+import { logoutRequest, resetApp } from '../../store/actions';
 
 // Originally by -https://codepen.io/RSH87/pen/rmgYbo
 const FullScreenMenu = () => {
@@ -42,6 +42,7 @@ const FullScreenMenu = () => {
     body = document.querySelector('body');
     toggleClass(body, 'nav-active');
     dispatch(logoutRequest());
+    dispatch(resetApp());
     localStorage.clear();
   }
 

@@ -17,3 +17,7 @@ export const logoutRequest = () => ({
 export const logoutRequestSuccess = () => ({
   type: actionLabels.LOGOUT_REQUEST_SUCCESS
 });
+
+export const resetApp = () => ({
+  type: actionLabels.RESET_APP
+});
