@@ -113,7 +113,7 @@ router.get('/peer/:channelGenesisHash', async (req, res) => {
     };
 
     const { data } = await explorer.get(
-      `api/peer/${channelGenesisHash}`,
+      `api/peersStatus/${channelGenesisHash}`,
       config,
     );
     res.send(data);
