@@ -27,6 +27,6 @@ function* networkDetailsRequestSaga() {
 
 export default function* rootsaga() {
   yield all([
-    yield takeEvery(actionLabels.NETWORKLIST_REQUEST, networkDetailsRequestSaga),
+    yield takeEvery(actionLabels.NETWORK_REQUEST, networkDetailsRequestSaga),
   ]);
 }

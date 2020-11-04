@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionLabels.NETWORKLIST_REQUEST_SUCCESS: {
+    case actionLabels.NETWORK_REQUEST_SUCCESS: {
       return {
         ...state,
         networkStats: action.payload,
