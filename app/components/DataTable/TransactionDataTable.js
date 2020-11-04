@@ -54,7 +54,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       onDateChange={onDateChange}
       dropdownOptions={dropdownOptions}
       onSelectChange={onSelectChange}
-      hideFilters
+      hideFilters={hideFilters}
     />
   )
 }
