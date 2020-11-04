@@ -39,8 +39,8 @@ const FullScreenMenu = () => {
   }, []);
 
   const onLogoutClick = () => {
-    // body = document.querySelector('body');
-    // toggleClass(body, 'nav-active');
+    body = document.querySelector('body');
+    toggleClass(body, 'nav-active');
     dispatch(logoutRequest());
     localStorage.clear();
   }
