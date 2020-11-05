@@ -16,6 +16,7 @@ const TransactionInfo = () => {
     dispatch(getTransactionDetailsRequest({ txId }))
   }, [txId]);
 
+  const isEverythingLoaded = !Object.keys(txDetails).length && !!txId;
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
@@ -26,7 +27,7 @@ const TransactionInfo = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Card.Header title={`Transaction #${txDetails?.txhash}`} />
+            <Card.Header title={`Transaction #${!isEverythingLoaded ? txDetails?.txhash : '...'}`} />
             <Card.Header title="2020-09-05" />
           </div>
 
@@ -37,25 +38,30 @@ const TransactionInfo = () => {
                   <BlockchainCardItem
                     label="Transaction ID"
                     value={txDetails?.txhash}
+                    isLoading={isEverythingLoaded}
                   />
-                  <BlockchainCardItem label="Validation Code" value={txDetails?.validation_code} />
+                  <BlockchainCardItem label="Validation Code" value={txDetails?.validation_code} isLoading={isEverythingLoaded} />
                   <BlockchainCardItem
                     label="Payload Hash"
                     value={txDetails?.payload_proposal_hash}
+                    isLoading={isEverythingLoaded}
                   />
-                  <BlockchainCardItem label="Creator MSP" value={txDetails?.creator_msp_id} />
+                  <BlockchainCardItem label="Creator MSP" value={txDetails?.creator_msp_id} isLoading={isEverythingLoaded} />
                   <BlockchainCardItem
                     label="Endoser"
                     value={txDetails?.endorser_msp_id}
+                    isLoading={isEverythingLoaded}
                   />
-                  <BlockchainCardItem label="Chaincode" value={txDetails?.chaincodename} />
+                  <BlockchainCardItem label="Chaincode" value={txDetails?.chaincodename} isLoading={isEverythingLoaded} />
                   <BlockchainCardItem
                     label="Type"
                     value={txDetails?.type}
+                    isLoading={isEverythingLoaded}
                   />
                   <BlockchainCardItem
                     label="Time"
                     value={txDetails?.createdt}
+                    isLoading={isEverythingLoaded}
                   />
                 </div>
               </Card>
