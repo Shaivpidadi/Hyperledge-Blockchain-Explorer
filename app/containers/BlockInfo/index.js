@@ -51,18 +51,19 @@ const BlockInfo = () => {
     history.push(`/tx/${txhash}`)
   };
 
+  const isEverythingLoaded = !blockTransactions.length && !Object.keys(blockDetails).length;
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
         <Heading style={{ fontSize: '40px' }}>BlockInfo</Heading>
         <div style={{ marginTop: '40px' }}>
           <BlockchainCardItem label="Channel Name" value="shaiv" />
-          <BlockchainCardItem label="Block Number" value={blockDetails?.number} />
+          <BlockchainCardItem label="Block Number" value={blockDetails?.number} isLoading={isEverythingLoaded} />
           <BlockchainCardItem
             label="Created at"
             value="2020-08-31T1210:41.913Z"
           />
-          <BlockchainCardItem label="# of Txs" value={blockDetails?.transactions?.length} />
+          <BlockchainCardItem label="# of Txs" value={blockDetails?.transactions?.length} isLoading={isEverythingLoaded} />
           <BlockchainCardItem
             label="Block Hash"
             value="csui12t4yuuidasdaoiuq880j"
@@ -70,17 +71,19 @@ const BlockInfo = () => {
           <BlockchainCardItem
             label="Data Hash"
             value={blockDetails?.data_hash}
+            isLoading={isEverythingLoaded}
           />
           <BlockchainCardItem
             label="Prehash"
             value={blockDetails?.previous_hash}
+            isLoading={isEverythingLoaded}
           />
         </div>
       </Card>
       <div style={{ marginTop: '20px' }}>
         <Card>
           <div style={{ padding: '20px' }}>
-            <Heading>{`All Transaction From Block #${blockId}`}</Heading>
+            <Heading>{`All Transaction From Block #${!isEverythingLoaded ? blockId : ''}`}</Heading>
           </div>
           <div style={{ padding: '20px' }}>
             <TransactionDataTable
@@ -90,7 +93,7 @@ const BlockInfo = () => {
               dropdownOptions={options}
               onSelectChange={(selectedOrgs) => console.log({ selectedOrgs })}
               onResetClick={() => { console.log('reset clicked') }}
-              isLoading={!blockTransactions.length}
+              isLoading={isEverythingLoaded}
               hideFilters
             />
           </div>
