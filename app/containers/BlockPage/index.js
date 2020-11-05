@@ -71,6 +71,7 @@ const BlockPage = () => {
             dropdownOptions={options}
             onSelectChange={onSelectChange}
             onResetClick={onResetClick}
+            isLoading={!blockTxsListData.length}
           />
         </div>
       </Card>

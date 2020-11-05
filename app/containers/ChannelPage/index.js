@@ -23,7 +23,7 @@ const ChannelPage = () => {
         <Card.Header title="Network" />
 
         <div style={{ marginTop: '25px' }}>
-          <ChannelDataTable rowsData={channelListData} />
+          <ChannelDataTable rowsData={channelListData} isLoading={!channelListData.length} />
         </div>
       </Card>
     </div>

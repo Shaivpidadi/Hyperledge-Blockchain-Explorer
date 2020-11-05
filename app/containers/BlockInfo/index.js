@@ -90,6 +90,7 @@ const BlockInfo = () => {
               dropdownOptions={options}
               onSelectChange={(selectedOrgs) => console.log({ selectedOrgs })}
               onResetClick={() => { console.log('reset clicked') }}
+              isLoading={!blockTransactions.length}
               hideFilters
             />
           </div>

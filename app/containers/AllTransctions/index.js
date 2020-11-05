@@ -71,6 +71,7 @@ const AllTransctions = () => {
           dropdownOptions={options}
           onSelectChange={onSelectChange}
           onResetClick={onResetClick}
+          isLoading={!txsListData.length}
         />
       </Card>
     </div>

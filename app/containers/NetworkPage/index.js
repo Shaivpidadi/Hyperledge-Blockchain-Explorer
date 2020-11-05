@@ -23,7 +23,7 @@ const NetworkPage = () => {
         <Card.Header title="Network" />
 
         <div style={{ marginTop: '25px' }}>
-          <NetworkDataTable rowsData={networkPeersList} />
+          <NetworkDataTable rowsData={networkPeersList} isLoading={!networkPeersList.length} />
         </div>
       </Card>
     </div>

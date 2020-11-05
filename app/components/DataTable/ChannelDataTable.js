@@ -2,7 +2,7 @@ import React from 'react';
 import DataTable from './DataTable';
 import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 
-const ChannelDataTable = ({ rowsData }) => {
+const ChannelDataTable = ({ rowsData, isLoading }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -36,6 +36,7 @@ const ChannelDataTable = ({ rowsData }) => {
       rowsData={rowsData}
       columns={columns}
       onRowClick={(data) => console.log(data)}
+      isLoading={isLoading}
       hideFilters
     />
   )

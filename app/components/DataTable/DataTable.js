@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import styled from 'styled-components';
-import { Button, TextField } from '@shopify/polaris';
+import { Button, TextField, SkeletonBodyText } from '@shopify/polaris';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select from "react-select";
 
@@ -52,7 +52,19 @@ const TableStyles = styled.div`
   }
 `;
 
-const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange, onResetClick, hideFilters }) => {
+const TableDataLoadingState = ({ length }) => {
+  return (Array(length).fill(0).map((_, idx) => (
+    <tr className='loading' key={idx}>
+      {
+        Array(length).fill(0).map((_, idx) => (
+          <td key={idx}> <SkeletonBodyText lines={2} /></td>
+        ))
+      }
+    </tr>
+  )))
+}
+
+const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOptions, onSelectChange, onResetClick, hideFilters, isLoading }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const {
@@ -170,41 +182,43 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
         </thead>
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
-          <AnimatePresence>
-            {// Loop over the table rows
-              page.map(row => {
-                // Prepare the row for display
-                prepareRow(row);
-                return (
-                  // Apply the row props
-                  <motion.tr
-                    {...row.getRowProps({
-                      layoutTransition: spring,
-                      exit: { opacity: 0, maxHeight: 0 },
-                    })}
-                    // onClick={() => console.log(row.values)}
-                    onClick={() => onRowClick(row.values)}
-                    className="flip-horizontal-top"
-                  >
-                    {// Loop over the rows cells
-                      row.cells.map(cell => {
-                        // Apply the cell props
-                        return (
-                          <motion.td
-                            {...cell.getCellProps({
-                              layoutTransition: spring,
-                            })}
-                            className="highlight"
-                          >
-                            {// Render the cell contents
-                              cell.render('Cell')}
-                          </motion.td>
-                        );
+          {isLoading ? <TableDataLoadingState length={columns.length} /> :
+            <AnimatePresence>
+              {// Loop over the table rows
+                page.map(row => {
+                  // Prepare the row for display
+                  prepareRow(row);
+
+                  return (
+                    // Apply the row props
+                    <motion.tr
+                      {...row.getRowProps({
+                        layoutTransition: spring,
+                        exit: { opacity: 0, maxHeight: 0 },
                       })}
-                  </motion.tr>
-                );
-              })}
-          </AnimatePresence>
+                      // onClick={() => console.log(row.values)}
+                      onClick={() => onRowClick(row.values)}
+                      className="flip-horizontal-top"
+                    >
+                      {// Loop over the rows cells
+                        row.cells.map(cell => {
+                          // Apply the cell props
+                          return (
+                            <motion.td
+                              {...cell.getCellProps({
+                                layoutTransition: spring,
+                              })}
+                              className="highlight"
+                            >
+                              {// Render the cell contents
+                                cell.render('Cell')}
+                            </motion.td>
+                          );
+                        })}
+                    </motion.tr>
+                  );
+                })}
+            </AnimatePresence>}
         </tbody>
       </table>
 

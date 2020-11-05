@@ -2,7 +2,7 @@ import React from 'react';
 import DataTable from './DataTable';
 import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 
-const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange, onResetClick }) => {
+const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange, onResetClick, isLoading }) => {
 
   const columns = React.useMemo(
     () => [
@@ -54,6 +54,7 @@ const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions,
       dropdownOptions={dropdownOptions}
       onSelectChange={onSelectChange}
       onResetClick={onResetClick}
+      isLoading={isLoading}
     />
   )
 }

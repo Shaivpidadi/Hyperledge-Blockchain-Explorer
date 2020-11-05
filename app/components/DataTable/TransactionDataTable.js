@@ -4,7 +4,7 @@ import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
 import moment from 'moment';
 import { Tag } from '@shopify/polaris';
 
-const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, dropdownOptions, onSelectChange, hideFilters }) => {
+const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, dropdownOptions, onSelectChange, hideFilters, isLoading }) => {
 
   const columns = React.useMemo(
     () => [
@@ -54,6 +54,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       onDateChange={onDateChange}
       dropdownOptions={dropdownOptions}
       onSelectChange={onSelectChange}
+      isLoading={isLoading}
       hideFilters={hideFilters}
     />
   )
