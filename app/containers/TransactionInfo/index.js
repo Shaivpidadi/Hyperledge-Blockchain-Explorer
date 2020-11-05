@@ -27,7 +27,7 @@ const TransactionInfo = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Card.Header title={`Transaction #${!isEverythingLoaded ? txDetails?.txhash : '...'}`} />
+            <Card.Header title={`Transaction ${!isEverythingLoaded ? `#${txDetails?.txhash.substring(0, 8)}...` : '...'}`} />
             <Card.Header title="2020-09-05" />
           </div>
 
