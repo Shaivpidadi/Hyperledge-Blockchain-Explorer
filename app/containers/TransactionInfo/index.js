@@ -49,8 +49,10 @@ const TransactionInfo = () => {
                   <BlockchainCardItem label="Creator MSP" value={txDetails?.creator_msp_id} isLoading={isEverythingLoaded} />
                   <BlockchainCardItem
                     label="Endoser"
-                    value={txDetails?.endorser_msp_id}
+                    value={!!txDetails?.endorser_msp_id ? JSON.parse(txDetails?.endorser_msp_id?.replace(/{/g, '[').replace(/}/g, ']')) : ''}
                     isLoading={isEverythingLoaded}
+                    valueAsTag
+                    isArray
                   />
                   <BlockchainCardItem label="Chaincode" value={txDetails?.chaincodename} isLoading={isEverythingLoaded} />
                   <BlockchainCardItem
