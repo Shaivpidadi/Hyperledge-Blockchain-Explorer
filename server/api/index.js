@@ -172,7 +172,7 @@ router.get(
       };
 
       const { data } = await explorer.get(
-        `api/channel/getChangeChannel/${channelGenesisHash}`,
+        `api/changeChannel/${channelGenesisHash}`,
         config,
       );
       res.send(data);
