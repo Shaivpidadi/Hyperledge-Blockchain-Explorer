@@ -17,7 +17,7 @@ const style = {
 };
 
 const CustomTooltip = ({ active, payload }) => {
-  if (active) {
+  if (active && !!payload) {
     return (
       <div className="custom-tooltip">
         <p className="label">{`Org : ${payload[0].payload.name}`}</p>

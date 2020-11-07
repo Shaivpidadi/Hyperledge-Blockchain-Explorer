@@ -61,7 +61,7 @@ const ExplorerBarChart = ({ width, height, onBarClick, data }) => {
               x="463.26"
               y="16.205882352941174"
               width={10}
-              height={height}
+              height={height.toString()}
               fill="#FFE9B5"
             />
           }
