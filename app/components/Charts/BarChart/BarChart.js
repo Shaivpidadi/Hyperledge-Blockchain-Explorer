@@ -73,7 +73,7 @@ const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div className="custom-tooltip">
-        <p className="label">{`Block : ${payload[0].value}`}</p>
+        {/* <p className="label">{`Block : ${payload[0].value}`}</p> */}
         <p className="label">{`Transaction : ${payload[0]?.payload.pv}`}</p>
       </div>
     );
