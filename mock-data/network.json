@@ -1,8 +1,0 @@
-{
-  "networkList": [
-    {
-      "name": "global-network",
-      "authEnabled": true
-    }
-  ]
-}

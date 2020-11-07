@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DataTable from '../../components/DataTable/DataTable';
 import BlockchainCardItem from '../../components/BlockchainCardItem';
-import fakeData from '../../components/DataTable/dummyData';
 import { getBlockDetailsRequest, getTransactionByOrgRequest } from '../../store/actions';
 import TransactionDataTable from '../../components/DataTable/TransactionDataTable';
 

@@ -6,23 +6,17 @@ import {
   SkeletonThumbnail,
   ButtonGroup,
   Button,
-  SkeletonDisplayText
 } from '@shopify/polaris';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ExplorerBarChart from '../../components/Charts/BarChart/BarChart';
-import { Dropdown } from '../../components/Dropdown/Dropdown';
-import BlockchainCard from '../../components/BlockchainCard/BlockchainCard';
 import SingleBlockCard from '../../components/SingleBlockCard/SingleBlockCard';
 import HiddenScroll from '../../components/HiddenScroll/HiddenScroll';
 import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
-// import blockList from '../../../mock-data/blockList.json';
-import txByOrg from '../../../mock-data/txByOrg.json';
 import getOrgColor from '../../components/Charts/getOrgColor';
 
 import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest, getNetworkListRequest, getChannelListRequest } from '../../store/actions';
-import LoadingLayout from '../../components/LoadingLayout/LoadingLayout';
 import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 import axiosMain from '../../http/axios/axiosMain';
 import NeumorphicCard from '../../components/NeumorphicCard/NeumorphicCard';

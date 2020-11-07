@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, SkeletonBodyText } from '@shopify/polaris';
+import { Card } from '@shopify/polaris';
 
 import BlockchainCardItem from '../BlockchainCardItem';
-import networkStats from '../../../mock-data/network-stats.json';
 
 const BlockchainCard = ({ title, cardItems }) => {
   return (
@@ -16,7 +15,7 @@ const BlockchainCard = ({ title, cardItems }) => {
           flexWrap: 'wrap',
         }}
       >
-        {Object.keys(networkStats).map(key => (
+        {Object.keys(cardItems).map(key => (
           <BlockchainCardItem
             key={key}
             label={key}

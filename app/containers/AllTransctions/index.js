@@ -3,7 +3,6 @@ import { Card } from '@shopify/polaris';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import fakeData from '../../components/DataTable/dummyData';
 import TransactionDataTable from '../../components/DataTable/TransactionDataTable';
 import { getTransactionByOrgRequest, getTransactionListRequest } from '../../store/actions';
 

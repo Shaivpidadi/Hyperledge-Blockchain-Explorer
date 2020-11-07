@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Select from "react-select";
 
 import './DataTable.scss';
-import fakeData from './dummyData';
 import Calender from '../Calender/Calender';
 
 const TableStyles = styled.div`
