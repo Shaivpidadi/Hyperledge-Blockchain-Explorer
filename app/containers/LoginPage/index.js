@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import Select from "react-select";
 
 import { loginRequest } from '../../store/actions';
 import './LoginPage.scss';
 
 const LoginPage = () => {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
   useEffect(() => {
     window.$(function () {
@@ -35,8 +36,8 @@ const LoginPage = () => {
   })
   const dispatch = useDispatch();
 
-  const submitLogin = () => {
-    dispatch(loginRequest(values));
+  const submitLogin = (data) => {
+    dispatch(loginRequest({ ...data, network: data.network.value }));
   };
 
   watch("network", "user", "password");
@@ -55,12 +56,22 @@ const LoginPage = () => {
               <div className="formContainer">
 
                 <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
-                  <p>NETWORK</p>
-                  <input
+                  <p style={{ marginBottom: '10px' }}>NETWORK</p>
+                  <Controller
                     name="network"
-                    type="text"
-                    autoComplete="off"
-                    ref={register({ required: true })}
+                    control={control}
+                    defaultValue={false}
+                    rules={{ required: true }}
+                    render={props =>
+                      <Select
+                        options={[
+                          { value: 'network1', label: 'network1' },
+                          { value: 'network3', label: 'network3' },
+                          { value: 'network2', label: 'network2' }
+                        ]}
+                        onChange={value => props.onChange(value)}
+                      />
+                    }
                   />
                   {errors.network && <p className="error">Network is required</p>}
                 </div>
