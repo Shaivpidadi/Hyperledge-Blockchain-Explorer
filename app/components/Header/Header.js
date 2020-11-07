@@ -14,7 +14,6 @@ const Header = () => {
   const { channelList, currentChannel } = useSelector(state => state.channel);
   const localCurrentChannel = localStorage.getItem('currentChannel');
 
-  // console.log({ localCurrentChannel })
   useEffect(() => {
     if (!channelList.length) {
       dispatch(getChannelListRequest());

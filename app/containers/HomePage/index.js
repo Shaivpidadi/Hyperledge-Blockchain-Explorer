@@ -111,13 +111,13 @@ const HomePage = ({ history }) => {
               TX / Hour
             </Button>
 
-            <Button
+            {/* <Button
               onClick={handleTxMinuteAction}
               disabled={selectedTransactionChart === 'TX / Minute'}
               outline
             >
               TX / Minute
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Card.Header>
         <Card.Section>
