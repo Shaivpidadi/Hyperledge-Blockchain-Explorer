@@ -48,7 +48,7 @@ const App = () => {
   return (
     <div>
       <AppProvider i18n={enTranslations}>
-        <Header />
+        {(!!auth && isTokenPresent) && <Header />}
         {(!!auth && isTokenPresent) && <FullScreenMenu />}
         <Switch>
           <Route path="/login" component={LoginPage} />
