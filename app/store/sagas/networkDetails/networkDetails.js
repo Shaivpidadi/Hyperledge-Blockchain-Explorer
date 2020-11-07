@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { all, takeEvery, put } from 'redux-saga/effects';
-import { networkDetailsRequestSuccess, showLoader, hideLoader, logoutRequestSuccess, getNetworkListRequestSuccess } from '../../actions';
+import { networkDetailsRequestSuccess, showLoader, hideLoader, logoutRequestSuccess, getNetworkListRequestSuccess, getAuthNetworkListRequest, getAuthNetworkListRequestSuccess } from '../../actions';
 import * as actionLabels from '../../actionLabels';
 import axiosMain from '../../../http/axios/axiosMain';
 
@@ -46,9 +46,26 @@ function* networkListRequestSaga() {
   }
 }
 
+function* getAuthNetworkListRequestSaga() {
+  try {
+    yield put(showLoader());
+
+    const response = yield axiosMain.get('/networkList');
+    if (response.status === 200) {
+      yield put(getAuthNetworkListRequestSuccess(response.data.data.networkList));
+      yield put(hideLoader());
+    } else {
+      yield put(hideLoader());
+    }
+  } catch (error) {
+    yield put(hideLoader());
+  }
+}
+
 export default function* rootsaga() {
   yield all([
     yield takeEvery(actionLabels.NETWORK_REQUEST, networkDetailsRequestSaga),
-    yield takeEvery(actionLabels.GET_NETWORK_LIST_REQUEST, networkListRequestSaga)
+    yield takeEvery(actionLabels.GET_NETWORK_LIST_REQUEST, networkListRequestSaga),
+    yield takeEvery(actionLabels.GET_AUTH_NETWORK_LIST_REQUEST, getAuthNetworkListRequestSaga)
   ]);
 }

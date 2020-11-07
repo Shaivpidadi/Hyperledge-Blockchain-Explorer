@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 
-import { loginRequest } from '../../store/actions';
+import { loginRequest, getAuthNetworkListRequest } from '../../store/actions';
 import './LoginPage.scss';
 
 const LoginPage = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
+  const dispatch = useDispatch();
+  const { authNetworkList } = useSelector(state => state.networkStats);
 
   useEffect(() => {
+    if (!authNetworkList.length) {
+      dispatch(getAuthNetworkListRequest());
+    }
+
     window.$(function () {
       window.$('#container').append('<style>#container, .acceptContainer:before, #logoContainer:before { center fixed }');
 
@@ -34,14 +40,22 @@ const LoginPage = () => {
       }, 10)
     });
   })
-  const dispatch = useDispatch();
 
   const submitLogin = (data) => {
     dispatch(loginRequest({ ...data, network: data.network.value }));
   };
 
+  const networkList = useMemo(() => {
+    return authNetworkList.map(({ name }) => ({
+      label: name,
+      value: name
+    }));
+  }, [authNetworkList]);
+
+  console.log({ authNetworkList });
+  console.log({ networkList });
+
   watch("network", "user", "password");
-  console.log({ errors });
   return (
     <div className="container">
 
@@ -64,11 +78,7 @@ const LoginPage = () => {
                     rules={{ required: true }}
                     render={props =>
                       <Select
-                        options={[
-                          { value: 'network1', label: 'network1' },
-                          { value: 'network3', label: 'network3' },
-                          { value: 'network2', label: 'network2' }
-                        ]}
+                        options={networkList}
                         onChange={value => props.onChange(value)}
                       />
                     }
