@@ -160,7 +160,7 @@ router.get('/channel/curChannel', async (req, res) => {
 });
 
 router.get(
-  '/channel/getChangeChannel/:channelGenesisHash',
+  '/channel/changeChannel/:channelGenesisHash',
   async (req, res) => {
     try {
       const authToken = req.headers['authorization'] || '';

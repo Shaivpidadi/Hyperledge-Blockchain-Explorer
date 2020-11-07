@@ -17,3 +17,14 @@ export const getChannelListRequestSuccess = (payload) => ({
     type: actionLabels.GET_CHANNEL_LIST_REQUEST_SUCCESS,
     payload
 });
+
+export const changeChannelRequest = (payload) => ({
+    type: actionLabels.CHANGE_CHANNEL_REQUEST,
+    payload
+});
+
+export const changeChannelRequestSuccess = (payload) => ({
+    type: actionLabels.CHANGE_CHANNEL_REQUEST_SUCCESS,
+    payload
+});
+

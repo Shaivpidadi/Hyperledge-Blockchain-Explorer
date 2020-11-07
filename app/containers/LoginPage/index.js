@@ -52,9 +52,6 @@ const LoginPage = () => {
     }));
   }, [authNetworkList]);
 
-  console.log({ authNetworkList });
-  console.log({ networkList });
-
   watch("network", "user", "password");
   return (
     <div className="container">

@@ -19,6 +19,12 @@ export default (state = initialState, action) => {
         channelList: action.payload,
       };
     }
+    case actionLabels.CHANGE_CHANNEL_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        currentChannel: action.payload
+      };
+    }
     default:
       return state;
   }
