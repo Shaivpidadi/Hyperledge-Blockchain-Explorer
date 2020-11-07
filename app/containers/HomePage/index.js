@@ -16,7 +16,7 @@ import RadicalChart from '../../components/Charts/RadicalChart/RadicalChart';
 
 import getOrgColor from '../../components/Charts/getOrgColor';
 
-import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest, getNetworkListRequest, getChannelListRequest } from '../../store/actions';
+import { networkDetailsRequest, getBlocklistRequest, getTransactionByOrgRequest, getTransactionByHourRequest, getTransactionByMinuteRequest, getCurrentChannelRequest, getNetworkListRequest, getChannelListRequest, getBlockAndTransactionsListRequest } from '../../store/actions';
 import SetTokenInterval from '../../hoc/SetTokenHeader/SetTokenHeader';
 import axiosMain from '../../http/axios/axiosMain';
 import NeumorphicCard from '../../components/NeumorphicCard/NeumorphicCard';
@@ -36,7 +36,7 @@ const HomePage = ({ history }) => {
   const [selectedTransactionChart, updateSelectedTransactionChart] = useState('TX / Hour')
   const { networkStats } = useSelector(state => state.networkStats);
   const { blockList } = useSelector(state => state.block);
-  const { txsByOrg, txsByHour, txsByMinute } = useSelector(state => state.transaction);
+  const { txsByOrg, txsByHour, txsByMinute, blockTxsList } = useSelector(state => state.transaction);
   const { currentChannel } = useSelector(state => state.channel);
 
   const dispatch = useDispatch();
@@ -50,6 +50,7 @@ const HomePage = ({ history }) => {
       dispatch(getTransactionByMinuteRequest());
       dispatch(getNetworkListRequest());
       dispatch(getChannelListRequest());
+      dispatch(getBlockAndTransactionsListRequest());
     } else {
       dispatch(getCurrentChannelRequest())
     }
@@ -90,7 +91,7 @@ const HomePage = ({ history }) => {
     return txsData;
   }, [txsByHour, txsByMinute, selectedTransactionChart]);
 
-  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg && !!txsChartData;
+  const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg && !!txsChartData && !!blockTxsList;
 
   return (
     <div style={{ marginTop: '40px' }}>
@@ -154,7 +155,7 @@ const HomePage = ({ history }) => {
                 >
                   <HiddenScroll height="400px">
                     {isEverythingLoaded ? (
-                      blockList.map(
+                      blockTxsList.map(
                         ({
                           blockhash,
                           blocknum,
