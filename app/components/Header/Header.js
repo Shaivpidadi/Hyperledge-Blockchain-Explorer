@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Avatar, TextField } from '@shopify/polaris';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select';
 
+import { getChannelListRequest } from '../../store/actions';
 import './Header.scss';
+
 const Header = () => {
   const [searchValue, setSeachValue] = useState('');
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { channelList } = useSelector(state => state.channel);
+
+  useEffect(() => {
+    if (!channelList.length) {
+      dispatch(getChannelListRequest());
+    }
+  }, []);
+
+  const channelListOptions = useMemo(() => {
+    return channelList.map((channelDetails) => ({
+      ...channelDetails,
+      label: channelDetails.channelname,
+      value: channelDetails.channelname
+    }))
+  }, [channelList]);
+
+  console.log({ channelList })
+
   return (
     <div
       className="Header"
@@ -19,7 +42,9 @@ const Header = () => {
         />
       </div>
 
-      <div style={{ width: '350px' }}>
+      {/* Temporary Removing global search */}
+
+      {/* <div style={{ width: '350px' }}>
         <TextField
           className="explorerSearch"
           type="search"
@@ -33,8 +58,15 @@ const Header = () => {
           role="combobox"
           aria-label="Search Explorer"
         />
+    </div> */}
+
+      <div style={{ width: '350px', zIndex: 20 }}>
+        <Select
+          onChange={(value) => console.log(value)}
+          options={channelListOptions}
+        />
       </div>
-    </div>
+    </div >
   );
 };
 
