@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Button, FormLayout, TextField } from '@shopify/polaris';
+import { FormLayout } from '@shopify/polaris';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
-import $ from 'jquery';
 
 import { loginRequest } from '../../store/actions';
 import './LoginPage.scss';
@@ -46,7 +45,6 @@ const LoginPage = () => {
 
   return (
     <div className="container">
-      {/* <h1>Login</h1> */}
 
       <div id="containerLogin">
         <div id="inviteContainer">
@@ -55,7 +53,6 @@ const LoginPage = () => {
             <img className="text" src={require('../../assets/images/Blockchain.svg')} />
           </div>
           <div className="acceptContainer">
-            {/* <form> */}
             <FormLayout>
               <div className="formContainer">
 
@@ -69,7 +66,7 @@ const LoginPage = () => {
                   />
                 </div>
 
-                <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
+                <div className="formDiv" style={{ transitionDelay: '0.4s' }}>
                   <p>USER</p>
                   <input
                     type="email"
@@ -79,7 +76,7 @@ const LoginPage = () => {
                   />
                 </div>
 
-                <div className="formDiv" style={{ transitionDelay: '0.4s' }}>
+                <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
                   <p>PASSWORD</p>
                   <input
                     type="password"
@@ -89,39 +86,15 @@ const LoginPage = () => {
                   />
                 </div>
 
-                <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
+                <div className="formDiv" style={{ transitionDelay: '0.8s' }}>
                   <button className="acceptBtn" type="submit" onClick={() => submitLogin(values)}>Login</button>
                 </div>
 
               </div>
             </FormLayout>
-            {/* </form> */}
           </div>
         </div>
       </div>
-
-      {/* <FormLayout>
-        <TextField
-          name="network"
-          label="Network"
-          value={values?.network}
-          onChange={value => setValues({ ...values, network: value })}
-        />
-        <TextField
-          name="user"
-          label="User"
-          value={values?.user}
-          onChange={value => setValues({ ...values, user: value })}
-        />
-        <TextField
-          name="password"
-          type="password"
-          label="Password"
-          value={values?.password}
-          onChange={value => setValues({ ...values, password: value })}
-        />
-        <Button onClick={() => submitLogin(values)}>Login</Button>
-      </FormLayout> */}
     </div>
   );
 };
