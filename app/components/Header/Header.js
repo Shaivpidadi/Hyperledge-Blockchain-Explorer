@@ -14,7 +14,7 @@ const Header = () => {
   const { channelList, currentChannel } = useSelector(state => state.channel);
   const localCurrentChannel = localStorage.getItem('currentChannel');
 
-  console.log({ localCurrentChannel })
+  // console.log({ localCurrentChannel })
   useEffect(() => {
     if (!channelList.length) {
       dispatch(getChannelListRequest());
@@ -35,9 +35,8 @@ const Header = () => {
     localStorage.setItem('currentChannel', channel_genesis_hash);
   })
 
-  const getDefaultChannel = useMemo(() => channelList.find(({ channel_genesis_hash }) => localCurrentChannel === channel_genesis_hash), [currentChannel, localCurrentChannel])
+  const getDefaultChannel = channelList.find(({ channel_genesis_hash }) => localCurrentChannel === channel_genesis_hash);
 
-  console.log({ getDefaultChannel })
   return (
     <div
       className="Header"
@@ -69,9 +68,9 @@ const Header = () => {
         />
     </div> */}
 
-      <div style={{ width: '350px', zIndex: 20 }}>
+      <div style={{ width: '350px', zIndex: 19 }}>
         <Select
-          defaultValue={getDefaultChannel?.channelname}
+          defaultValue={!!getDefaultChannel ? getDefaultChannel.channelname : ''}
           onChange={handleChannelChange}
           options={channelListOptions}
         />
