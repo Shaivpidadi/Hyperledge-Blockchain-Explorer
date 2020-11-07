@@ -6,11 +6,13 @@ import Select from "react-select";
 
 import { loginRequest, getAuthNetworkListRequest } from '../../store/actions';
 import './LoginPage.scss';
+import Loader from '../../components/Loader/Loader';
 
 const LoginPage = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
   const dispatch = useDispatch();
   const { authNetworkList } = useSelector(state => state.networkStats);
+  const { loader: isLoading } = useSelector(state => state.loader);
 
   useEffect(() => {
     if (!authNetworkList.length) {
@@ -39,7 +41,7 @@ const LoginPage = () => {
         }, 1000)
       }, 10)
     });
-  })
+  }, [])
 
   const submitLogin = (data) => {
     dispatch(loginRequest({ ...data, network: data.network.value }));
@@ -106,11 +108,12 @@ const LoginPage = () => {
                 </div>
 
                 <div className="formDiv" style={{ transitionDelay: '0.8s' }}>
-                  <button className="acceptBtn" type="submit">Login</button>
+                  <button className="acceptBtn" type="submit" disabled={isLoading}>Login</button>
                 </div>
 
               </div>
             </form>
+            {isLoading && <Loader />}
           </div>
         </div>
       </div>

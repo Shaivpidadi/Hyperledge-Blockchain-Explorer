@@ -3,8 +3,8 @@ import './Loader.scss';
 
 const Loader = () => {
   return (
-    <div class="loadingio-spinner-eclipse-nc395aglcjo">
-      <div class="ldio-kpc8nyu6bje">
+    <div className="loadingio-spinner-eclipse-nc395aglcjo">
+      <div className="ldio-kpc8nyu6bje">
         <div></div>
       </div>
     </div>
