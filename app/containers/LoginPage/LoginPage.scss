@@ -89,6 +89,14 @@ form {
 		color: #aaa;
 		font-size: 10px;
 		user-select: none;
+		
+	}
+	.error {
+		color: tomato;
+		&::before {
+			display: inline;
+			content: "⚠ ";
+		  }
 	}
 	input {
 		background: transparent;

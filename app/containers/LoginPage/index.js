@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { FormLayout } from '@shopify/polaris';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
+import { useForm } from "react-hook-form";
 
 import { loginRequest } from '../../store/actions';
 import './LoginPage.scss';
 
 const LoginPage = () => {
-  const [values, setValues] = useState({
-    network: '',
-    user: '',
-    password: '',
-  });
+  const { register, handleSubmit, watch, errors } = useForm();
 
   useEffect(() => {
     window.$(function () {
@@ -24,7 +20,7 @@ const LoginPage = () => {
           setTimeout(function () {
             window.$('.logoContainer .text').addClass('loadIn');
             setTimeout(function () {
-              window.$('.acceptContainer').transition({ height: '431.5px' });
+              window.$('.acceptContainer').transition({ height: '500px' });
               setTimeout(function () {
                 window.$('.acceptContainer').addClass('loadIn');
                 setTimeout(function () {
@@ -39,10 +35,12 @@ const LoginPage = () => {
   })
   const dispatch = useDispatch();
 
-  const submitLogin = data => {
-    dispatch(loginRequest(data));
+  const submitLogin = () => {
+    dispatch(loginRequest(values));
   };
 
+  watch("network", "user", "password");
+  console.log({ errors });
   return (
     <div className="container">
 
@@ -53,45 +51,48 @@ const LoginPage = () => {
             <img className="text" src={require('../../assets/images/Blockchain.svg')} />
           </div>
           <div className="acceptContainer">
-            <FormLayout>
+            <form onSubmit={handleSubmit(submitLogin)}>
               <div className="formContainer">
 
                 <div className="formDiv" style={{ transitionDelay: '0.2s' }}>
                   <p>NETWORK</p>
                   <input
+                    name="network"
                     type="text"
                     autoComplete="off"
-                    value={values?.network}
-                    onChange={(e) => setValues({ ...values, network: e.target.value })}
+                    ref={register({ required: true })}
                   />
+                  {errors.network && <p className="error">Network is required</p>}
                 </div>
 
                 <div className="formDiv" style={{ transitionDelay: '0.4s' }}>
-                  <p>USER</p>
+                  <p>USERNAME</p>
                   <input
-                    type="email"
+                    name="user"
+                    type="text"
                     autoComplete="off"
-                    value={values?.user}
-                    onChange={e => setValues({ ...values, user: e.target.value })}
+                    ref={register({ required: true })}
                   />
+                  {errors.user && <p className="error">Username is required</p>}
                 </div>
 
                 <div className="formDiv" style={{ transitionDelay: '0.6s' }}>
                   <p>PASSWORD</p>
                   <input
+                    name="password"
                     type="password"
                     autoComplete="off"
-                    value={values?.password}
-                    onChange={e => setValues({ ...values, password: e.target.value })}
+                    ref={register({ required: true })}
                   />
+                  {errors.password && <p className="error">Password is required</p>}
                 </div>
 
                 <div className="formDiv" style={{ transitionDelay: '0.8s' }}>
-                  <button className="acceptBtn" type="submit" onClick={() => submitLogin(values)}>Login</button>
+                  <button className="acceptBtn" type="submit">Login</button>
                 </div>
 
               </div>
-            </FormLayout>
+            </form>
           </div>
         </div>
       </div>
