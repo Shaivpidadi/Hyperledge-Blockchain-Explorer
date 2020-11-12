@@ -70,11 +70,11 @@ const TransactionInfo = () => {
             </div>
 
             <div style={{ margin: '20px auto' }}>
-              <AccordianCard title="Reads" containerData="Coming Soon ..." />
+              <AccordianCard title="Reads" containerData={txDetails?.read_set} />
             </div>
 
             <div style={{ margin: '20px auto' }}>
-              <AccordianCard title="Writes" containerData="Coming Soon ..." />
+              <AccordianCard title="Writes" containerData={txDetails?.write_set} />
             </div>
           </div>
         </div>
