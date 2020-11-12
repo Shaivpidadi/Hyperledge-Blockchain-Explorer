@@ -10,7 +10,7 @@ This repository uses Explorer's api to fetch data with new fresh design.
  `npm install`
  
  2. Export Your hosted explorer's endpoint 
- `export EXPLORER_URL='https://your-hosted-explorere'`
+ `export EXPLORER_URL='https://your-hosted-explorer-ip-or-link'`
  
  3. Start React Server
  `npm start`
