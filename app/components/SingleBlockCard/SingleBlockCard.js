@@ -9,9 +9,10 @@ const LabelWithValue = ({ label, value }) => (
     <span
       style={{
         color: 'rgb(0, 0, 0)',
-        width: '110px',
+        width: 'auto',
         display: 'inline-block',
         fontWeight: 'bolder',
+        marginRight: '5px'
       }}
     >
       {`${label}:`}
@@ -45,7 +46,7 @@ const SingleBlockCard = ({
         }}
         onClick={onClick}
       >
-        <div>
+        <div style={{ width: '10%', justifyContent: ' center' }}>
           <Avatar
             customer
             name="logo"
@@ -53,7 +54,7 @@ const SingleBlockCard = ({
           />
         </div>
 
-        <div style={{ display: 'inline-block' }}>
+        <div style={{ display: 'inline-block', width: '25%', justifyContent: ' center' }}>
           <div>
             <span
               style={{
@@ -65,11 +66,13 @@ const SingleBlockCard = ({
             </span>
           </div>
           <div>
-            <span style={{ color: 'rgb(0, 0, 0)' }}>{blockNumber}</span>
+            <LabelWithValue label="Block No" value={blockNumber} />
+
+            {/* <span style={{ color: 'rgb(0, 0, 0)' }}>{blockNumber}</span> */}
           </div>
         </div>
 
-        <div style={{ display: 'inline-block' }}>
+        <div style={{ display: 'inline-block', width: '40%', justifyContent: ' center' }}>
           <LabelWithValue label="Channel Name" value={channelName} />
           <LabelWithValue label="Total txs" value={totalTxs} />
         </div>
@@ -80,6 +83,8 @@ const SingleBlockCard = ({
             height: '40px',
             alignItems: 'center',
             fontWeight: 'bolder',
+            width: '25%',
+            justifyContent: ' center'
           }}
         >
           <Tag>
