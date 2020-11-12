@@ -195,7 +195,6 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
                           layoutTransition: spring,
                           exit: { opacity: 0, maxHeight: 0 },
                         })}
-                        // onClick={() => console.log(row.values)}
                         onClick={() => onRowClick(row.values)}
                         className="flip-horizontal-top"
                       >

@@ -88,10 +88,6 @@ const BlockInfo = () => {
             <TransactionDataTable
               rowsData={blockTransactions}
               onTransactionClick={onTransactionClick}
-              onDateChange={(dates) => console.log({ dates })}
-              dropdownOptions={options}
-              onSelectChange={(selectedOrgs) => console.log({ selectedOrgs })}
-              onResetClick={() => { console.log('reset clicked') }}
               isLoading={isEverythingLoaded}
               hideFilters
             />

@@ -29,7 +29,6 @@ const Header = () => {
   }, [channelList]);
 
   const handleChannelChange = useCallback(({ channel_genesis_hash }) => {
-    console.log('called');
     dispatch(changeChannelRequest({ channelGenesis: channel_genesis_hash }));
     localStorage.setItem('currentChannel', channel_genesis_hash);
   })

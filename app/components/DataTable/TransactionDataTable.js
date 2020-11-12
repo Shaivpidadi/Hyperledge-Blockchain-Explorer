@@ -6,7 +6,6 @@ import { Tag } from '@shopify/polaris';
 
 const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, dropdownOptions, onSelectChange, hideFilters, isLoading }) => {
 
-  console.log({ rowsData })
   const columns = React.useMemo(
     () => [
       {

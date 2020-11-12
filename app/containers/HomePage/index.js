@@ -125,7 +125,6 @@ const HomePage = ({ history }) => {
               // API ONLY RETURNS NUMBER, NEED TO CREATE SOME LOGIC FOR REDIRECTION
 
               // onBarClick={data => {
-              //   console.log({ data });
               //   history.push('/block');
               // }}
               />

@@ -45,7 +45,6 @@ function* getChannelListRequestSaga() {
 function* changeChannelRequestSaga({ payload }) {
   try {
     const { channelGenesis } = payload;
-    console.log({ channelGenesis })
     yield put(showLoader());
     const response = yield axiosMain.get(`/channel/changeChannel/${channelGenesis}`);
     if (response.status === 200) {
