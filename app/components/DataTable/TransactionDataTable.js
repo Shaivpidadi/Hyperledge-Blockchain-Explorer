@@ -6,6 +6,7 @@ import { Tag } from '@shopify/polaris';
 
 const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, dropdownOptions, onSelectChange, hideFilters, isLoading }) => {
 
+  console.log({ rowsData })
   const columns = React.useMemo(
     () => [
       {
@@ -19,7 +20,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       {
         Header: 'Tx Id',
         accessor: 'txhash',
-        Cell: ({ value }) => <TextWithEllipses text={value} />
+        Cell: ({ value = '' }) => { return (<TextWithEllipses text={value} />) }
       },
       {
         Header: 'Type',
@@ -29,7 +30,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
           if (value === 'ENDORSER_TRANSACTION') {
             return 'Endorser'
           } else {
-            <TextWithEllipses text={value} />
+            return (<TextWithEllipses text={value} />);
           }
         }
       },
@@ -40,7 +41,7 @@ const TransactionDataTable = ({ rowsData, onTransactionClick, onDateChange, drop
       {
         Header: 'Timestamp',
         accessor: 'createdt',
-        Cell: ({ value }) => <Tag>{moment(value).fromNow()}</Tag>
+        Cell: ({ value }) => { return (<Tag>{moment(value).fromNow()}</Tag>) }
       }
     ],
     [],
