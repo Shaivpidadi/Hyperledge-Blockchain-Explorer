@@ -182,42 +182,42 @@ const DataTable = ({ columns, rowsData, onRowClick, onDateChange, dropdownOption
         {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
           {isLoading ? <TableDataLoadingState length={columns.length} /> :
-            <AnimatePresence>
-              {// Loop over the table rows
-                page.map(row => {
-                  // Prepare the row for display
-                  prepareRow(row);
-
-                  return (
-                    // Apply the row props
-                    <motion.tr
-                      {...row.getRowProps({
-                        layoutTransition: spring,
-                        exit: { opacity: 0, maxHeight: 0 },
-                      })}
-                      // onClick={() => console.log(row.values)}
-                      onClick={() => onRowClick(row.values)}
-                      className="flip-horizontal-top"
-                    >
-                      {// Loop over the rows cells
-                        row.cells.map(cell => {
-                          // Apply the cell props
-                          return (
-                            <motion.td
-                              {...cell.getCellProps({
-                                layoutTransition: spring,
-                              })}
-                              className="highlight"
-                            >
-                              {// Render the cell contents
-                                cell.render('Cell')}
-                            </motion.td>
-                          );
+            rowsData?.length === 0 ? <div>Blank</div> :
+              <AnimatePresence>
+                {// Loop over the table rows
+                  page.map(row => {
+                    // Prepare the row for display
+                    prepareRow(row);
+                    return (
+                      // Apply the row props
+                      <motion.tr
+                        {...row.getRowProps({
+                          layoutTransition: spring,
+                          exit: { opacity: 0, maxHeight: 0 },
                         })}
-                    </motion.tr>
-                  );
-                })}
-            </AnimatePresence>}
+                        // onClick={() => console.log(row.values)}
+                        onClick={() => onRowClick(row.values)}
+                        className="flip-horizontal-top"
+                      >
+                        {// Loop over the rows cells
+                          row.cells.map(cell => {
+                            // Apply the cell props
+                            return (
+                              <motion.td
+                                {...cell.getCellProps({
+                                  layoutTransition: spring,
+                                })}
+                                className="highlight"
+                              >
+                                {// Render the cell contents
+                                  cell.render('Cell')}
+                              </motion.td>
+                            );
+                          })}
+                      </motion.tr>
+                    );
+                  })}
+              </AnimatePresence>}
         </tbody>
       </table>
 
