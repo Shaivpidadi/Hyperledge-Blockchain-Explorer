@@ -1,1 +1,19 @@
-#Lets Explore!
+# Custom Hyperledger Explorer
+
+Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, open source browser for viewing activity on the underlying blockchain network. Users have the ability to configure & build Hyperledger Explorer natively on macOS and Ubuntu. 
+
+This repository uses Explorer's api to fetch data with new fresh design.
+
+**Quick start**
+
+ 1. Install Dependencies
+ `npm install`
+ 
+ 2. Export Your hosted explorer's endpoint 
+ `export EXPLORER_URL='https://your-hosted-explorere'`
+ 
+ 3. Start React Server
+ `npm start`
+
+**Docker support will be added in future**
+
