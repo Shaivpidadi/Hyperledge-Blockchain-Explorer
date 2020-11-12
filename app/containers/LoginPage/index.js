@@ -48,7 +48,6 @@ const LoginPage = () => {
   };
 
   const networkList = useMemo(() => {
-    console.log({ authNetworkList })
     return authNetworkList.map(({ name, id = name }) => ({
       label: name,
       value: id
