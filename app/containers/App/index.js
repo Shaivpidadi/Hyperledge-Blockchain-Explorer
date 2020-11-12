@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import enTranslations from '@shopify/polaris/locales/en.json';
-import { AppProvider } from '@shopify/polaris';
-import { useSelector, useDispatch } from 'react-redux';
+import { AppProvider, SkeletonBodyText } from '@shopify/polaris';
+import { useSelector } from 'react-redux';
 
 import axios from '../../http/axios/axiosMain';
 
@@ -21,10 +21,10 @@ import ChannelPage from '../ChannelPage';
 import NetworkPage from '../NetworkPage';
 
 const App = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const { userToken: auth } = useSelector(state => state.auth);
+  const { loader: isSomethingLoading } = useSelector(state => state.loader);
   const isTokenPresent = !!localStorage.getItem('userToken');
 
   useEffect(() => {
@@ -61,6 +61,11 @@ const App = () => {
           <Route exact path="/networks" component={NetworkPage} />
           <Route component={NotFoundPage} />
         </Switch>
+
+        <div className='createdBy'>
+          {isSomethingLoading ? <SkeletonBodyText lines={2} /> : <p>Created By !Undr Pressure</p>}
+        </div>
+
       </AppProvider>
       <GlobalStyle />
     </div>

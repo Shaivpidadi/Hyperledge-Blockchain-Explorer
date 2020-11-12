@@ -69,6 +69,10 @@ Not supports in Firefox and IE */
 ::-webkit-scrollbar-button {
   display:none !important
 }
+
+.createdBy {
+  width: 300px
+}
 `;
 
 export default GlobalStyle;
