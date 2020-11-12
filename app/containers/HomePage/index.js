@@ -91,6 +91,8 @@ const HomePage = ({ history }) => {
     return txsData;
   }, [txsByHour, txsByMinute, selectedTransactionChart]);
 
+  const latestBlockList = blockTxsList.length !== 0 ? blockTxsList : blockList;
+
   const isEverythingLoaded = !!Object.keys(networkStats).length && !!blockList && !!txsByOrg && !!txsChartData && !!blockTxsList;
 
   return (
@@ -154,7 +156,7 @@ const HomePage = ({ history }) => {
                 >
                   <HiddenScroll height="400px">
                     {isEverythingLoaded ? (
-                      blockTxsList.map(
+                      latestBlockList.map(
                         ({
                           blockhash,
                           blocknum,
