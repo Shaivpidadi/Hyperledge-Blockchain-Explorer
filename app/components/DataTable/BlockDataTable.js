@@ -1,8 +1,16 @@
 import React from 'react';
 import DataTable from './DataTable';
 import TextWithEllipses from '../TextWithEllipses/TextWithEllipses';
+import { Stack } from '@shopify/polaris';
 
 const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions, onSelectChange, onResetClick, isLoading }) => {
+
+  const MultiTransactionWithEllipses = ({ txs }) => (
+    <Stack vertical={true} distribution="equalSpacing" alignment="fill" spacing="extraTight">
+      {txs.map((tx) =>
+        <TextWithEllipses text={tx} asTag />)}
+    </Stack>
+  );
 
   const columns = React.useMemo(
     () => [
@@ -36,6 +44,7 @@ const BlockDataTable = ({ rowsData, onBlockClick, onDateChange, dropdownOptions,
       {
         Header: 'Transactions',
         accessor: 'txhash',
+        Cell: ({ value }) => <MultiTransactionWithEllipses txs={value} />
       },
       {
         Header: 'Size (KB)',

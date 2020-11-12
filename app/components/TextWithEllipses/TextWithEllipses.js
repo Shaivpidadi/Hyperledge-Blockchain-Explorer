@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Tooltip } from '@shopify/polaris';
+import { Tooltip, Tag } from '@shopify/polaris';
 
-const TextWithEllipses = ({ text, lengthLimit }, props) => {
+const TextWithEllipses = ({ text, lengthLimit, asTag }, props) => {
   if (!!text && text.length > lengthLimit) {
     return (
       <Tooltip
@@ -10,9 +10,13 @@ const TextWithEllipses = ({ text, lengthLimit }, props) => {
         content={text}
         dismissOnMouseOut
         preferredPosition="above"
+        asTag
         {...props}
       >
-        <div>{text.substring(0, lengthLimit - 3).trim()}...</div>
+
+        {asTag ? <Tag> {text.substring(0, lengthLimit - 3).trim()}... </Tag>
+          : <div>{text.substring(0, lengthLimit - 3).trim()}...</div>}
+
       </Tooltip>
     );
   }
@@ -22,6 +26,7 @@ const TextWithEllipses = ({ text, lengthLimit }, props) => {
 
 TextWithEllipses.defaultProps = {
   lengthLimit: 15,
+  asTag: false
 };
 
 export default TextWithEllipses;
