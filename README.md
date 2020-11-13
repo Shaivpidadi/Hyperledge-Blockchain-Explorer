@@ -17,3 +17,14 @@ This repository uses Explorer's api to fetch data with new fresh design.
 
 **Docker support will be added in future**
 
+
+
+## Features for next release
+
+- **Transaction Subscription** ( You'll get notify for new transaction, New Block or even on new channel creation)
+- **Totally Customization** according to your design just by changing Environment Variable.
+- Minor Design Fixes.
+- Also Moving from Shopify Polaris to Ant Design
+- **New Public Blockchain Explorer**
+
+***Note: A Separate Repo will be created for Public Blockchain Explorer***
