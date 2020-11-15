@@ -3,9 +3,11 @@ import { Card, Heading } from '@shopify/polaris';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import DataTable from '../../components/DataTable/DataTable';
 import BlockchainCardItem from '../../components/BlockchainCardItem';
-import { getBlockDetailsRequest, getTransactionByOrgRequest } from '../../store/actions';
+import {
+  getBlockDetailsRequest,
+  getTransactionByOrgRequest,
+} from '../../store/actions';
 import TransactionDataTable from '../../components/DataTable/TransactionDataTable';
 
 const BlockInfo = () => {
@@ -13,10 +15,10 @@ const BlockInfo = () => {
   const { blockId } = useParams();
   const dispatch = useDispatch();
   const { blockDetails } = useSelector(state => state.block);
-  const { txsByOrg } = useSelector(state => state.transaction);
+  const { txsByOrg, blockTxsList } = useSelector(state => state.transaction);
 
   useEffect(() => {
-    dispatch(getBlockDetailsRequest({ blockId }))
+    dispatch(getBlockDetailsRequest({ blockId }));
   }, [blockId]);
 
   useEffect(() => {
@@ -25,64 +27,79 @@ const BlockInfo = () => {
     }
   }, [txsByOrg]);
 
+  const selectedBlockDetails = useMemo(
+    () =>
+      blockTxsList.find(({ blocknum }) => blocknum === parseInt(blockId, 10)),
+    [blockId],
+  );
+
+  /* eslint-disable camelcase */
   const blockTransactions = useMemo(() => {
-    let transactions = blockDetails?.transactions || [];
+    const transactions = blockDetails?.transactions || [];
 
     return transactions.map(({ payload }) => ({
       creator_msp_id: payload?.header?.signature_header?.creator?.Mspid,
       channelname: payload?.header?.channel_header?.channel_id,
       txhash: payload?.header?.channel_header?.tx_id,
       type: payload?.header?.channel_header?.typeString,
-      chaincodename: payload?.data?.actions[0]?.payload?.chaincode_proposal_payload?.input?.chaincode_spec?.chaincode_id?.name,
-      createdt: payload?.header?.channel_header?.timestamp
-    }))
-  })
-
-  const options = useMemo(() => {
-    return txsByOrg?.map((item) => ({
-      ...item,
-      value: item.creator_msp_id,
-      label: item.creator_msp_id
-    }))
-  }, [txsByOrg]) || [];
+      chaincodename:
+        payload?.data?.actions[0]?.payload?.chaincode_proposal_payload?.input
+          ?.chaincode_spec?.chaincode_id?.name,
+      createdt: payload?.header?.channel_header?.timestamp,
+    }));
+  });
 
   const onTransactionClick = ({ txhash }) => {
-    history.push(`/tx/${txhash}`)
+    history.push(`/tx/${txhash}`);
   };
 
-  const isEverythingLoaded = !blockTransactions.length && !Object.keys(blockDetails).length;
+  const isEverythingLoaded =
+    !blockTransactions.length && !Object.keys(blockDetails).length;
   return (
     <div style={{ marginTop: '40px', width: '100%' }}>
       <Card sectioned>
         <Heading style={{ fontSize: '40px' }}>BlockInfo</Heading>
         <div style={{ marginTop: '40px' }}>
-          <BlockchainCardItem label="Channel Name" value="shaiv" />
-          <BlockchainCardItem label="Block Number" value={blockDetails?.number} isLoading={isEverythingLoaded} />
           <BlockchainCardItem
-            label="Created at"
-            value="2020-08-31T1210:41.913Z"
+            label="Channel Name"
+            value={selectedBlockDetails?.channelname}
           />
-          <BlockchainCardItem label="# of Txs" value={blockDetails?.transactions?.length} isLoading={isEverythingLoaded} />
+          <BlockchainCardItem
+            label="Block Number"
+            value={selectedBlockDetails?.blocknum}
+            isLoading={isEverythingLoaded}
+          />
+          <BlockchainCardItem
+            label="# of Txs"
+            value={blockDetails?.transactions?.length}
+            isLoading={isEverythingLoaded}
+          />
           <BlockchainCardItem
             label="Block Hash"
-            value="csui12t4yuuidasdaoiuq880j"
+            value={selectedBlockDetails?.blockhash}
           />
           <BlockchainCardItem
             label="Data Hash"
-            value={blockDetails?.data_hash}
+            value={selectedBlockDetails?.datahash}
             isLoading={isEverythingLoaded}
           />
           <BlockchainCardItem
             label="Prehash"
-            value={blockDetails?.previous_hash}
+            value={selectedBlockDetails?.prehash}
             isLoading={isEverythingLoaded}
+          />
+          <BlockchainCardItem
+            label="Created at"
+            value={selectedBlockDetails?.createdt}
           />
         </div>
       </Card>
       <div style={{ marginTop: '20px' }}>
         <Card>
           <div style={{ padding: '20px' }}>
-            <Heading>{`All Transaction From Block #${!isEverythingLoaded ? blockId : ''}`}</Heading>
+            <Heading>{`All Transaction From Block #${
+              !isEverythingLoaded ? blockId : ''
+            }`}</Heading>
           </div>
           <div style={{ padding: '20px' }}>
             <TransactionDataTable
