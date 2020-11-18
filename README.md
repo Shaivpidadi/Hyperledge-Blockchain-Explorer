@@ -28,3 +28,5 @@ This repository uses Explorer's api to fetch data with new fresh design.
 - **New Public Blockchain Explorer**
 
 ***Note: A Separate Repo will be created for Public Blockchain Explorer***
+
+A Big thanks to Maximilian Stoiber for create awesome [highly scalable react boilerplate](https://github.com/react-boilerplate/react-boilerplate). 
