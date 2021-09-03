@@ -76,7 +76,7 @@
     "framer-motion": "^2.6.6",
     "history": "4.9.0",
     "hoist-non-react-statics": "3.3.0",
-    "immer": "8.0.1",
+    "immer": "9.0.6",
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
