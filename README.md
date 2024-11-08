@@ -2,6 +2,8 @@
 
 Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, open source browser for viewing activity on the underlying blockchain network. Users have the ability to configure & build Hyperledger Explorer natively on macOS and Ubuntu. 
 
+If you're looking for public explorer try this [Custom Block Explorer](https://github.com/Shaivpidadi/custom-block-explorer)
+
 This repository uses Explorer's api to fetch data with new fresh design.
 
 **Quick start**
