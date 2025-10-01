@@ -179,7 +179,7 @@
     "url-loader": "1.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "3.3.0",
-    "webpack-dev-middleware": "3.6.2",
+    "webpack-dev-middleware": "5.3.4",
     "webpack-hot-middleware": "2.24.3",
     "webpack-pwa-manifest": "4.0.0",
     "whatwg-fetch": "3.0.0"
